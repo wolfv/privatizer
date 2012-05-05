@@ -1,0 +1,31 @@
+{
+  "name": "Privatizer",
+  "version": "1.0",
+  "description": "Military grade encryption at your fingertip.",
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "popup": "html/popup.html"
+  },
+  "permissions": [
+    "<all_urls>"
+  ],
+  "options_page": "html/options_page.html",
+  "content_scripts": [
+    {
+      "matches": ["*://www.facebook.com/*"],
+      "js": ["javascript/addons/facebook.js"],
+      "run_at":"document_start"
+    },
+    {
+      "matches": ["<all_urls>"],
+    	"js": [
+        "javascript/thirdparty/encrypt.js", 
+        "javascript/privatizer.main.js"
+      ],
+      "css": [
+        "html/style_inline.css"
+      ],
+      "run_at":"document_start"
+    }
+  ]
+}

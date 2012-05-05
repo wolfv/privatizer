@@ -1,0 +1,28 @@
+/* line 4, ../scss/style_inline.sass */
+.x { clear: both; }
+
+/* line 7, ../scss/style_inline.sass */
+.privatizer-padlock { width: 20px; height: 24px; display: inline-block; text-align: center; -webkit-border-radius: 2px; -moz-border-radius: 2px; -ms-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; border: 1px solid rgba(0, 0, 0, 0.5); border-top: 1px solid rgba(0, 0, 0, 0.01); text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.5); background: #ff9600; -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.35), 0px 1px 3px rgba(0, 0, 0, 0.18), inset 0px -3px 0px rgba(0, 0, 0, 0.35), inset 0px 5px 5px rgba(255, 255, 255, 0.1); -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.35), 0px 1px 3px rgba(0, 0, 0, 0.18), inset 0px -3px 0px rgba(0, 0, 0, 0.35), inset 0px 5px 5px rgba(255, 255, 255, 0.1); box-shadow: 0 0 10px rgba(0, 0, 0, 0.35), 0px 1px 3px rgba(0, 0, 0, 0.18), inset 0px -3px 0px rgba(0, 0, 0, 0.35), inset 0px 5px 5px rgba(255, 255, 255, 0.1); z-index: 4000; -webkit-transition: 0.2s all ease-in; -moz-transition: 0.2s all ease-in; -ms-transition: 0.2s all ease-in; -o-transition: 0.2s all ease-in; transition: 0.2s all ease-in; cursor: pointer; }
+/* line 21, ../scss/style_inline.sass */
+.privatizer-padlock:hover { -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.35), 0px 1px 3px rgba(0, 0, 0, 0.18), inset 0px -3px 0px rgba(0, 0, 0, 0.35), inset 0px 5px 5px rgba(255, 255, 255, 0.1), inset 0 -3px 15px rgba(255, 255, 255, 0.8); -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.35), 0px 1px 3px rgba(0, 0, 0, 0.18), inset 0px -3px 0px rgba(0, 0, 0, 0.35), inset 0px 5px 5px rgba(255, 255, 255, 0.1), inset 0 -3px 15px rgba(255, 255, 255, 0.8); box-shadow: 0 0 10px rgba(0, 0, 0, 0.35), 0px 1px 3px rgba(0, 0, 0, 0.18), inset 0px -3px 0px rgba(0, 0, 0, 0.35), inset 0px 5px 5px rgba(255, 255, 255, 0.1), inset 0 -3px 15px rgba(255, 255, 255, 0.8); }
+/* line 23, ../scss/style_inline.sass */
+.privatizer-padlock:active { border-top: 1px solid rgba(0, 0, 0, 0.5); -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.35), 0px 3px 8px rgba(0, 0, 0, 0.4), inset 0px 5px 5px rgba(255, 255, 255, 0.1), inset 0 0px 15px rgba(255, 255, 255, 0.8); -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.35), 0px 3px 8px rgba(0, 0, 0, 0.4), inset 0px 5px 5px rgba(255, 255, 255, 0.1), inset 0 0px 15px rgba(255, 255, 255, 0.8); box-shadow: 0 0 10px rgba(0, 0, 0, 0.35), 0px 3px 8px rgba(0, 0, 0, 0.4), inset 0px 5px 5px rgba(255, 255, 255, 0.1), inset 0 0px 15px rgba(255, 255, 255, 0.8); }
+
+/* line 26, ../scss/style_inline.sass */
+#privatizer-popup { background: white; -webkit-box-shadow: 0 0 5px #333333; -moz-box-shadow: 0 0 5px #333333; box-shadow: 0 0 5px #333333; font-family: Arial, Helvetica, sans-serif; width: 200px; }
+/* line 31, ../scss/style_inline.sass */
+#privatizer-popup::before { content: ""; border-width: 0 6px 6px; border-color: #333333 transparent; position: absolute; border-style: solid; left: 5px; top: -6px; display: block; }
+/* line 40, ../scss/style_inline.sass */
+#privatizer-popup::after { content: ""; border-width: 0 5px 5px; border-color: white transparent; border-style: solid; position: absolute; left: 5px; top: -5px; display: block; }
+/* line 50, ../scss/style_inline.sass */
+#privatizer-popup ul { list-style-type: none; margin: 0; padding: 0; font-size: 12px; line-height: 16px; }
+/* line 56, ../scss/style_inline.sass */
+#privatizer-popup ul li { padding: 2px 4px; -webkit-transition: all 0.2s ease-in; -moz-transition: all 0.2s ease-in; -ms-transition: all 0.2s ease-in; -o-transition: all 0.2s ease-in; transition: all 0.2s ease-in; }
+/* line 59, ../scss/style_inline.sass */
+#privatizer-popup ul li:hover { background: #cccccc; }
+/* line 61, ../scss/style_inline.sass */
+#privatizer-popup ul li input[type="radio"] { float: left; -webkit-appearance: none; -moz-appearance: none; appearance: none; -webkit-appearance: none; -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; border: 2px solid black; height: 14px; width: 14px; display: inline-block; }
+/* line 71, ../scss/style_inline.sass */
+#privatizer-popup ul li input[type="radio"]:checked { background-color: #ff9600; }
+/* line 75, ../scss/style_inline.sass */
+#privatizer-popup ul li label { display: block; padding-left: 30px; cursor: pointer; }

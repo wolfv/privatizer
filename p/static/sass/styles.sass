@@ -1,0 +1,27 @@
+// I gather this file is a starting point for the project.
+@import "bootstrap"
+
+// Include responsive Bootstrap styles
+@import "bootstrap-responsive"
+
+.btn
+	&:hover
+	&:active
+
+.input-append
+	margin-top: 5px
+	input
+		margin: 0
+	input.text
+		&:focus
+			+box-shadow(0 0 2px green)
+	.btn
+		margin-left: -5px
+i.icon-close
+	display: inline-block
+	width: 14px
+	height: 14px
+	line-height: 14px
+	font-size: 14px
+	&::after
+		content: '\00D7'

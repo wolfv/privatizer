@@ -1,0 +1,20 @@
+@import "compass"
+$o:  #FF9600
+$oh: #FFBB00
+.x
+	clear: both
+.padlock 
+	width: 24px
+	height: 24px
+	+border-radius(10px)
+	background: #CCC inline-image('../images/padlock.gif') center no-repeat
+	display: block
+	position: absolute
+	right: 10px
+	top: 10px
+	opacity: 0.6 
+	z-index: 4000
+	+transition(0.2s all ease-in)
+	cursor: pointer
+	&:hover	
+		opacity: 1

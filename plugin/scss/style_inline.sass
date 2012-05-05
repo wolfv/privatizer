@@ -1,0 +1,78 @@
+@import "compass"
+$o:  #FF9600
+$oh: #FFBB00
+.x
+	clear: both
+
+.privatizer-padlock 
+	width: 20px
+	height: 24px
+	display: inline-block
+	text-align: center
+	+border-radius(2px)
+	border: 1px solid rgba(0,0,0,0.5)
+	border-top: 1px solid rgba(0,0,0,0.01)
+	+text-shadow(0 -1px 1px rgba(0,0,0,0.5))
+	background: $o
+	+box-shadow(0 0 10px rgba(0,0,0,0.35), 0px 1px 3px rgba(0,0,0,0.18), inset 0px -3px 0px rgba(0,0,0,0.35), inset 0px 5px 5px rgba(255,255,255,0.10))
+	z-index: 4000
+	+transition(0.2s all ease-in)
+	cursor: pointer
+	&:hover	
+		+box-shadow(0 0 10px rgba(0,0,0,0.35), 0px 1px 3px rgba(0,0,0,0.18), inset 0px -3px 0px rgba(0,0,0,0.35), inset 0px 5px 5px rgba(255,255,255,0.10), inset 0 -3px 15px rgba(#FFF, 0.8))
+	&:active
+		border-top: 1px solid rgba(0,0,0,0.5)
+		+box-shadow(0 0 10px rgba(0,0,0,0.35), 0px 3px 8px rgba(0,0,0,0.4), inset 0px 5px 5px rgba(255,255,255,0.10), inset 0 0px 15px rgba(#FFF, 0.8))
+#privatizer-popup
+	background: #FFF
+	+box-shadow(0 0 5px #333)
+	font-family: Arial, Helvetica, sans-serif
+	width: 200px
+	&::before
+		content: ''
+		border-width: 0 6px 6px
+		border-color: #333 transparent
+		position: absolute
+		border-style: solid
+		left: 5px
+		top: -6px
+		display: block
+	&::after
+		content: '' 
+		border-width: 0 5px 5px
+		border-color: #FFF transparent
+		border-style: solid
+		position: absolute
+		left: 5px
+		top: -5px
+		display: block
+
+	ul
+		list-style-type: none
+		margin: 0
+		padding: 0
+		font-size: 12px
+		line-height: 16px
+		li
+			padding: 2px 4px
+			+transition(all 0.2s ease-in)
+			&:hover
+				background: #CCC
+			input[type="radio"]
+				float: left
+				+appearance(none)
+				-webkit-appearance: none
+				+border-radius(5px)
+				border: 2px solid #000
+
+				height: 14px
+				width: 14px
+				display: inline-block
+				&:checked
+					background-color: $o
+
+
+			label
+				display: block
+				padding-left: 30px
+				cursor: pointer
