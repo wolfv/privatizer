@@ -1,14 +1,18 @@
-README
+Privatizer
 ==================
 
 Getting Started
 ---------------
 
-- cd <directory containing this file>
+### Installing the Plugin
 
-- $venv/bin/python setup.py develop
+Download the plugin from the plugin folder, in which you will find all major browsers except IE
 
-- $venv/bin/populate_p development.ini
+### Running a server
 
-- $venv/bin/pserve development.ini
-
+1. Have a running linux distro
+2. Use postgreSQL for database
+3. Configure the development.ini and production.ini to match your environment
+4. Run (sudo) python setup.py (develop/production)
+5. Run pserve (development.ini/production.ini)
+6. Have fun
