@@ -7,7 +7,6 @@
 *.sqlite
 *.pem
 *~
-.sass-cache
 dist
 build
 eggs

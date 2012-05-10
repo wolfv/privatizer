@@ -41,7 +41,7 @@
 <h3>Download the Plugin</h3>
 Feel free to download the Plugin here. As we don't yet have any autoupdate capability, please make sure to come back some time and check if there is a newer version for you. We will continue to improve reliability, performance and user interface drastically in the course of the next few weeks. <br><br>We furthermore plan to include many more websites for privatization than just (speaking as of now) fatzebook.<br> 
 		<br><br>
-		<a class="btn" href="${request.static_url('privatizer:static/plugin/chrome/privatizer.crx')}">
+		<a class="btn" href="${request.static_url('privatizer:static/download/plugin_chrome/privatizer.crx')}">
 			<i class="icon-download"></i> Privatizer for <b>Chrome</b> or <b>Chromium</b>
 		</a>
 		<br>		<br>
