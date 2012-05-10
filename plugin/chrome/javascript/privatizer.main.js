@@ -146,7 +146,7 @@
         textarea = textareas[_i];
         _results.push((function() {
           var padlock;
-          if (textarea.hasAttribute('encryption')) {
+          if (textarea.hasAttribute('encryption') || textarea.style.display === 'none' || textarea.style.visibility === 'hidden' || textarea.style.opacity === 0) {
             return false;
           }
           textarea.setAttribute('encryption', '0');

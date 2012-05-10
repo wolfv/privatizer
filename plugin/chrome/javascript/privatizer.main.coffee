@@ -100,7 +100,11 @@ DOM =
 		
 		for textarea in textareas
 			do ->
-				if textarea.hasAttribute('encryption')
+				if (textarea.hasAttribute('encryption') or
+					textarea.style.display == 'none' or
+					textarea.style.visibility == 'hidden' or
+					textarea.style.opacity == 0 
+				)
 					return false
 
 				textarea.setAttribute 'encryption', '0'
