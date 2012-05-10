@@ -3,9 +3,14 @@
 # Packages
 *.egg
 *.egg-info
+*.db
+*.sqlite
+*.pem
+
 dist
 build
 eggs
+p.egg-info
 parts
 bin
 var
