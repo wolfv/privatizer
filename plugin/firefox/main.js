@@ -6,10 +6,19 @@ var pageMod = require("page-mod");
 // Files included on facebook pages
 pageMod.PageMod({
   include: "*.facebook.com",
-  contentScriptWhen: 'end',
+  contentScriptWhen: 'ready',
   contentScriptFile: [self.data.url("facebook.js"),
                       self.data.url("encrypt.js"),
-                      self.data.url("privatizer.main.js")]
+                      self.data.url("privatizer.main.js")],
+  contentScript: "onMessage = function onMessage(message) {" +
+                        "    var style = document.createElement('style');" +
+                        "    style.type = 'text/css';" +
+                        "    style.appendChild(document.createTextNode(message));" +
+                        "    document.getElementsByTagName('head')[0].appendChild(style);" +
+                        "};",
+  onAttach: function(worker) {
+      worker.postMessage(self.data.load("style_inline.css"));
+  }
 });
 
 /*
