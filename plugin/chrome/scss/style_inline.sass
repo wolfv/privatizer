@@ -1,32 +1,51 @@
 @import "compass"
 $o:  #FF9600
 $oh: #FFBB00
+
+
++font-face('iconfont', inline-font-files('iconfont/fontello-b416c357.woff', woff))
+
 .x
 	clear: both
 
+.privatizer-icon
+	font-family: iconfont
+
 .privatizer-padlock 
-	width: 20px
-	height: 24px
+	padding: 3px
 	display: inline-block
 	text-align: center
-	+border-radius(2px)
-	border: 1px solid rgba(0,0,0,0.5)
-	border-top: 1px solid rgba(0,0,0,0.01)
-	+text-shadow(0 -1px 1px rgba(0,0,0,0.5))
+	color: #FFF
+	+border-radius(0px)
+	+text-shadow(0 -1px 1px rgba(#000,0.5))
 	background: $o
-	+box-shadow(0 0 10px rgba(0,0,0,0.35), 0px 1px 3px rgba(0,0,0,0.18), inset 0px -3px 0px rgba(0,0,0,0.35), inset 0px 5px 5px rgba(255,255,255,0.10))
+	+background-image(linear-gradient(top, $o 0%, $oh 100%))
+	border-top: 1px solid darken($o, 5%)
+	+box-shadow(0 1px 0 0 lighten($o, 10%) inset)
 	z-index: 4000
-	+transition(0.2s all ease-in)
+	position: absolute
+	right: 0px
+	top: 0
+
+	font-family: iconfont
+	font-style: normal
+	padding: 5px
+	font-size: 14px
+	line-height: 14px
 	cursor: pointer
+	+transition(0.1s all ease-in)
 	&:hover	
-		+box-shadow(0 0 10px rgba(0,0,0,0.35), 0px 1px 3px rgba(0,0,0,0.18), inset 0px -3px 0px rgba(0,0,0,0.35), inset 0px 5px 5px rgba(255,255,255,0.10), inset 0 -3px 15px rgba(#FFF, 0.8))
+		background: $oh
+		+box-shadow(0 0 5px darken($o, 10%) inset) 
+
 	&:active
-		border-top: 1px solid rgba(0,0,0,0.5)
-		+box-shadow(0 0 10px rgba(0,0,0,0.35), 0px 3px 8px rgba(0,0,0,0.4), inset 0px 5px 5px rgba(255,255,255,0.10), inset 0 0px 15px rgba(#FFF, 0.8))
+		+background-image(linear-gradient(bottom, $o 0%, $oh 100%))
 #privatizer-popup
 	background: #FFF
 	+box-shadow(0 0 5px #333)
 	font-family: Arial, Helvetica, sans-serif
+	font-weight: normal
+	font-style: normal
 	width: 200px
 	&::before
 		content: ''

@@ -152,8 +152,8 @@
           textarea.setAttribute('encryption', '0');
           textarea.setAttribute('unencrypted', textarea.value);
           padlock = document.createElement('span');
-          padlock.innerHTML = "&#9911;";
           padlock.className = "privatizer-padlock";
+          padlock.innerHTML = "A";
           padlock.setAttribute('open', 0);
           textarea.parentNode.insertBefore(padlock, textarea.nextSibling);
           padlock.onclick = function(e) {
@@ -198,7 +198,7 @@
     elem.onclick = function(e) {
       return e.stopPropagation();
     };
-    document.body.insertBefore(elem);
+    document.body.appendChild(elem);
     request = new XMLHttpRequest();
     document.documentElement.onclick = function() {
       padlock.setAttribute('open', '0');
@@ -260,10 +260,12 @@
   };
 
   document.addEventListener("DOMContentLoaded", function() {
-    return setInterval(function() {
-      Privatizer.decryptDOM();
-      return DOM.findTextareas();
-    }, 1000);
+    if (Plugin.classnames !== void 0) {
+      return setInterval(function() {
+        Privatizer.decryptDOM();
+        return DOM.findTextareas();
+      }, 1000);
+    }
   });
 
 }).call(this);

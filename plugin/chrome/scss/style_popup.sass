@@ -1,9 +1,14 @@
 @import "compass"
 $o:  #FF9600
 $oh: #FFBB00
+
++font-face('iconfont', inline-font-files('iconfont/fontello-b416c357.woff', woff))
+
+
 .x
 	clear: both
-
+body
+	font-family: iconfont
 #loginform
 	background: #F6F6F6
 	+border-radius(12px)
@@ -33,6 +38,11 @@ $oh: #FFBB00
 		+transition(0.2s all ease-in)
 		&:hover
 			+box-shadow(inset 0px 1px 3px rgba(0, 0, 0, 0.2))
+textarea
+	background: #F00
+	&::after
+		content: 'A'
+		font-family: 'iconfont'
 
 #keylist
 	li 
