@@ -1,13 +1,15 @@
 <%inherit file="../base.mako"/>
-<hr>
 <div class="row">
-	<div class="spa12">
+	<hr>
+
+	<div class="span12">
 		<h1>Eigene Keys</h1>
 	</div>
 <div>
-<hr>
 <div class="row">
 	<div class="span12">
+	<hr>
+
 	<table class="table table-striped table-condensed">
 		<thead>
 			<th>#</th>

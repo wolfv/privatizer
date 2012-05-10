@@ -10,7 +10,17 @@
 	<label for="password">Passwort</label>
 	<input type="password" name="password" value="${password}"/>
 </div>
+<hr>
 <input type="hidden" name="csrf" value="${request.session.get_csrf_token()}" />
-<input type="submit" name="form.submitted" value="Log In"/>
+<input class="btn btn-primary" type="submit" name="form.submitted" value="Log In"/>
 </form>
 </%block>
+
+
+<hr>
+<div class="row"><div class="span12">
+	<h1>Login</h1>
+	Welcome back. It's great to see you here, again.
+	</div>
+</div>
+<hr>

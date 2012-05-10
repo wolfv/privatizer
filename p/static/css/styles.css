@@ -5804,30 +5804,34 @@ a.thumbnail:hover {
 }
 
 /* line 16, ../sass/styles.sass */
+table.table-condensed td {
+  vertical-align: middle;
+}
+/* line 18, ../sass/styles.sass */
 table.table-condensed form {
   margin-bottom: 0;
 }
 
-/* line 19, ../sass/styles.sass */
+/* line 21, ../sass/styles.sass */
 .input-append {
   margin-top: 5px;
 }
-/* line 21, ../sass/styles.sass */
+/* line 23, ../sass/styles.sass */
 .input-append input {
   margin: 0;
 }
-/* line 24, ../sass/styles.sass */
+/* line 26, ../sass/styles.sass */
 .input-append input.text:focus {
   -webkit-box-shadow: 0 0 2px green;
   -moz-box-shadow: 0 0 2px green;
   box-shadow: 0 0 2px green;
 }
-/* line 26, ../sass/styles.sass */
+/* line 28, ../sass/styles.sass */
 .input-append .btn {
   margin-left: -5px;
 }
 
-/* line 28, ../sass/styles.sass */
+/* line 30, ../sass/styles.sass */
 i.icon-close {
   display: inline-block;
   width: 14px;
@@ -5835,7 +5839,7 @@ i.icon-close {
   line-height: 14px;
   font-size: 14px;
 }
-/* line 34, ../sass/styles.sass */
+/* line 36, ../sass/styles.sass */
 i.icon-close::after {
   content: "\00D7";
 }
