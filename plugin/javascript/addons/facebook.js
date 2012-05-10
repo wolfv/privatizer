@@ -1,6 +1,1 @@
-Plugin.classnames = [
-	"messageBody",
-	"content noh",
-	"tlTxFe",
-	"commentBody"
-];
+Plugin.classnames = ["messageBody", "content noh", "tlTxFe"];

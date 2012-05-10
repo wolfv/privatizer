@@ -31,6 +31,8 @@ def authenticate(request):
 @view_config(route_name='home', renderer='start.mako')
 def home(request):
     user = authenticated_userid(request)
+    if user:
+        user = User.by_id(user)
     try:
     	return {'user': user}
     except DBAPIError:

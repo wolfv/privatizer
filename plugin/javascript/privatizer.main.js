@@ -48,7 +48,6 @@
             msg.oldHTML = oldHTML;
             msg.innerHTML = decryptedText + " [⚷]";
             msg.onmouseover = function(e) {
-              cos;
               return msg.innerHTML = msg.oldHTML;
             };
           }

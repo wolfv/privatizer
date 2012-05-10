@@ -13,19 +13,38 @@ from ..models import *
 log = logging.getLogger(__name__)
 
 @view_config(route_name='key.add', renderer='addkey.mako', permission='auth')
-def add(request):   
+def add(request):
+    flashtype = {'attention':
+        {'cssclass': 'attention',
+         'name': 'Attention'}, 
+    'error': 
+        {'cssclass': 'error',
+         'name': 'Error'}, 
+    'success': 
+        {'cssclass': 'success',
+        'name': 'Success'}
+    }
+    error = False
     if 'form.submitted' in request.params:
-        if request.POST['name'] is None:
-            return {'flash': 'You need to give your Key a name'}
-        user = User.by_id(authenticated_userid(request))
-        key = Key(
-            request.POST['name'],
-            user.id,           
-            request.POST['description'],
-            request.POST['description']
-            )
-        DBSession.add(key)
-        return {'flash': 'Erfolg!'}
+        log.debug(request.POST)
+        if not len(request.POST['name']):
+            request.session.flash({'message': 'You need to set a name for your Key!', 'type': flashtype['error']})
+            error = True
+        if  not len(request.POST['keytext']):
+            request.session.flash({'message': 'You need to set a keytext for your Key!', 'type': flashtype['error']})
+            error = True
+        if error:
+            return {}
+        else:
+            user = User.by_id(authenticated_userid(request))
+            key = Key(
+                request.POST['name'],
+                user.id,
+                request.POST['description'],
+                request.POST['keytext']
+                )
+            DBSession.add(key)
+            request.session.flash({'message': 'Your Key was added', 'type': flashtype['success']})
     else:
         log.debug(request.params)
     return {}

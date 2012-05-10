@@ -32,7 +32,6 @@ Privatizer =
 					msg.oldHTML = oldHTML
 					msg.innerHTML = decryptedText + " [⚷]"
 					msg.onmouseover = (e) -> 
-						cos
 						msg.innerHTML = msg.oldHTML
 				return
 

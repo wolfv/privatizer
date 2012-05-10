@@ -10,11 +10,15 @@
 </head>
 <body>
   <div class="container">
-    % if flash:
-    <div class="alert">
-      <strong>Attention!</strong>
-      ${flash}
-    </div>
+    % if request.session.peek_flash():
+    <hr>
+    <% flash = request.session.pop_flash() %> 
+    % for fm in flash:
+      <div class="alert alert-${fm['type']['cssclass']}">
+        <strong>${fm['type']['name']}!</strong>
+        ${fm['message']}
+      </div>
+    % endfor
     % endif 
     
     ${self.body()}
