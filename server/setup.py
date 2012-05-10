@@ -18,9 +18,9 @@ requires = [
     'webhelpers'
     ]
 
-setup(name='p',
-      version='0.0',
-      description='p',
+setup(name='privatizer',
+      version='0.1',
+      description='the privatizer server',
       long_description=README + '\n\n' +  CHANGES,
       classifiers=[
         "Programming Language :: Python",
@@ -35,13 +35,12 @@ setup(name='p',
       packages=find_packages(),
       include_package_data=True,
       zip_safe=False,
-      test_suite='p',
+      test_suite='privatizer',
       install_requires=requires,
       entry_points="""\
       [paste.app_factory]
-      main = p:main
+      main = privatizer:main
       [console_scripts]
-      initialize_p_db = p.scripts.initializedb:main
+      initialize_privatizer_db = privatizer.scripts.initializedb:main
       """,
       )
-
