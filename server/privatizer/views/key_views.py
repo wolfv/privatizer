@@ -49,7 +49,7 @@ def add(request):
         log.debug(request.params)
     return {}
 
-@view_config(route_name='key.changepermission', context='p.models.Key', permission='own')
+@view_config(route_name='key.changepermission', context='privatizer.models.Key', permission='own')
 def changepermission(context, request):
     if 'form.adduserpermission' in request.params:
         key = context
@@ -75,7 +75,7 @@ def changepermission(context, request):
             return HTTPFound(location=url)
     return Response('Something wrong here.')
 
-@view_config(route_name='key.deletepermission', context='p.models.Key', permission='own')
+@view_config(route_name='key.deletepermission', context='privatizer.models.Key', permission='own')
 def deletepermission(context, request):
     key = context
     url = request.route_url('key.list')
