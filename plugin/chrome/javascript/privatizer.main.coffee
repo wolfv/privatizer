@@ -100,15 +100,19 @@ DOM =
 		
 		for textarea in textareas
 			do ->
-				if textarea.hasAttribute('encryption')
+				if (textarea.hasAttribute('encryption') or
+					textarea.style.display == 'none' or
+					textarea.style.visibility == 'hidden' or
+					textarea.style.opacity == 0 
+				)
 					return false
 
 				textarea.setAttribute 'encryption', '0'
 				textarea.setAttribute 'unencrypted', textarea.value
 
 				padlock = document.createElement 'span'
-				padlock.innerHTML = "&#9911;"
 				padlock.className = "privatizer-padlock"
+				padlock.innerHTML = "A" # Iconfont: Key
 				padlock.setAttribute 'open', 0
 				textarea.parentNode.insertBefore padlock, textarea.nextSibling
 				
@@ -144,7 +148,7 @@ popup = (padlock) ->
 	elem.onclick = (e) ->
 		e.stopPropagation()
 
-	document.body.insertBefore(elem)
+	document.body.appendChild(elem)
 	
 	request = new XMLHttpRequest()
 
@@ -179,6 +183,7 @@ popup = (padlock) ->
 							radio.onchange = -> 
 								padlock.setAttribute 'key', @value
 					return
+
 				when 403
 					loginform = document.createElement 'form'
 					loginform.onsubmit = (e) ->
@@ -204,12 +209,12 @@ popup = (padlock) ->
 
 
 document.addEventListener "DOMContentLoaded", ->
-
-	setInterval(
-		->
-			Privatizer.decryptDOM()
-			DOM.findTextareas()
-		, 1000)
+	if Plugin.classnames != undefined
+		setInterval(
+			->
+				Privatizer.decryptDOM()
+				DOM.findTextareas()
+			, 1000)
 
 
 	
