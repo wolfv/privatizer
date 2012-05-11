@@ -39,9 +39,9 @@ function script_loads(){
     pm = pageMod.PageMod({
       include: "*.facebook.com",
       contentScriptWhen: 'ready',
-      contentScriptFile: [self.data.url("facebook.js"),
-                          self.data.url("encrypt.js"),
-                          self.data.url("privatizer.main.js")],
+      contentScriptFile: [self.data.url("javascript/addons/facebook.js"),
+                          self.data.url("javascript/thirdparty/encrypt.js"),
+                          self.data.url("javascript/privatizer.main.js")],
       contentScript: "onMessage = function onMessage(message) {" +
                             "    var style = document.createElement('style');" +
                             "    style.type = 'text/css';" +
@@ -49,7 +49,7 @@ function script_loads(){
                             "    document.getElementsByTagName('head')[0].appendChild(style);" +
                             "};",
       onAttach: function(worker) {
-        worker.postMessage(self.data.load("style_inline.css"));
+        worker.postMessage(self.data.load("css/style_inline.css"));
       }
     });
   }else{
