@@ -1,16 +1,38 @@
+
 purl = "http://wolle.crabdance.com:6543/"
 
 preg = new RegExp "(:enc:)([^:]+):([^:]+):", "g"
 
+self.port.on 'loadCSS', (message) ->
+	style = document.createElement('style')
+	style.type = 'text/css'
+	style.appendChild(document.createTextNode(message.css));
+	document.getElementsByTagName('head')[0].appendChild(style)
+
+# Request objects for Firefox
+xhrQueue = {count:0, onloads: [] }
+
+# Listener for Request Response
+self.port.on 'p_response', (response) ->
+	xhrQueue.onloads[response.requestID](response);
+
+p_request = (obj) ->
+	obj.type = 'request';
+	if (typeof(obj.onload) != 'undefined') 
+		obj.requestID = xhrQueue.count
+		xhrQueue.onloads[xhrQueue.count] = obj.onload;
+		self.port.emit 'request', obj
+		xhrQueue.count++
+	return
+
 Privatizer =
 	login: (username, password) ->
-		request = new XMLHttpRequest()
-		request.open "POST", purl + "api/login", false
-		request.setRequestHeader 'Content-Type', 'application/x-www-form-urlencoded'
-		sendData = "username=#{username}&password=#{password}"
-		request.send sendData
-		if request.readyState == 4 && request.status == 200
-			return request.response
+		request = new Request({
+			url: purl + "api/login",
+			content: {"username": username, "password": password},
+			onComplete: ->
+				return request.response
+		}).post()
 
 	decryptDOM: () ->
 		messages = []
@@ -150,20 +172,19 @@ popup = (padlock) ->
 
 	document.body.appendChild(elem)
 	
-	request = new XMLHttpRequest()
-
 	document.documentElement.onclick = ->
 		padlock.setAttribute 'open', '0'
 		try
 			elem = document.getElementById "privatizer-popup"
 			document.body.removeChild(elem)
-		
 	
-	request.onreadystatechange = ->
-		if request.readyState == 4
-			switch request.status
+	request = p_request({
+		url: purl + "api/keys/list",
+		method: 'POST',
+		onload: (response) ->
+			switch response.status
 				when 200
-					json = JSON.parse request.response
+					json = JSON.parse response.text
 					ul = elem.appendChild document.createElement 'ul'
 					for key in json
 						do ->
@@ -174,7 +195,7 @@ popup = (padlock) ->
 							radio.setAttribute 'name', 'keys'
 							
 							label = document.createElement 'label'
-							label.innerHTML = "<span class=\"description\">#{key.description}</span>"
+							label.innerHTML = "<span class=\"name\">#{key.name}</span><span class=\"description\">#{key.description}</span>"
 							label.setAttribute 'for', 'pkey-' + key.hash
 
 							li = ul.appendChild document.createElement 'li' 
@@ -198,17 +219,17 @@ popup = (padlock) ->
 
 					elem.innerHTML = '<h3>Login Dring</h3>'
 					elem.appendChild loginform
-	
-	request.open "GET", purl + "api/keys/list", true
-
-	request.send null
+					return
+			return
+	});
 
 	padlock.setAttribute 'open', '1'
 
-
+	return 
 
 
 document.addEventListener "DOMContentLoaded", ->
+	console.log 'wir sind da. logs gehen?'
 	if Plugin.classnames != undefined
 		setInterval(
 			->

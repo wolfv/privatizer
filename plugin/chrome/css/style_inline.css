@@ -22,12 +22,16 @@
 /* line 70, ../scss/style_inline.sass */
 #privatizer-popup ul { list-style-type: none; margin: 0; padding: 0; font-size: 12px; line-height: 16px; }
 /* line 76, ../scss/style_inline.sass */
-#privatizer-popup ul li { padding: 2px 4px; -webkit-transition: all 0.2s ease-in; -moz-transition: all 0.2s ease-in; -ms-transition: all 0.2s ease-in; -o-transition: all 0.2s ease-in; transition: all 0.2s ease-in; }
+#privatizer-popup ul li { padding: 2px 4px; -webkit-transition: all 0.2s ease-in; -moz-transition: all 0.2s ease-in; -ms-transition: all 0.2s ease-in; -o-transition: all 0.2s ease-in; transition: all 0.2s ease-in; color: black; font-weight: normal; }
 /* line 79, ../scss/style_inline.sass */
 #privatizer-popup ul li:hover { background: #cccccc; }
 /* line 81, ../scss/style_inline.sass */
 #privatizer-popup ul li input[type="radio"] { float: left; -webkit-appearance: none; -moz-appearance: none; appearance: none; -webkit-appearance: none; -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; border: 2px solid black; height: 14px; width: 14px; display: inline-block; }
 /* line 91, ../scss/style_inline.sass */
 #privatizer-popup ul li input[type="radio"]:checked { background-color: #ff9600; }
-/* line 95, ../scss/style_inline.sass */
-#privatizer-popup ul li label { display: block; padding-left: 30px; cursor: pointer; }
+/* line 96, ../scss/style_inline.sass */
+#privatizer-popup ul li .name { font-weight: bold; display: block; font-size: 12px; }
+/* line 100, ../scss/style_inline.sass */
+#privatizer-popup ul li .description { font-size: 10px; display: block; min-height: 10px; }
+/* line 104, ../scss/style_inline.sass */
+#privatizer-popup ul li label { color: black; font-weight: normal; display: block; padding-left: 30px; cursor: pointer; line-height: 10px; }

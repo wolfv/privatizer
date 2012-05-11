@@ -23,7 +23,7 @@
         "javascript/privatizer.main.js"
       ],
       "css": [
-        "html/style_inline.css"
+        "css/style_inline.css"
       ],
       "run_at":"document_start"
     }

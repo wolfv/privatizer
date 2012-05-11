@@ -174,7 +174,7 @@ popup = (padlock) ->
 							radio.setAttribute 'name', 'keys'
 							
 							label = document.createElement 'label'
-							label.innerHTML = "<span class=\"description\">#{key.description}</span>"
+							label.innerHTML = "<span class=\"name\">#{key.name}</span><span class=\"description\">#{key.description}</span>"
 							label.setAttribute 'for', 'pkey-' + key.hash
 
 							li = ul.appendChild document.createElement 'li' 
@@ -185,6 +185,7 @@ popup = (padlock) ->
 					return
 
 				when 403
+					console.log 'warrrrrum????'
 					loginform = document.createElement 'form'
 					loginform.onsubmit = (e) ->
 						e.preventDefault()
@@ -198,6 +199,8 @@ popup = (padlock) ->
 
 					elem.innerHTML = '<h3>Login Dring</h3>'
 					elem.appendChild loginform
+				else 
+					console.log 'das war wohl nix? obwohl 403, eiegntlich'
 	
 	request.open "GET", purl + "api/keys/list", true
 
@@ -209,6 +212,7 @@ popup = (padlock) ->
 
 
 document.addEventListener "DOMContentLoaded", ->
+	console.log 'wir sind da. logs gehen?'
 	if Plugin.classnames != undefined
 		setInterval(
 			->
