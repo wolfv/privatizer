@@ -4,7 +4,6 @@ var self = require("self");
 var pageMod = require("page-mod");
 var ss = require("simple-storage");
 var pm;
-console.log(pm)
 if( ss.storage.firstRun == undefined ){
   ss.storage.firstRun = false;
   ss.storage.activation = false;
@@ -24,7 +23,6 @@ var privatizer_panel = require("panel").Panel({
 privatizer_panel.port.emit("event1", ss.storage.activation);
 privatizer_panel.port.on("event2", function(act) {
   ss.storage.activation = act;
-  console.log(act)
   script_loads();
 })
 
@@ -61,6 +59,8 @@ function script_loads(){
   }
   
   for(var i = 0; i<tabs.length; i++){
-    tabs[i].reload();
+    if(tabs[i].url.substr(0, 23) == "http://www.facebook.com"){
+      tabs[i].reload();
+    }
   }
 }
