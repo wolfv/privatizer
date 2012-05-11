@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <script type="text/javascript">
+            function init(){
+                activation = false;
+            }
+            function homepage(){
+                window.open("http://wolle.crabdance.com:6543/")
+            }
+        </script>
+        <style type="text/css" media="all">
+            html {
+                margin: 3px;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                font-size: 15px;
+                line-height: 15px;
+                color: #333333;
+                background-color: white;
+                text-align: center;
+                font-weight: bold;
+            }
+            input {
+                width: 140px;
+            }
+        </style>
+    </head>
+    <body>
+        <p id="Status">
+            Privatizer ON/OFF
+        </p>
+        <hr />
+        <p id="button1">
+            <input type="button" onclick="" id="change_status" value="test" />
+        </p>
+        <p>
+            <input type="button" onclick="homepage()" value="The Privatizer" />
+        </p>
+    </body>
+</html>

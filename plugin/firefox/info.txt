@@ -1,3 +1,5 @@
-1. content scripts eingebunden auf www.facebook.com
-2. css file nicht eingebunden
-3. roter Rahmen zeigt, wenn Scripts aktiv (in facebook.js)
+Scripts eingebunden. Add-On funktioniert
+
+TODO:
+1. FireFox-Spezifischen Fehler abstellen (Wolf)
+2. Code auskommentieren & bereinigen (Georg)
