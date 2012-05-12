@@ -52,6 +52,7 @@ function script_loads(){
 			contentScriptFile: [
 			  self.data.url("javascript/addons/facebook.js"),
 			  self.data.url("javascript/thirdparty/encrypt.js"),
+			  self.data.url("javascript/privatizer.firefox.js"),
 			  self.data.url("javascript/privatizer.main.js")
 			],
 			contentScript: "",
