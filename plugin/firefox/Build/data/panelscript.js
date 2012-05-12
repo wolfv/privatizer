@@ -18,10 +18,10 @@ button.onclick = function(){
 
 function reload(){
   if( activation ) {
-    document.getElementById("Status").innerHTML = "ACTIVE"
+    document.getElementById("Status").innerHTML = "<img src='lock_closed.png'/>"
     document.getElementById("change_status").value = "Disable"
   } else {
-    document.getElementById("Status").innerHTML = "DISABLED"
+    document.getElementById("Status").innerHTML = "<img src='lock_open.png'/>"
     document.getElementById("change_status").value = "Activate"
   }
 }
