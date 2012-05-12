@@ -6,6 +6,7 @@
             }
             function homepage(){
                 window.open("http://wolle.crabdance.com:6543/")
+                self.close()
             }
         </script>
         <style type="text/css" media="all">
@@ -16,17 +17,21 @@
                 line-height: 15px;
                 color: #333333;
                 background-color: white;
-                text-align: center;
                 font-weight: bold;
+                text-align: center;
             }
             input {
                 width: 140px;
+            }
+            img {
+                height: 40px;
+                width: 40px;
             }
         </style>
     </head>
     <body>
         <p id="Status">
-            Privatizer ON/OFF
+            Activation Status
         </p>
         <hr />
         <p id="button1">
