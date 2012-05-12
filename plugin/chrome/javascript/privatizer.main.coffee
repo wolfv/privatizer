@@ -37,6 +37,7 @@ Privatizer =
 
 
 Crypt = 
+	# Function to encrypt contents of an textarea
 	encrypt: (elem, keyhash) ->
 		sendRequest({
 			type: "GET",
@@ -51,7 +52,7 @@ Crypt =
 					console.log 'cannot encrypt the shizzle.'
 
 		})
-
+	# Function to decrypt an element
 	decrypt: (msg, value, keyhash) ->
 		sendRequest({
 			url: purl + "api/key/" + keyhash,
@@ -74,7 +75,10 @@ Crypt =
 		})
 
 
+# Document Object Model Helper functions
+
 DOM =
+	# Calculate the total offset to position the Popup
 	totalOffset: (element) ->
 		x = y = 0
 		while element.offsetParent
@@ -82,6 +86,9 @@ DOM =
 			y += element.offsetTop
 			element = element.offsetParent
 		return {x: x, y: y}
+
+	# Not used yet, might be used later to fade in the 
+	# Element
 	fadeIn: (element, speed = 100) ->
 		opacity = element.style.opacity
 		interval = setInterval( 
@@ -105,11 +112,17 @@ DOM =
 					element.style.opacity = opacity
 			, speed)
 
+	# Find all textareas in the DOM
+
 	findTextareas: () ->
 		textareas = document.getElementsByTagName "textarea"
 		
+		# Loop through all textareas
 		for textarea in textareas
 			do ->
+				# If textarea is already in the set or not visible
+				# Don't attach a padlock
+				
 				if (textarea.hasAttribute('encryption') or
 					textarea.style.display == 'none' or
 					textarea.style.visibility == 'hidden' or
@@ -117,21 +130,33 @@ DOM =
 				)
 					return false
 
+				# Append the attributes for privatizer
+				
 				textarea.setAttribute 'encryption', '0'
 				textarea.setAttribute 'unencrypted', textarea.value
+
+				# Create the Padlock
 
 				padlock = document.createElement 'span'
 				padlock.className = "privatizer-padlock"
 				padlock.innerHTML = "A" # Iconfont: Key
 				padlock.setAttribute 'open', 0
 				padlock.setAttribute 'key', 0
+				
+				# Insert the padlock
+
 				textarea.parentNode.insertBefore padlock, textarea.nextSibling
 				
+				# Add the eventlistener to open the popup
+
 				padlock.addEventListener('click', (e) ->
 					window.privatizer.popup.open(padlock)
 					e.stopPropagation()
 				, true)
 				
+				# Blurring (e.g. clicking outside) the textarea
+				# encrypts its contents
+
 				textarea.onblur = ->
 					if this.getAttribute('encryption') != '1'
 						this.setAttribute 'unencrypted', this.value
@@ -139,6 +164,9 @@ DOM =
 						if this.value && padlock.getAttribute 'key'
 							Crypt.encrypt this, padlock.getAttribute 'key'
 				
+				# Focussing in the textarea restores unencrypted 
+				# content
+
 				textarea.onfocus = ->
 					if this.getAttribute('encryption') is '1'
 						this.setAttribute 'encryption', '0'
@@ -147,6 +175,9 @@ DOM =
 class Popup
 
 	constructor: ->
+
+		# Create a standard popup div
+
 		elem = document.createElement('div')
 		elem.id = 'privatizer-popup'
 		elem.className = 'privatizer-popup visible'
