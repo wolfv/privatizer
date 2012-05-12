@@ -77,15 +77,14 @@ function script_loads(){
 					function(request) {
 						var responseObj = {
 							"requestID": request.requestID,
-							"type" : 'request'
 						}
-						if(request.method == 'POST'){
+						if(request.type == 'POST'){
 							Request({
 								url: request.url,
 								onComplete: function(response) {
 									responseObj['text'] = response.text;
 									responseObj['status'] = response.status;
-									worker.port.emit('p_response', responseObj);
+									worker.port.emit('requestCallback', responseObj);
 								},
 								headers: request.headers,
 								content: request.data
@@ -96,7 +95,7 @@ function script_loads(){
 								onComplete: function(response) {
 									responseObj['text'] = response.text;
 									responseObj['status'] = response.status;
-									worker.port.emit('p_response', responseObj);
+									worker.port.emit('requestCallback', responseObj);
 								},
 								headers: request.headers,
 								content: request.data

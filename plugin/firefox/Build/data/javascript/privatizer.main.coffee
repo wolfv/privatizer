@@ -3,27 +3,7 @@ purl = "http://wolle.crabdance.com:6543/"
 
 preg = new RegExp "(:enc:)([^:]+):([^:]+):", "g"
 
-self.port.on 'loadCSS', (message) ->
-	style = document.createElement('style')
-	style.type = 'text/css'
-	style.appendChild(document.createTextNode(message.css));
-	document.getElementsByTagName('head')[0].appendChild(style)
 
-# Request objects for Firefox
-xhrQueue = {count:0, onloads: [] }
-
-# Listener for Request Response
-self.port.on 'p_response', (response) ->
-	xhrQueue.onloads[response.requestID](response);
-
-p_request = (obj) ->
-	obj.type = 'request';
-	if (typeof(obj.onload) != 'undefined') 
-		obj.requestID = xhrQueue.count
-		xhrQueue.onloads[xhrQueue.count] = obj.onload;
-		self.port.emit 'request', obj
-		xhrQueue.count++
-	return
 
 Privatizer =
 	login: (username, password) ->
@@ -156,76 +136,92 @@ DOM =
 						this.setAttribute 'encryption', '0'
 						this.value = this.getAttribute 'unencrypted'
 
-popup = (padlock) ->
-	elem = document.createElement('div')
-	elem.id = 'privatizer-popup'
-	elem.className = 'privatizer-popup'
-	elem.style.position = 'absolute'
-	elem.style.border = '1px solid #000'
+popup =
+	isOpen: false
 	
-	offset = DOM.totalOffset(padlock)
-	elem.style.left = offset['x'] + "px"
-	elem.style.top = offset['y'] + 30 + "px"
-	elem.style.zIndex = 10000
-	elem.onclick = (e) ->
-		e.stopPropagation()
-
-	document.body.appendChild(elem)
-	
-	document.documentElement.onclick = ->
-		padlock.setAttribute 'open', '0'
-		try
-			elem = document.getElementById "privatizer-popup"
-			document.body.removeChild(elem)
-	
-	request = p_request({
-		url: purl + "api/keys/list",
-		method: 'POST',
-		onload: (response) ->
-			switch response.status
-				when 200
-					json = JSON.parse response.text
-					ul = elem.appendChild document.createElement 'ul'
-					for key in json
-						do ->
-							radio  = document.createElement 'input'
-							radio.setAttribute 'type', 'radio'
-							radio.id = 'pkey-' + key.hash
-							radio.value = key.hash
-							radio.setAttribute 'name', 'keys'
-							
-							label = document.createElement 'label'
-							label.innerHTML = "<span class=\"name\">#{key.name}</span><span class=\"description\">#{key.description}</span>"
-							label.setAttribute 'for', 'pkey-' + key.hash
-
-							li = ul.appendChild document.createElement 'li' 
-							li.appendChild radio
-							li.appendChild label
-							radio.onchange = -> 
-								padlock.setAttribute 'key', @value
-					return
-
-				when 403
-					loginform = document.createElement 'form'
-					loginform.onsubmit = (e) ->
-						e.preventDefault()
-						response = Privatizer.login(loginform.elements['email'].value, loginform.elements['password'].value)
-						console.log response
-						popup(padlock)
-					loginform.innerHTML = '
-									<input type="email" name="email" placeholder="Email"></input>
-									<input type="password" name="password" placeholder="Password"></input>
-									<input type="submit" value="Login"/>'
-
-					elem.innerHTML = '<h3>Login Dring</h3>'
-					elem.appendChild loginform
-					return
+	open: ->
+		if @isOpen
 			return
-	});
+		elem = document.getElementById 'privatizer-popup'
+		if not elem
+			elem = document.createElement('div')
+			elem.id = 'privatizer-popup'
+			elem.className = 'privatizer-popup visible'
+			elem.style.position = 'absolute'
+			elem.style.border = '1px solid #000'
+			elem.style.zIndex = 10000
 
-	padlock.setAttribute 'open', '1'
+		offset = DOM.totalOffset(padlock)
+		elem.style.left = offset['x'] + "px"
+		elem.style.top = offset['y'] + 30 + "px"
 
-	return 
+		document.body.appendChild(elem)
+		
+		checktarget = (target) ->
+			while target.parentNode 
+				if target == elem
+					return false
+				else
+					target = target.parentNode
+			return true
+
+		document.addEventListener('click', (e) ->
+			if padlock.getAttribute('open') and checktarget(e.target)
+				padlock.setAttribute 'open', '0'
+				try
+					elem.className = 'privatizer-popup hidden'
+					elem.style.display = 'none'
+			return
+		)
+		
+		request = p_request({
+			url: purl + "api/keys/list",
+			method: 'POST',
+			onload: (response) ->
+				switch response.status
+					when 200
+						json = JSON.parse response.text
+						ul = elem.appendChild document.createElement 'ul'
+						for key in json
+							do ->
+								radio  = document.createElement 'input'
+								radio.setAttribute 'type', 'radio'
+								radio.id = 'pkey-' + key.hash
+								radio.value = key.hash
+								radio.setAttribute 'name', 'keys'
+								
+								label = document.createElement 'label'
+								label.innerHTML = "<span class=\"name\">#{key.name}</span><span class=\"description\">#{key.description}</span>"
+								label.setAttribute 'for', 'pkey-' + key.hash
+
+								li = ul.appendChild document.createElement 'li' 
+								li.appendChild radio
+								li.appendChild label
+								radio.onchange = -> 
+									padlock.setAttribute 'key', @value
+						return
+
+					when 403
+						loginform = document.createElement 'form'
+						loginform.onsubmit = (e) ->
+							e.preventDefault()
+							response = Privatizer.login(loginform.elements['email'].value, loginform.elements['password'].value)
+							console.log response
+							popup(padlock)
+						loginform.innerHTML = '
+										<input type="email" name="email" placeholder="Email"></input>
+										<input type="password" name="password" placeholder="Password"></input>
+										<input type="submit" value="Login"/>'
+
+						elem.innerHTML = '<h3>Login Dring</h3>'
+						elem.appendChild loginform
+						return
+				return
+		});
+
+		padlock.setAttribute 'open', '1'
+
+		return 
 
 
 document.addEventListener "DOMContentLoaded", ->
