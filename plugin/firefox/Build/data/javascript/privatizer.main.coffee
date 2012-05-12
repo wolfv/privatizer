@@ -37,15 +37,15 @@ Privatizer =
 
 
 Crypt = 
-	encrypt: (value, keyhash) ->
-		return sendRequest({
+	encrypt: (elem, keyhash) ->
+		sendRequest({
 			type: "GET",
 			url: purl + "api/key/" + keyhash,
 			onload: (response) ->
 				if response.status == 200
 					json = JSON.parse response.text
-					crypttext = Aes.Ctr.encrypt value, json.key, 256
-					return keyhash + ":" + crypttext + ":"
+					crypttext = Aes.Ctr.encrypt elem.value, json.key, 256
+					elem.value = ":enc:" + keyhash + ":" + crypttext + ":"
 				else
 					console.log response
 					console.log 'cannot encrypt the shizzle.'
@@ -71,7 +71,7 @@ Crypt =
 				msg.onmouseover = (e) -> 
 					msg.innerHTML = msg.oldHTML
 				return decryptedText
-			})
+		})
 
 
 DOM =
@@ -124,6 +124,7 @@ DOM =
 				padlock.className = "privatizer-padlock"
 				padlock.innerHTML = "A" # Iconfont: Key
 				padlock.setAttribute 'open', 0
+				padlock.setAttribute 'key', 0
 				textarea.parentNode.insertBefore padlock, textarea.nextSibling
 				
 				padlock.addEventListener('click', (e) ->
@@ -135,8 +136,8 @@ DOM =
 					if this.getAttribute('encryption') != '1'
 						this.setAttribute 'unencrypted', this.value
 						this.setAttribute 'encryption', '1'
-						if this.value
-							this.value = ":enc:" + Crypt.encrypt this.value, padlock.getAttribute 'key'
+						if this.value && padlock.getAttribute 'key'
+							Crypt.encrypt this, padlock.getAttribute 'key'
 				
 				textarea.onfocus = ->
 					if this.getAttribute('encryption') is '1'
@@ -197,13 +198,12 @@ class Popup
 		elem.style.top = offset['y'] + 30 + "px"
 
 		elem.style.display = 'block'
-		
+		elem.innerHTML = ''
 		request = sendRequest({
 			type: "GET",
 			url: purl + "api/keys/list",		
 			onload: (response) ->
-				console.log('we got a response')
-				console.log response
+
 				switch response.status
 					when 200
 						json = JSON.parse response.text
@@ -224,7 +224,7 @@ class Popup
 								li.appendChild radio
 								li.appendChild label
 								radio.onchange = -> 
-									padlock.setAttribute 'key', @value
+									padlock.setAttribute 'key', this.value
 						return
 
 					when 403

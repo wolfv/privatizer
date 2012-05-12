@@ -56,7 +56,7 @@
   };
 
   Crypt = {
-    encrypt: function(value, keyhash) {
+    encrypt: function(elem, keyhash) {
       return sendRequest({
         type: "GET",
         url: purl + "api/key/" + keyhash,
@@ -64,8 +64,8 @@
           var crypttext, json;
           if (response.status === 200) {
             json = JSON.parse(response.text);
-            crypttext = Aes.Ctr.encrypt(value, json.key, 256);
-            return keyhash + ":" + crypttext + ":";
+            crypttext = Aes.Ctr.encrypt(elem.value, json.key, 256);
+            return elem.value = ":enc:" + keyhash + ":" + crypttext + ":";
           } else {
             console.log(response);
             return console.log('cannot encrypt the shizzle.');
@@ -163,6 +163,7 @@
           padlock.className = "privatizer-padlock";
           padlock.innerHTML = "A";
           padlock.setAttribute('open', 0);
+          padlock.setAttribute('key', 0);
           textarea.parentNode.insertBefore(padlock, textarea.nextSibling);
           padlock.addEventListener('click', function(e) {
             window.privatizer.popup.open(padlock);
@@ -172,8 +173,8 @@
             if (this.getAttribute('encryption') !== '1') {
               this.setAttribute('unencrypted', this.value);
               this.setAttribute('encryption', '1');
-              if (this.value) {
-                return this.value = ":enc:" + Crypt.encrypt(this.value, padlock.getAttribute('key'));
+              if (this.value && padlock.getAttribute('key')) {
+                return Crypt.encrypt(this, padlock.getAttribute('key'));
               }
             }
           };
@@ -245,13 +246,12 @@
       elem.style.left = offset['x'] + "px";
       elem.style.top = offset['y'] + 30 + "px";
       elem.style.display = 'block';
+      elem.innerHTML = '';
       request = sendRequest({
         type: "GET",
         url: purl + "api/keys/list",
         onload: function(response) {
           var json, key, loginform, ul, _fn, _i, _len;
-          console.log('we got a response');
-          console.log(response);
           switch (response.status) {
             case 200:
               json = JSON.parse(response.text);
