@@ -32,6 +32,7 @@
       default:
         request.open("GET", data.url, true);
     }
+    request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
     if (data.header) {
       request.setRequestHeader(data.header[0], data.header[1]);
     }

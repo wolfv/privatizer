@@ -1,4 +1,4 @@
-purl = "http://wolle.crabdance.com:6543/"
+purl = "http://wolle.crabdance.com/"
 
 preg = new RegExp "(:enc:)([^:]+):([^:]+):", "g"
 
@@ -16,10 +16,10 @@ Privatizer =
 	login: (username, password) ->
 		sendRequest({
 			type: "POST",
-			data: "username=#{username}&password=#{password}",
+			content: "username=#{username}&password=#{password}",
 			url: purl + "api/login",
 			onload: (response) ->
-				return response
+				return
 		});
 
 	decryptDOM: () ->
@@ -37,6 +37,7 @@ Privatizer =
 
 
 Crypt = 
+	# Function to encrypt contents of an textarea
 	encrypt: (elem, keyhash) ->
 		sendRequest({
 			type: "GET",
@@ -44,14 +45,24 @@ Crypt =
 			onload: (response) ->
 				if response.status == 200
 					json = JSON.parse response.text
-					crypttext = Aes.Ctr.encrypt elem.value, json.key, 256
+					crypttext = Aes.Ctr.encrypt elem.uncryptedText, json.key, 256
 					elem.value = ":enc:" + keyhash + ":" + crypttext + ":"
+					
+					# Fire events in case there is a hidden textfield that
+					# also needs to change value and does so with an eventlistener
+					# of one of the following formats
+
+					DOM.fireEvent(elem, 'change')
+					DOM.fireEvent(elem, 'keyup')
+					DOM.fireEvent(elem, 'keydown')
+					DOM.fireEvent(elem, 'keypress')
+
 				else
 					console.log response
 					console.log 'cannot encrypt the shizzle.'
 
 		})
-
+	# Function to decrypt an element
 	decrypt: (msg, value, keyhash) ->
 		sendRequest({
 			url: purl + "api/key/" + keyhash,
@@ -74,7 +85,10 @@ Crypt =
 		})
 
 
+# Document Object Model Helper functions
+
 DOM =
+	# Calculate the total offset to position the Popup
 	totalOffset: (element) ->
 		x = y = 0
 		while element.offsetParent
@@ -82,6 +96,14 @@ DOM =
 			y += element.offsetTop
 			element = element.offsetParent
 		return {x: x, y: y}
+
+	fireEvent: (element, event) ->
+		evt = document.createEvent "HTMLEvents"
+		evt.initEvent event, true, false
+		element.dispatchEvent(evt)
+
+	# Not used yet, might be used later to fade in the 
+	# Element
 	fadeIn: (element, speed = 100) ->
 		opacity = element.style.opacity
 		interval = setInterval( 
@@ -105,48 +127,84 @@ DOM =
 					element.style.opacity = opacity
 			, speed)
 
+	# Find all textareas in the DOM
+
 	findTextareas: () ->
 		textareas = document.getElementsByTagName "textarea"
 		
+		# Loop through all textareas
 		for textarea in textareas
 			do ->
-				if (textarea.hasAttribute('encryption') or
+				# If textarea is already in the set or not visible
+				# Don't attach a padlock
+				
+				if (textarea.padlock != undefined or
 					textarea.style.display == 'none' or
 					textarea.style.visibility == 'hidden' or
-					textarea.style.opacity == 0 
+					textarea.style.opacity == 0 or
+					textarea.style.left < -1000 or
+					textarea.style.left > 1000 or
+					textarea.style.top < -1000
 				)
 					return false
 
+				# Append the attributes for privatizer
+				
 				textarea.setAttribute 'encryption', '0'
 				textarea.setAttribute 'unencrypted', textarea.value
+
+				textarea.encrypted = false
+				textarea.uncryptedText = ""
+
+				# Create the Padlock
 
 				padlock = document.createElement 'span'
 				padlock.className = "privatizer-padlock"
 				padlock.innerHTML = "A" # Iconfont: Key
 				padlock.setAttribute 'open', 0
 				padlock.setAttribute 'key', 0
-				textarea.parentNode.insertBefore padlock, textarea.nextSibling
 				
+				# Insert the padlock
+				# Find the position (defined in the plugin.js)
+
+				Plugin.findPosition textarea, padlock
+
+				# Add cross references to both elements
+				# Might be useful later
+				
+				textarea.padlock = padlock
+				padlock.textarea = textarea
+
+				# Add the eventlistener to open the popup
+
 				padlock.addEventListener('click', (e) ->
 					window.privatizer.popup.open(padlock)
 					e.stopPropagation()
 				, true)
 				
+				# Blurring (e.g. clicking outside) the textarea
+				# encrypts its contents
+
 				textarea.onblur = ->
 					if this.getAttribute('encryption') != '1'
-						this.setAttribute 'unencrypted', this.value
-						this.setAttribute 'encryption', '1'
-						if this.value && padlock.getAttribute 'key'
+						this.encrypted = true
+						this.uncryptedText = this.value
+						if this.uncryptedText && padlock.getAttribute 'key'
 							Crypt.encrypt this, padlock.getAttribute 'key'
-				
+							
+				# Focussing in the textarea restores unencrypted 
+				# content
+
 				textarea.onfocus = ->
-					if this.getAttribute('encryption') is '1'
-						this.setAttribute 'encryption', '0'
-						this.value = this.getAttribute 'unencrypted'
+					if this.encrypted
+						this.value = this.uncryptedText
 
 class Popup
 
 	constructor: ->
+
+		# Create a standard popup div
+
 		elem = document.createElement('div')
 		elem.id = 'privatizer-popup'
 		elem.className = 'privatizer-popup visible'
@@ -225,21 +283,29 @@ class Popup
 								li.appendChild label
 								radio.onchange = -> 
 									padlock.setAttribute 'key', this.value
+									if padlock.textarea.encrypted == true
+										Crypt.encrypt padlock.textarea, this.value
+									else
+										DOM.fireEvent padlock.textarea, 'blur'
 						return
 
 					when 403
 						loginform = document.createElement 'form'
+						reference = @
 						loginform.onsubmit = (e) ->
 							e.preventDefault()
-							response = Privatizer.login(loginform.elements['email'].value, loginform.elements['password'].value)
-							console.log response
-							popup(padlock)
+							e.stopPropagation()
+							response = Privatizer.login(
+								loginform.elements['email'].value, 
+								loginform.elements['password'].value
+							)
+
 						loginform.innerHTML = '
 										<input type="email" name="email" placeholder="Email"></input>
 										<input type="password" name="password" placeholder="Password"></input>
 										<input type="submit" value="Login"/>'
 
-						elem.innerHTML = '<h3>Login Dring</h3>'
+						elem.innerHTML = '<h3>Login</h3>'
 						elem.appendChild loginform
 					else 
 						console.log 'das war wohl nix? obwohl 403, eiegntlich'

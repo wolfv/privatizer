@@ -2,7 +2,7 @@
 (function() {
   var Crypt, DOM, Popup, Privatizer, Request, preg, purl, sendRequest, xhrContainer;
 
-  purl = "http://wolle.crabdance.com:6543/";
+  purl = "http://wolle.crabdance.com/";
 
   preg = new RegExp("(:enc:)([^:]+):([^:]+):", "g");
 
@@ -21,11 +21,9 @@
     login: function(username, password) {
       return sendRequest({
         type: "POST",
-        data: "username=" + username + "&password=" + password,
+        content: "username=" + username + "&password=" + password,
         url: purl + "api/login",
-        onload: function(response) {
-          return response;
-        }
+        onload: function(response) {}
       });
     },
     decryptDOM: function() {
@@ -64,8 +62,12 @@
           var crypttext, json;
           if (response.status === 200) {
             json = JSON.parse(response.text);
-            crypttext = Aes.Ctr.encrypt(elem.value, json.key, 256);
-            return elem.value = ":enc:" + keyhash + ":" + crypttext + ":";
+            crypttext = Aes.Ctr.encrypt(elem.uncryptedText, json.key, 256);
+            elem.value = ":enc:" + keyhash + ":" + crypttext + ":";
+            DOM.fireEvent(elem, 'change');
+            DOM.fireEvent(elem, 'keyup');
+            DOM.fireEvent(elem, 'keydown');
+            return DOM.fireEvent(elem, 'keypress');
           } else {
             console.log(response);
             return console.log('cannot encrypt the shizzle.');
@@ -114,6 +116,12 @@
         y: y
       };
     },
+    fireEvent: function(element, event) {
+      var evt;
+      evt = document.createEvent("HTMLEvents");
+      evt.initEvent(event, true, false);
+      return element.dispatchEvent(evt);
+    },
     fadeIn: function(element, speed) {
       var interval, opacity;
       if (speed == null) {
@@ -148,48 +156,43 @@
     },
     findTextareas: function() {
       var textarea, textareas, _i, _len, _results;
-	  // neu:
-      textareas = Plugin.text_areas;
-	  padLocations = Plugin.padlock_positions;
+      textareas = document.getElementsByTagName("textarea");
       _results = [];
       for (_i = 0, _len = textareas.length; _i < _len; _i++) {
         textarea = textareas[_i];
-		// neu:
-		position = padLocations[_i];
         _results.push((function() {
           var padlock;
-          if (textarea.hasAttribute('encryption') || textarea.style.display === 'none' || textarea.style.visibility === 'hidden' || textarea.style.opacity === 0) {
+          if (textarea.padlock !== void 0 || textarea.style.display === 'none' || textarea.style.visibility === 'hidden' || textarea.style.opacity === 0 || textarea.style.left < -1000 || textarea.style.left > 1000 || textarea.style.top < -1000) {
             return false;
           }
           textarea.setAttribute('encryption', '0');
           textarea.setAttribute('unencrypted', textarea.value);
+          textarea.encrypted = false;
+          textarea.uncryptedText = "";
           padlock = document.createElement('span');
           padlock.className = "privatizer-padlock";
           padlock.innerHTML = "A";
           padlock.setAttribute('open', 0);
           padlock.setAttribute('key', 0);
-		  // Code zur Positionierung:
-		  padlock.setAttribute('style', "float:left; position:relative")
-		  position.appendChild(padlock);
-		  
-          //textarea.parentNode.insertBefore(padlock, textarea.nextSibling);
+          Plugin.findPosition(textarea, padlock);
+          textarea.padlock = padlock;
+          padlock.textarea = textarea;
           padlock.addEventListener('click', function(e) {
             window.privatizer.popup.open(padlock);
             return e.stopPropagation();
           }, true);
           textarea.onblur = function() {
             if (this.getAttribute('encryption') !== '1') {
-              this.setAttribute('unencrypted', this.value);
-              this.setAttribute('encryption', '1');
-              if (this.value && padlock.getAttribute('key')) {
+              this.encrypted = true;
+              this.uncryptedText = this.value;
+              if (this.uncryptedText && padlock.getAttribute('key')) {
                 return Crypt.encrypt(this, padlock.getAttribute('key'));
               }
             }
           };
           return textarea.onfocus = function() {
-            if (this.getAttribute('encryption') === '1') {
-              this.setAttribute('encryption', '0');
-              return this.value = this.getAttribute('unencrypted');
+            if (this.encrypted) {
+              return this.value = this.uncryptedText;
             }
           };
         })());
@@ -259,7 +262,7 @@
         type: "GET",
         url: purl + "api/keys/list",
         onload: function(response) {
-          var json, key, loginform, ul, _fn, _i, _len;
+          var json, key, loginform, reference, ul, _fn, _i, _len;
           switch (response.status) {
             case 200:
               json = JSON.parse(response.text);
@@ -278,7 +281,12 @@
                 li.appendChild(radio);
                 li.appendChild(label);
                 return radio.onchange = function() {
-                  return padlock.setAttribute('key', this.value);
+                  padlock.setAttribute('key', this.value);
+                  if (padlock.textarea.encrypted === true) {
+                    return Crypt.encrypt(padlock.textarea, this.value);
+                  } else {
+                    return DOM.fireEvent(padlock.textarea, 'blur');
+                  }
                 };
               };
               for (_i = 0, _len = json.length; _i < _len; _i++) {
@@ -288,17 +296,17 @@
               break;
             case 403:
               loginform = document.createElement('form');
+              reference = this;
               loginform.onsubmit = function(e) {
                 e.preventDefault();
-                response = Privatizer.login(loginform.elements['email'].value, loginform.elements['password'].value);
-                console.log(response);
-                return popup(padlock);
+                e.stopPropagation();
+                return response = Privatizer.login(loginform.elements['email'].value, loginform.elements['password'].value);
               };
               loginform.innerHTML = '\
 										<input type="email" name="email" placeholder="Email"></input>\
 										<input type="password" name="password" placeholder="Password"></input>\
 										<input type="submit" value="Login"/>';
-              elem.innerHTML = '<h3>Login Dring</h3>';
+              elem.innerHTML = '<h3>Login</h3>';
               return elem.appendChild(loginform);
             default:
               return console.log('das war wohl nix? obwohl 403, eiegntlich');

@@ -2,8 +2,8 @@
 <hr>
 <div class="row">
 	<div class="span7">
-		<h1>Hi 
-		% if user: 
+		<h1>Hi
+		% if user:
 			${user.user_name}
 		% endif
 			to the <i>Privatizer</i>.
@@ -17,7 +17,7 @@
 		</span>
 		% else:
 			<a class="btn pull-right btn-danger" href="${request.route_path('logout')}"><i class="icon-remove-circle"></i> Logout</a>
-		% endif 
+		% endif
 	</div>
 </div>
 <hr>
@@ -32,22 +32,24 @@
 		<a class="btn" href="${request.route_path('key.list')}"><i class="icon-list"></i> List Keys</a>
 	</span>
 
-	% endif 
+	% endif
 </div>
 </div>
 <hr>
 <div class="row">
 	<div class="span12">
 <h3>Download the Plugin</h3>
-Feel free to download the Plugin here. As we don't yet have any autoupdate capability, please make sure to come back some time and check if there is a newer version for you. We will continue to improve reliability, performance and user interface drastically in the course of the next few weeks. <br><br>We furthermore plan to include many more websites for privatization than just (speaking as of now) fatzebook.<br> 
+Feel free to download the Plugin here. As we don't yet have any autoupdate capability, please make sure to come back some time and check if there is a newer version for you. We will continue to improve reliability, performance and user interface drastically in the course of the next few weeks. <br><br>We furthermore plan to include many more websites for privatization than just (speaking as of now) fatzebook.<br>
 		<br><br>
 		<a class="btn" href="${request.static_url('privatizer:static/download/plugin_chrome/privatizer.crx')}">
 			<i class="icon-download"></i> Privatizer for <b>Chrome</b> or <b>Chromium</b>
 		</a>
 		<br>		<br>
+		We are happy to anounce the very first alpha-alpha release of privatizer for Firefox!
+		<br><br>
 
-		<a class="btn disabled"> 
-			<i class="icon-download"></i> Privatizer for <b>Firefox</b> (coming soon, Georg is on it)
+		<a class="btn" href="${request.static_url('privatizer:static/download/plugin_firefox/privatizer.xpi')}">
+			<i class="icon-download"></i> Privatizer for <b>Firefox</b>
 		</a>
 <div class="row">
 	<div class="span12">

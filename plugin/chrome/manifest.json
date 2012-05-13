@@ -7,7 +7,8 @@
     "popup": "html/popup.html"
   },
   "permissions": [
-    "<all_urls>"
+    "<all_urls>",
+    "cookies"
   ],
   "options_page": "html/options_page.html",
   "content_scripts": [
@@ -30,3 +31,4 @@
     }
   ]
 }
+ 

@@ -1,4 +1,4 @@
-purl = "http://wolle.crabdance.com:6543/"
+purl = "http://wolle.crabdance.com/"
 
 preg = new RegExp "(:enc:)([^:]+):([^:]+):", "g"
 
@@ -16,10 +16,10 @@ Privatizer =
 	login: (username, password) ->
 		sendRequest({
 			type: "POST",
-			data: "username=#{username}&password=#{password}",
+			content: "username=#{username}&password=#{password}",
 			url: purl + "api/login",
 			onload: (response) ->
-				return response
+				return
 		});
 
 	decryptDOM: () ->
@@ -45,8 +45,18 @@ Crypt =
 			onload: (response) ->
 				if response.status == 200
 					json = JSON.parse response.text
-					crypttext = Aes.Ctr.encrypt elem.value, json.key, 256
+					crypttext = Aes.Ctr.encrypt elem.uncryptedText, json.key, 256
 					elem.value = ":enc:" + keyhash + ":" + crypttext + ":"
+					
+					# Fire events in case there is a hidden textfield that
+					# also needs to change value and does so with an eventlistener
+					# of one of the following formats
+
+					DOM.fireEvent(elem, 'change')
+					DOM.fireEvent(elem, 'keyup')
+					DOM.fireEvent(elem, 'keydown')
+					DOM.fireEvent(elem, 'keypress')
+
 				else
 					console.log response
 					console.log 'cannot encrypt the shizzle.'
@@ -87,6 +97,11 @@ DOM =
 			element = element.offsetParent
 		return {x: x, y: y}
 
+	fireEvent: (element, event) ->
+		evt = document.createEvent "HTMLEvents"
+		evt.initEvent event, true, false
+		element.dispatchEvent(evt)
+
 	# Not used yet, might be used later to fade in the 
 	# Element
 	fadeIn: (element, speed = 100) ->
@@ -123,10 +138,13 @@ DOM =
 				# If textarea is already in the set or not visible
 				# Don't attach a padlock
 				
-				if (textarea.hasAttribute('encryption') or
+				if (textarea.padlock != undefined or
 					textarea.style.display == 'none' or
 					textarea.style.visibility == 'hidden' or
-					textarea.style.opacity == 0 
+					textarea.style.opacity == 0 or
+					textarea.style.left < -1000 or
+					textarea.style.left > 1000 or
+					textarea.style.top < -1000
 				)
 					return false
 
@@ -134,6 +152,9 @@ DOM =
 				
 				textarea.setAttribute 'encryption', '0'
 				textarea.setAttribute 'unencrypted', textarea.value
+
+				textarea.encrypted = false
+				textarea.uncryptedText = ""
 
 				# Create the Padlock
 
@@ -144,9 +165,16 @@ DOM =
 				padlock.setAttribute 'key', 0
 				
 				# Insert the padlock
+				# Find the position (defined in the plugin.js)
 
-				textarea.parentNode.insertBefore padlock, textarea.nextSibling
-				
+				Plugin.findPosition textarea, padlock
+
+				# Add cross references to both elements
+				# Might be useful later
+
+				textarea.padlock = padlock
+				padlock.textarea = textarea
+
 				# Add the eventlistener to open the popup
 
 				padlock.addEventListener('click', (e) ->
@@ -159,18 +187,17 @@ DOM =
 
 				textarea.onblur = ->
 					if this.getAttribute('encryption') != '1'
-						this.setAttribute 'unencrypted', this.value
-						this.setAttribute 'encryption', '1'
-						if this.value && padlock.getAttribute 'key'
+						this.encrypted = true
+						this.uncryptedText = this.value
+						if this.uncryptedText && padlock.getAttribute 'key'
 							Crypt.encrypt this, padlock.getAttribute 'key'
-				
+							
 				# Focussing in the textarea restores unencrypted 
 				# content
 
 				textarea.onfocus = ->
-					if this.getAttribute('encryption') is '1'
-						this.setAttribute 'encryption', '0'
-						this.value = this.getAttribute 'unencrypted'
+					if this.encrypted
+						this.value = this.uncryptedText
 
 class Popup
 
@@ -256,21 +283,29 @@ class Popup
 								li.appendChild label
 								radio.onchange = -> 
 									padlock.setAttribute 'key', this.value
+									if padlock.textarea.encrypted == true
+										Crypt.encrypt padlock.textarea, this.value
+									else
+										DOM.fireEvent padlock.textarea, 'blur'
 						return
 
 					when 403
 						loginform = document.createElement 'form'
+						reference = @
 						loginform.onsubmit = (e) ->
 							e.preventDefault()
-							response = Privatizer.login(loginform.elements['email'].value, loginform.elements['password'].value)
-							console.log response
-							popup(padlock)
+							e.stopPropagation()
+							response = Privatizer.login(
+								loginform.elements['email'].value, 
+								loginform.elements['password'].value
+							)
+
 						loginform.innerHTML = '
 										<input type="email" name="email" placeholder="Email"></input>
 										<input type="password" name="password" placeholder="Password"></input>
 										<input type="submit" value="Login"/>'
 
-						elem.innerHTML = '<h3>Login Dring</h3>'
+						elem.innerHTML = '<h3>Login</h3>'
 						elem.appendChild loginform
 					else 
 						console.log 'das war wohl nix? obwohl 403, eiegntlich'

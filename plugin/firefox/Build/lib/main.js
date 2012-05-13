@@ -119,6 +119,7 @@ function script_loads(){
 				});
 				worker.port.on('request', 
 					function(request) {
+						request.headers = {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
 						var responseObj = {
 							"requestID": request.requestID,
 						}
