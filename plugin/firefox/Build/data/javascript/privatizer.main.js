@@ -148,11 +148,13 @@
     },
     findTextareas: function() {
       var textarea, textareas, _i, _len, _results;
+	  // neu:
       textareas = Plugin.text_areas;
 	  padLocations = Plugin.padlock_positions;
       _results = [];
       for (_i = 0, _len = textareas.length; _i < _len; _i++) {
         textarea = textareas[_i];
+		// neu:
 		position = padLocations[_i];
         _results.push((function() {
           var padlock;
@@ -166,10 +168,10 @@
           padlock.innerHTML = "A";
           padlock.setAttribute('open', 0);
           padlock.setAttribute('key', 0);
-		  /* mein Code:
+		  // Code zur Positionierung:
 		  padlock.setAttribute('style', "float:left; position:relative")
 		  position.appendChild(padlock);
-		  */
+		  
           //textarea.parentNode.insertBefore(padlock, textarea.nextSibling);
           padlock.addEventListener('click', function(e) {
             window.privatizer.popup.open(padlock);
