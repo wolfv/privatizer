@@ -15,7 +15,7 @@ button.onclick = function(){
     reload();
     self.port.emit("event2", activation);
 }
-
+var ts = "text-shadow"
 function reload(){
   if( activation ) {
     document.getElementById("Status").innerHTML = "<img src='lock_closed.png'/>"

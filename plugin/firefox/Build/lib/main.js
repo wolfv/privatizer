@@ -2,7 +2,9 @@
 		FireFox-Plugin
 */
 
+
 // Funktionsaufruf: Initialisierung der Variablen
+var widgets, cm, tabs, windows, self, pageMod, notifications, ss, Request, menuitems
 init_var()
 
 if( ss.storage.firstRun == undefined ){
@@ -11,6 +13,9 @@ if( ss.storage.firstRun == undefined ){
 }
 
 // Funktionsaufruf: Erzeugt Browser-Menues
+var privatizer_panel, menuitem, widget
+var panel_height = 170
+var panel_width = 180
 create_menu()
 
 // Funktionsaufruf: Läd die benötigten Content-Scripts
@@ -46,8 +51,8 @@ function init_var(){
 */
 function create_menu(){
 		privatizer_panel = require("panel").Panel({
-				height: 170,
-				width: 180,
+				height: panel_height,
+				width: panel_width,
 				contentURL: self.data.url("panel.html"),
 				contentScriptFile: self.data.url("panelscript.js")
 		})
