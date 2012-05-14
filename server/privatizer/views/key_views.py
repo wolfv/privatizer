@@ -40,8 +40,8 @@ def add(request):
             key = Key(
                 request.POST['name'],
                 user.id,
-                request.POST['description'],
-                request.POST['keytext']
+                request.POST['keytext'],
+                request.POST['description']
                 )
             DBSession.add(key)
             request.session.flash({'message': 'Your Key was added', 'type': flashtype['success']})
@@ -120,7 +120,7 @@ def key_api_by_id(request):
     log.debug(authenticated_userid(request))
     key_id = request.matchdict['id']
     if key_id:
-        key = Key.by_id(key_id)
+        key = Key.by_hash(key_id)
     if key:
         auth_user= authenticated_userid(request)
         if key.owner_id == auth_user:

@@ -169,6 +169,7 @@ class Key(Base):
     def __init__(self, name, owner_id, keytext, description = None):
         self.name = name
         self.owner_id = owner_id
+        
         self.keytext = keytext
         self.description = description
 
