@@ -211,6 +211,7 @@ class Popup
 		elem.style.position = 'absolute'
 		elem.style.border = '1px solid #000'
 		elem.style.zIndex = 10000
+		elem.style.width = '235px'
 		@Element = elem
 		document.body.appendChild(@Element)
 
