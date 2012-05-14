@@ -2,7 +2,7 @@
 (function() {
   var Crypt, DOM, Popup, Privatizer, Request, preg, purl, sendRequest, xhrContainer;
 
-  purl = "http://wolle.crabdance.com/";
+  purl = "http://privatizer.crabdance.com/";
 
   preg = new RegExp("(:enc:)([^:]+):([^:]+):", "g");
 
@@ -213,8 +213,7 @@
       elem.style.position = 'absolute';
       elem.style.border = '1px solid #000';
       elem.style.zIndex = 10000;
-	  elem.style.width = '235px';
-	  
+      elem.style.width = '235px';
       this.Element = elem;
       document.body.appendChild(this.Element);
     }

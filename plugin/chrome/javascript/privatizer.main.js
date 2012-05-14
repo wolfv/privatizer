@@ -2,7 +2,7 @@
 (function() {
   var Crypt, DOM, Popup, Privatizer, Request, preg, purl, sendRequest, xhrContainer;
 
-  purl = "http://wolle.crabdance.com/";
+  purl = "http://privatizer.crabdance.com/";
 
   preg = new RegExp("(:enc:)([^:]+):([^:]+):", "g");
 

@@ -1,4 +1,4 @@
-purl = "http://wolle.crabdance.com/"
+purl = "http://privatizer.crabdance.com/"
 
 preg = new RegExp "(:enc:)([^:]+):([^:]+):", "g"
 
