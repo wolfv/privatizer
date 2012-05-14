@@ -24,15 +24,16 @@ Plugin.findPosition = function(textarea, padlock) {
 			&& textarea.getAttribute("name") == "xhpc_message") {
 		position = document.getElementsByClassName('uiComposerMessageBoxControls')[0];
 		position.appendChild(padlock)
-		padlock.style.float = "right";
+        padlock.style.cssFloat = "right"
 		padlock.style.position = "relative";
+        padlock.style.margin = "2px";
 		return;
 	}
 
 	else if (textarea.classList.contains("uiTextareaNoResize")) {
 		position = textarea.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
 		position.appendChild(padlock)
-		padlock.style.float = "right"
+		padlock.style.cssFloat = "right"
 		padlock.style.position = "relative"
 		return;
 	}
@@ -41,7 +42,7 @@ Plugin.findPosition = function(textarea, padlock) {
 		position = textarea.parentNode.nextSibling;
 		position.appendChild(padlock)
 		padlock.style.position = "relative";
-		padlock.style.float = "right";
+		padlock.style.cssFloat = "right";
 	}
 	else {
 		position = textarea.parentNode;
