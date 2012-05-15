@@ -213,7 +213,7 @@
       elem.style.position = 'absolute';
       elem.style.border = '1px solid #000';
       elem.style.zIndex = 10000;
-      elem.style.width = '235px';
+      //elem.style.width = '235px';
       this.Element = elem;
       document.body.appendChild(this.Element);
     }
@@ -304,10 +304,11 @@
                 return response = Privatizer.login(loginform.elements['email'].value, loginform.elements['password'].value);
               };
               loginform.innerHTML = '\
-										<input type="email" name="email" placeholder="Email"></input>\
-										<input type="password" name="password" placeholder="Password"></input>\
-										<input type="submit" value="Login"/>';
-              elem.innerHTML = '<h3>Login</h3>';
+							<input type="email" name="email" placeholder="Email" style="width: 90%; margin: 5px"></input>\
+							<input type="password" name="password" placeholder="Password" style="width: 90%; margin: 5px"\
+							onKeyPress="return submitenter(this,event)"></input>\
+							<input type="submit" value="Login" style="width: 70px; margin: 5px"/>';
+              //elem.innerHTML = '<h2 style="margin 5px">Login</h2>';
               return elem.appendChild(loginform);
             default:
               return console.log('das war wohl nix? obwohl 403, eiegntlich');
@@ -339,3 +340,21 @@
   });
 
 }).call(this);
+
+
+// HELPER: For Form-Submit on Enter
+function submitenter(myfield,e)
+{
+var keycode;
+if (window.event) keycode = window.event.keyCode;
+else if (e) keycode = e.which;
+else return true;
+
+if (keycode == 13)
+   {
+   myfield.form.submit();
+   return false;
+   }
+else
+   return true;
+}
