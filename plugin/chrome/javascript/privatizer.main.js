@@ -169,7 +169,7 @@
         textarea = textareas[_i];
         _results.push((function() {
           var padlock;
-          if (textarea.padlock !== void 0 || textarea.style.display === 'none' || textarea.style.visibility === 'hidden' || textarea.style.opacity === 0 || textarea.style.left < -1000 || textarea.style.left > 1000 || textarea.style.top < -1000) {
+          if (textarea.padlock !== void 0 || textarea.style.display === 'none' || textarea.style.visibility === 'hidden' || textarea.style.opacity === 0 || textarea.offsetLeft < -1000 || textarea.offsetLeft > 1000 || textarea.offsetTop < -1000) {
             return false;
           }
           textarea.setAttribute('encryption', '0');
@@ -283,7 +283,6 @@
       elem.style.top = offset['y'] + 30 + "px";
       window.onkeydown = function(e) {
         var next, prevSelect, select, selects, _i, _j, _len, _len1, _results;
-        console.log(e);
         if (e.keyCode === 40) {
           e.preventDefault();
           selects = elem.getElementsByTagName('input');

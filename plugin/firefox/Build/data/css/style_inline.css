@@ -14,26 +14,32 @@
 .privatizer-padlock:active { background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #ff9600), color-stop(100%, #ffbb00)); background-image: -webkit-linear-gradient(bottom, #ff9600 0%, #ffbb00 100%); background-image: -moz-linear-gradient(bottom, #ff9600 0%, #ffbb00 100%); background-image: -o-linear-gradient(bottom, #ff9600 0%, #ffbb00 100%); background-image: -ms-linear-gradient(bottom, #ff9600 0%, #ffbb00 100%); background-image: linear-gradient(bottom, #ff9600 0%, #ffbb00 100%); }
 
 /* line 45, ../scss/style_inline.sass */
-#privatizer-popup { background: white; -webkit-box-shadow: 0 0 10px #333333; -moz-box-shadow: 0 0 10px #333333; box-shadow: 0 0 10px #333333; font-family: Arial, Helvetica, sans-serif; font-weight: normal; font-style: normal; border: 1px solid #999999; z-index: 306; width: 200px; padding: 5px; }
+#privatizer-popup { background: white; -webkit-box-shadow: 0 0 10px #333333; -moz-box-shadow: 0 0 10px #333333; box-shadow: 0 0 10px #333333; font-family: Arial, Helvetica, sans-serif; font-weight: normal; font-style: normal; border: 1px solid #999999; z-index: 306; width: 200px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -ms-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; }
 /* line 55, ../scss/style_inline.sass */
 #privatizer-popup::before { content: ""; border-width: 0 8px 8px; border-color: #888888 transparent; position: absolute; border-style: solid; left: 5px; top: -8px; display: block; z-index: 305; }
 /* line 65, ../scss/style_inline.sass */
-#privatizer-popup::after { content: ""; border-width: 0 7px 7px; border-color: white transparent; border-style: solid; position: absolute; left: 6px; top: -7px; display: block; z-index: 308; }
+#privatizer-popup::after { content: ""; border-width: 0 7px 7px; border-color: #f3f3f3 transparent; border-style: solid; position: absolute; left: 6px; top: -7px; display: block; z-index: 308; }
 /* line 76, ../scss/style_inline.sass */
-#privatizer-popup h3 { background: #f3f3f3; padding: 0 3px; border-bottom: 1px solid #aaaaaa; }
+#privatizer-popup h3 { background: #f3f3f3; padding: 5px 10px; border-bottom: 1px solid #aaaaaa; display: block; }
+/* line 81, ../scss/style_inline.sass */
+#privatizer-popup form { padding: 5px; }
 /* line 83, ../scss/style_inline.sass */
-#privatizer-popup ul { list-style-type: none; margin: 0; padding: 0; font-size: 12px; line-height: 16px; }
+#privatizer-popup form input[type=text], #privatizer-popup form input[type=email], #privatizer-popup form input[type=password] { -webkit-border-radius: 2px; -moz-border-radius: 2px; -ms-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; border: 1px solid #999999; padding: 3px; margin: 5px; width: 170px; }
 /* line 89, ../scss/style_inline.sass */
-#privatizer-popup ul li { padding: 2px 4px; -webkit-transition: all 0.2s ease-in; -moz-transition: all 0.2s ease-in; -ms-transition: all 0.2s ease-in; -o-transition: all 0.2s ease-in; transition: all 0.2s ease-in; color: black; font-weight: normal; }
+#privatizer-popup form input[type=submit] { margin: 5px; padding: 3 7px; }
 /* line 92, ../scss/style_inline.sass */
+#privatizer-popup ul { list-style-type: none; margin: 0; padding: 0; font-size: 12px; line-height: 16px; }
+/* line 98, ../scss/style_inline.sass */
+#privatizer-popup ul li { padding: 2px 4px; -webkit-transition: all 0.2s ease-in; -moz-transition: all 0.2s ease-in; -ms-transition: all 0.2s ease-in; -o-transition: all 0.2s ease-in; transition: all 0.2s ease-in; color: black; font-weight: normal; }
+/* line 101, ../scss/style_inline.sass */
 #privatizer-popup ul li:hover { background: #cccccc; }
-/* line 94, ../scss/style_inline.sass */
+/* line 103, ../scss/style_inline.sass */
 #privatizer-popup ul li input[type="radio"] { float: left; -webkit-appearance: none; -moz-appearance: none; appearance: none; -webkit-appearance: none; -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; border: 2px solid black; height: 14px; width: 14px; display: inline-block; }
-/* line 104, ../scss/style_inline.sass */
-#privatizer-popup ul li input[type="radio"]:checked { background-color: #ff9600; }
-/* line 109, ../scss/style_inline.sass */
-#privatizer-popup ul li .name { font-weight: bold; display: block; font-size: 12px; }
 /* line 113, ../scss/style_inline.sass */
+#privatizer-popup ul li input[type="radio"]:checked { background-color: #ff9600; }
+/* line 118, ../scss/style_inline.sass */
+#privatizer-popup ul li .name { font-weight: bold; display: block; font-size: 12px; }
+/* line 122, ../scss/style_inline.sass */
 #privatizer-popup ul li .description { font-size: 10px; display: block; min-height: 10px; }
-/* line 117, ../scss/style_inline.sass */
+/* line 126, ../scss/style_inline.sass */
 #privatizer-popup ul li label { color: black; font-weight: normal; display: block; padding-left: 30px; cursor: pointer; line-height: 10px; }

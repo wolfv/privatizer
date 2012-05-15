@@ -146,9 +146,10 @@ DOM =
 					textarea.style.display == 'none' or
 					textarea.style.visibility == 'hidden' or
 					textarea.style.opacity == 0 or
-					textarea.style.left < -1000 or
-					textarea.style.left > 1000 or
-					textarea.style.top < -1000
+					textarea.offsetLeft < -1000 or
+					textarea.offsetLeft > 1000 or
+					textarea.offsetTop < -1000
+
 				)
 					return false
 
@@ -286,7 +287,6 @@ class Popup
 		elem.style.top = offset['y'] + 30 + "px"
 
 		window.onkeydown = (e) ->
-			console.log e
 			if e.keyCode == 40 # ARROW UP
 				e.preventDefault()
 				selects = elem.getElementsByTagName 'input'
@@ -297,6 +297,7 @@ class Popup
 						break
 					if select.checked
 						next = true
+				# If no select checked
 				if !next
 					selects[0].checked = true
 			

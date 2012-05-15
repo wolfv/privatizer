@@ -91,7 +91,7 @@ function script_loads(){
 	console.log(ss.storage.activation)
 	if( ss.storage.activation ){
 		pm = pageMod.PageMod({
-			include: "*.facebook.com",
+			include: "*",
 			contentScriptWhen: 'ready',
 			contentScriptFile: [
 		      self.data.url("javascript/addons/facebook.js"),
@@ -109,16 +109,10 @@ function script_loads(){
 
 				worker.port.emit('loadCSS', initMessage);
 				
-				worker.port.on('fireRequest', function(data) {
-					request = Request({
-						url: "http://wolle.crabdance.com:6543/api/keys/list",
-						onComplete: function(response) {
-							console.log(response.status);
-						}
-					}).get();
-				});
 				worker.port.on('request', 
 					function(request) {
+						console.log(request.url)
+
 						request.headers = {"Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}
 						var responseObj = {
 							"requestID": request.requestID,
@@ -132,7 +126,7 @@ function script_loads(){
 									worker.port.emit('requestCallback', responseObj);
 								},
 								headers: request.headers,
-								content: request.data,
+								content: request.content,
 								withCredentials: true
 							}).post()
 						} else {
@@ -144,8 +138,7 @@ function script_loads(){
 									worker.port.emit('requestCallback', responseObj);
 								},
 								headers: request.headers,
-								content: request.data,
-								withCredentials: true
+								content: request.content
 							}).get()
 						} 
 					}
