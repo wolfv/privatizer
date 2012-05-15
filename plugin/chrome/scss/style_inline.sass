@@ -23,7 +23,7 @@ $oh: #FFBB00
 	border: 1px solid darken($o, 10%)
 	border-bottom: 1px solid darken($o, 5%)
 	+box-shadow(0 1px 0 0 lighten($o, 10%) inset)
-	z-index: 4000
+	z-index: 300
 	position: absolute
 	right: 0px
 	top: 0
@@ -41,31 +41,44 @@ $oh: #FFBB00
 
 	&:active
 		+background-image(linear-gradient(bottom, $o 0%, $oh 100%))
+
 #privatizer-popup
 	background: #FFF
-	+box-shadow(0 0 5px #333)
+	+box-shadow(0 0 10px #333)
 	font-family: Arial, Helvetica, sans-serif
 	font-weight: normal
 	font-style: normal
+	border: 1px solid #999
+	z-index: 306
 	width: 200px
+	padding: 5px
 	&::before
 		content: ''
-		border-width: 0 6px 6px
-		border-color: #333 transparent
+		border-width: 0 8px 8px
+		border-color: #888 transparent
 		position: absolute
 		border-style: solid
 		left: 5px
-		top: -6px
+		top: -8px
 		display: block
+		z-index: 305
 	&::after
 		content: '' 
-		border-width: 0 5px 5px
+		border-width: 0 7px 7px
 		border-color: #FFF transparent
 		border-style: solid
 		position: absolute
-		left: 5px
-		top: -5px
+		left: 6px
+		top: -7px
 		display: block
+		z-index: 308
+
+	h3
+		background: #F3F3F3
+		padding: 0 3px
+		border-bottom: 1px solid #AAA
+
+
 
 	ul
 		list-style-type: none

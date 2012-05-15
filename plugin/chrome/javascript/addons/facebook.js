@@ -22,10 +22,11 @@ Plugin.findPosition = function(textarea, padlock) {
 
 	if( textarea.classList.contains("uiTextareaAutogrow") 
 			&& textarea.getAttribute("name") == "xhpc_message") {
-		position = document.getElementsByClassName('uiComposerMessageBoxControls')[0];
-		position.appendChild(padlock)
-		padlock.style.float = "right";
+		position = document.getElementsByClassName('uiComposerBarRightArea')[0];
+		position.insertBefore(padlock, position.firstChild)
+        padlock.style.cssFloat = "left"
 		padlock.style.position = "relative";
+        padlock.style.margin = "-2px";
 		return;
 	}
 

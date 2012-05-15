@@ -73,7 +73,10 @@ def login(request):
 
 @view_config(route_name='api.login', renderer='json')
 def api_login(request):
-    request.response.headerlist.extend([('Access-Control-Allow-Origin', "*")])
+    request.response.headerlist.extend([
+        ('Access-Control-Allow-Origin', "%s" % request.referer ),
+        ('Access-Control-Allow-Credentials', "true")
+    ])   
     if 'username' in request.params:
         login = request.params['username']
         password = request.params['password']

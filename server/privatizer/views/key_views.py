@@ -113,7 +113,7 @@ def api_list(request):
 def key_api_by_id(request):
     log.debug( request.client_addr)
     request.response.headerlist.extend([
-        ('Access-Control-Allow-Origin', "*" ),
+        ('Access-Control-Allow-Origin', "%s" % request.referer ),
         ('Access-Control-Allow-Credentials', "true")
     ])   
     log.debug(request.cookies)
