@@ -1,4 +1,4 @@
-Plugin.classnames = ["messageBody", "content noh", "tlTxFe"];
+Plugin.classnames = ["messageBody", "content noh", "tlTxFe", "commentBody"];
 
 /*
 Vorschläge zur Poritionierung:

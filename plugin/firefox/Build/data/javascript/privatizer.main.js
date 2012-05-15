@@ -18,12 +18,20 @@
   };
 
   Privatizer = {
-    login: function(username, password) {
+    login: function(username, password, padlock) {
+      if (padlock == null) {
+        padlock = null;
+      }
+      console.log('login called.');
       return sendRequest({
         type: "POST",
         content: "username=" + username + "&password=" + password,
         url: purl + "api/login",
-        onload: function(response) {}
+        onload: function(response) {
+          if (padlock) {
+            window.privatizer.popup.open(padlock);
+          }
+        }
       });
     },
     decryptDOM: function() {
@@ -174,6 +182,7 @@
           padlock.innerHTML = "A";
           padlock.setAttribute('open', 0);
           padlock.setAttribute('key', 0);
+          padlock.setAttribute('tabindex', 0);
           Plugin.findPosition(textarea, padlock);
           textarea.padlock = padlock;
           padlock.textarea = textarea;
@@ -181,18 +190,23 @@
             window.privatizer.popup.open(padlock);
             return e.stopPropagation();
           }, true);
+          padlock.addEventListener('focus', function(e) {
+            window.privatizer.popup.open(padlock);
+            return e.stopPropagation();
+          }, true);
           textarea.onblur = function() {
-            if (this.getAttribute('encryption') !== '1') {
-              this.encrypted = true;
-              this.uncryptedText = this.value;
-              if (this.uncryptedText && padlock.getAttribute('key')) {
-                return Crypt.encrypt(this, padlock.getAttribute('key'));
+            if (padlock.textarea.encrypted !== true) {
+              padlock.textarea.encrypted = true;
+              padlock.textarea.uncryptedText = this.value;
+              if (padlock.textarea.uncryptedText && padlock.getAttribute('key')) {
+                return Crypt.encrypt(padlock.textarea, padlock.getAttribute('key'));
               }
             }
           };
           return textarea.onfocus = function() {
             if (this.encrypted) {
-              return this.value = this.uncryptedText;
+              this.value = this.uncryptedText;
+              return this.encrypted = false;
             }
           };
         })());
@@ -211,9 +225,7 @@
       elem.id = 'privatizer-popup';
       elem.className = 'privatizer-popup visible';
       elem.style.position = 'absolute';
-      elem.style.border = '1px solid #000';
-      elem.style.zIndex = 10000;
-      //elem.style.width = '235px';
+      elem.style.display = 'none';
       this.Element = elem;
       document.body.appendChild(this.Element);
     }
@@ -226,6 +238,18 @@
 
     Popup.prototype.close = function(e) {
       var checktarget, elem;
+      if (!e) {
+        if (this.isOpen) {
+          this.Padlock.setAttribute('open', '0');
+          try {
+            this.Element.className = 'privatizer-popup hidden';
+            this.Element.style.display = 'none';
+            this.isOpen = false;
+            window.onkeydown = function() {};
+          } catch (_error) {}
+        }
+        return;
+      }
       elem = this.Element;
       checktarget = function(target) {
         while (target.parentNode) {
@@ -243,6 +267,7 @@
           this.Element.className = 'privatizer-popup hidden';
           this.Element.style.display = 'none';
           this.isOpen = false;
+          window.onkeydown = function() {};
         } catch (_error) {}
       }
     };
@@ -257,6 +282,49 @@
       elem = this.Element;
       elem.style.left = offset['x'] + "px";
       elem.style.top = offset['y'] + 30 + "px";
+      window.onkeydown = function(e) {
+        var next, prevSelect, select, selects, _i, _j, _len, _len1, _results;
+        console.log(e);
+        if (e.keyCode === 40) {
+          e.preventDefault();
+          selects = elem.getElementsByTagName('input');
+          for (_i = 0, _len = selects.length; _i < _len; _i++) {
+            select = selects[_i];
+            if (next) {
+              select.checked = true;
+              select.onchange();
+              break;
+            }
+            if (select.checked) {
+              next = true;
+            }
+          }
+          if (!next) {
+            return selects[0].checked = true;
+          }
+        } else if (e.keyCode === 38) {
+          e.preventDefault();
+          selects = elem.getElementsByTagName('input');
+          _results = [];
+          for (_j = 0, _len1 = selects.length; _j < _len1; _j++) {
+            select = selects[_j];
+            if (select.checked) {
+              if (prevSelect) {
+                prevSelect.checked = true;
+                prevSelect.onchange();
+                break;
+              } else {
+                select.checked = true;
+              }
+            }
+            _results.push(prevSelect = select);
+          }
+          return _results;
+        } else if (e.keyCode === 27) {
+          window.privatizer.popup.close(null);
+          return e.preventDefault();
+        }
+      };
       elem.style.display = 'block';
       elem.innerHTML = '';
       request = sendRequest({
@@ -278,6 +346,7 @@
                 label = document.createElement('label');
                 label.innerHTML = "<span class=\"name\">" + key.name + "</span><span class=\"description\">" + key.description + "</span>";
                 label.setAttribute('for', 'pkey-' + key.hash);
+                label.setAttribute('tabindex', 0);
                 li = ul.appendChild(document.createElement('li'));
                 li.appendChild(radio);
                 li.appendChild(label);
@@ -295,27 +364,27 @@
                 _fn();
               }
               break;
-            case 403:
+            default:
               loginform = document.createElement('form');
               reference = this;
               loginform.onsubmit = function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                return response = Privatizer.login(loginform.elements['email'].value, loginform.elements['password'].value);
+                response = Privatizer.login(loginform.elements['email'].value, loginform.elements['password'].value, padlock);
+                return window.privatizer.popup.close();
               };
               loginform.innerHTML = '\
-							<input type="email" name="email" placeholder="Email" style="width: 90%; margin: 5px"></input>\
-							<input type="password" name="password" placeholder="Password" style="width: 90%; margin: 5px"\
-							onKeyPress="return submitenter(this,event)"></input>\
-							<input type="submit" value="Login" style="width: 70px; margin: 5px"/>';
-              //elem.innerHTML = '<h2 style="margin 5px">Login</h2>';
+								<input id="privatizer_email" type="email" name="email" placeholder="Email" tabindex="0"></input>\
+								<input type="password" name="password" placeholder="Password" tabindex="0"></input>\
+								<input type="submit" value="Login" tabindex="0"/>\
+							';
+              loginform.elements[0].focus();
               return elem.appendChild(loginform);
-            default:
-              return console.log('das war wohl nix? obwohl 403, eiegntlich');
           }
         }
       });
       document.addEventListener('click', function(e) {
+        console.log(e);
         window.privatizer.popup.close(e);
         return true;
       }, false);
@@ -340,21 +409,3 @@
   });
 
 }).call(this);
-
-
-// HELPER: For Form-Submit on Enter
-function submitenter(myfield,e)
-{
-var keycode;
-if (window.event) keycode = window.event.keyCode;
-else if (e) keycode = e.which;
-else return true;
-
-if (keycode == 13)
-   {
-   myfield.form.submit();
-   return false;
-   }
-else
-   return true;
-}

@@ -13,14 +13,19 @@ sendRequest = (request) ->
 	xhrContainer.count++
 
 Privatizer =
-	login: (username, password) ->
+	login: (username, password, padlock = null) ->
+		console.log 'login called.'
 		sendRequest({
 			type: "POST",
 			content: "username=#{username}&password=#{password}",
 			url: purl + "api/login",
 			onload: (response) ->
+				if padlock
+					window.privatizer.popup.open(padlock)
+
 				return
 		});
+
 
 	decryptDOM: () ->
 		messages = []
@@ -163,7 +168,7 @@ DOM =
 				padlock.innerHTML = "A" # Iconfont: Key
 				padlock.setAttribute 'open', 0
 				padlock.setAttribute 'key', 0
-				
+				padlock.setAttribute 'tabindex', 0
 				# Insert the padlock
 				# Find the position (defined in the plugin.js)
 
@@ -171,7 +176,7 @@ DOM =
 
 				# Add cross references to both elements
 				# Might be useful later
-				
+
 				textarea.padlock = padlock
 				padlock.textarea = textarea
 
@@ -182,15 +187,29 @@ DOM =
 					e.stopPropagation()
 				, true)
 				
+				# Focussing with tab opens popup
+
+				padlock.addEventListener('focus', (e) ->
+					window.privatizer.popup.open(padlock)
+					e.stopPropagation()
+				, true)
+				
+				# Blur with next tab closes Popup
+
+				#padlock.addEventListener('blur', (e) ->
+				#	window.privatizer.popup.close(e)
+				#	e.stopPropagation()
+				#, true)
+
 				# Blurring (e.g. clicking outside) the textarea
 				# encrypts its contents
 
 				textarea.onblur = ->
-					if this.getAttribute('encryption') != '1'
-						this.encrypted = true
-						this.uncryptedText = this.value
-						if this.uncryptedText && padlock.getAttribute 'key'
-							Crypt.encrypt this, padlock.getAttribute 'key'
+					if padlock.textarea.encrypted != true
+						padlock.textarea.encrypted = true
+						padlock.textarea.uncryptedText = this.value
+						if padlock.textarea.uncryptedText && padlock.getAttribute 'key'
+							Crypt.encrypt padlock.textarea, padlock.getAttribute 'key'
 							
 				# Focussing in the textarea restores unencrypted 
 				# content
@@ -198,7 +217,7 @@ DOM =
 				textarea.onfocus = ->
 					if this.encrypted
 						this.value = this.uncryptedText
-
+						this.encrypted = false
 class Popup
 
 	constructor: ->
@@ -209,9 +228,7 @@ class Popup
 		elem.id = 'privatizer-popup'
 		elem.className = 'privatizer-popup visible'
 		elem.style.position = 'absolute'
-		elem.style.border = '1px solid #000'
-		elem.style.zIndex = 10000
-		elem.style.width = '235px'
+		elem.style.display = 'none'
 		@Element = elem
 		document.body.appendChild(@Element)
 
@@ -225,6 +242,18 @@ class Popup
 	
 	# close action
 	close: (e) ->
+		# If event because of escape not mouse
+		if not e 
+			if @isOpen
+				@Padlock.setAttribute 'open', '0'
+				try
+					@Element.className = 'privatizer-popup hidden'
+					@Element.style.display = 'none'
+					@isOpen = false
+					window.onkeydown = () ->
+			return
+
+		# If event from mouse
 		elem = @Element
 		checktarget = (target) ->
 			while target.parentNode 
@@ -240,6 +269,7 @@ class Popup
 				@Element.className = 'privatizer-popup hidden'
 				@Element.style.display = 'none'
 				@isOpen = false
+				window.onkeydown = () ->
 		return
 
 	open: (padlock) -> 
@@ -255,6 +285,39 @@ class Popup
 
 		elem.style.left = offset['x'] + "px"
 		elem.style.top = offset['y'] + 30 + "px"
+
+		window.onkeydown = (e) ->
+			console.log e
+			if e.keyCode == 40 # ARROW UP
+				e.preventDefault()
+				selects = elem.getElementsByTagName 'input'
+				for select in selects
+					if next
+						select.checked = true
+						select.onchange()
+						break
+					if select.checked
+						next = true
+				if !next
+					selects[0].checked = true
+			
+			else if e.keyCode == 38 # ARROW DOWN
+				e.preventDefault()
+				selects = elem.getElementsByTagName 'input'
+				for select in selects
+					if select.checked
+						if prevSelect
+							prevSelect.checked = true
+							prevSelect.onchange()
+							break
+						else 
+							select.checked = true
+					prevSelect = select
+
+			else if e.keyCode == 27 #ESCAPE
+				window.privatizer.popup.close(null)
+				e.preventDefault()
+
 
 		elem.style.display = 'block'
 		elem.innerHTML = ''
@@ -278,6 +341,7 @@ class Popup
 								label = document.createElement 'label'
 								label.innerHTML = "<span class=\"name\">#{key.name}</span><span class=\"description\">#{key.description}</span>"
 								label.setAttribute 'for', 'pkey-' + key.hash
+								label.setAttribute 'tabindex', 0
 
 								li = ul.appendChild document.createElement 'li' 
 								li.appendChild radio
@@ -290,7 +354,7 @@ class Popup
 										DOM.fireEvent padlock.textarea, 'blur'
 						return
 
-					when 403
+					else
 						loginform = document.createElement 'form'
 						reference = @
 						loginform.onsubmit = (e) ->
@@ -298,21 +362,22 @@ class Popup
 							e.stopPropagation()
 							response = Privatizer.login(
 								loginform.elements['email'].value, 
-								loginform.elements['password'].value
+								loginform.elements['password'].value,
+								padlock
 							)
+							window.privatizer.popup.close()
 
 						loginform.innerHTML = '
-										<input type="email" name="email" placeholder="Email"></input>
-										<input type="password" name="password" placeholder="Password"></input>
-										<input type="submit" value="Login"/>'
-
-						elem.innerHTML = '<h3>Login</h3>'
+								<input id="privatizer_email" type="email" name="email" placeholder="Email" tabindex="0"></input>
+								<input type="password" name="password" placeholder="Password" tabindex="0"></input>
+								<input type="submit" value="Login" tabindex="0"/>
+							'
+						loginform.elements[0].focus()
 						elem.appendChild loginform
-					else 
-						console.log 'das war wohl nix? obwohl 403, eiegntlich'
 		});
 
 		document.addEventListener('click', (e) ->
+			console.log e
 			window.privatizer.popup.close(e)
 			return true
 		, false)

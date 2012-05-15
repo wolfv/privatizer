@@ -88,7 +88,7 @@ function create_menu(){
 */
 function script_loads(){
 		
-		console.log(ss.storage.activation)
+	console.log(ss.storage.activation)
 	if( ss.storage.activation ){
 		pm = pageMod.PageMod({
 			include: "*.facebook.com",
@@ -132,7 +132,8 @@ function script_loads(){
 									worker.port.emit('requestCallback', responseObj);
 								},
 								headers: request.headers,
-								content: request.data
+								content: request.data,
+								withCredentials: true
 							}).post()
 						} else {
 							Request({
@@ -143,7 +144,8 @@ function script_loads(){
 									worker.port.emit('requestCallback', responseObj);
 								},
 								headers: request.headers,
-								content: request.data
+								content: request.data,
+								withCredentials: true
 							}).get()
 						} 
 					}

@@ -22,18 +22,18 @@ Plugin.findPosition = function(textarea, padlock) {
 
 	if( textarea.classList.contains("uiTextareaAutogrow") 
 			&& textarea.getAttribute("name") == "xhpc_message") {
-		position = document.getElementsByClassName('uiComposerMessageBoxControls')[0];
-		position.appendChild(padlock)
-        padlock.style.cssFloat = "right"
+		position = document.getElementsByClassName('uiComposerBarRightArea')[0];
+		position.insertBefore(padlock, position.firstChild)
+        padlock.style.cssFloat = "left"
 		padlock.style.position = "relative";
-        padlock.style.margin = "2px";
+        padlock.style.margin = "-2px";
 		return;
 	}
 
 	else if (textarea.classList.contains("uiTextareaNoResize")) {
 		position = textarea.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
 		position.appendChild(padlock)
-		padlock.style.cssFloat = "right"
+		padlock.style.float = "right"
 		padlock.style.position = "relative"
 		return;
 	}
@@ -42,7 +42,7 @@ Plugin.findPosition = function(textarea, padlock) {
 		position = textarea.parentNode.nextSibling;
 		position.appendChild(padlock)
 		padlock.style.position = "relative";
-		padlock.style.cssFloat = "right";
+		padlock.style.float = "right";
 	}
 	else {
 		position = textarea.parentNode;

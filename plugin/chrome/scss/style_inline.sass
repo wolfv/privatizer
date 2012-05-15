@@ -51,7 +51,7 @@ $oh: #FFBB00
 	border: 1px solid #999
 	z-index: 306
 	width: 200px
-	padding: 5px
+	+border-radius(4px)
 	&::before
 		content: ''
 		border-width: 0 8px 8px
@@ -65,7 +65,7 @@ $oh: #FFBB00
 	&::after
 		content: '' 
 		border-width: 0 7px 7px
-		border-color: #FFF transparent
+		border-color: #F3F3F3 transparent
 		border-style: solid
 		position: absolute
 		left: 6px
@@ -75,11 +75,20 @@ $oh: #FFBB00
 
 	h3
 		background: #F3F3F3
-		padding: 0 3px
+		padding: 5px 10px
 		border-bottom: 1px solid #AAA
-
-
-
+		display: block
+	form 
+		padding: 5px
+		input[type=text], input[type=email], input[type=password]
+			+border-radius(2px)
+			border: 1px solid #999
+			padding: 3px
+			margin: 5px
+			width: 170px
+		input[type=submit]
+			margin: 5px
+			padding: 3 7px
 	ul
 		list-style-type: none
 		margin: 0
