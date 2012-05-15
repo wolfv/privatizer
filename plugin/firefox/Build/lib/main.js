@@ -14,7 +14,7 @@ if( ss.storage.firstRun == undefined ){
 
 // Funktionsaufruf: Erzeugt Browser-Menues
 var privatizer_panel, menuitem, widget
-var panel_height = 170
+var panel_height = 200
 var panel_width = 180
 create_menu()
 
