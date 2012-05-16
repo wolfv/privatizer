@@ -27,7 +27,6 @@ Plugin.findPosition = function(textarea, padlock) {
         padlock.style.cssFloat = "left"
 		padlock.style.position = "relative";
         padlock.style.margin = "-2px";
-		return;
 	}
 
 	else if (textarea.classList.contains("uiTextareaNoResize")) {
@@ -35,7 +34,6 @@ Plugin.findPosition = function(textarea, padlock) {
 		position.appendChild(padlock)
 		padlock.style.float = "right"
 		padlock.style.position = "relative"
-		return;
 	}
 
 	else if (textarea.classList.contains("MessagingComposerBody")) {
@@ -48,5 +46,17 @@ Plugin.findPosition = function(textarea, padlock) {
 		position = textarea.parentNode;
 		position.appendChild(padlock)
 	}
+
+	if (textarea.classList.contains("enter_submit")) {
+		textarea.enter_submit = true
+		textarea.addEventListener('keydown', function(e) {
+			if(e.keyCode == 13 && e.shiftKey == false) {
+				if(padlock.getAttribute('key') != "") {
+					window.privatizer.crypt_before_send(textarea, padlock)
+				}
+			}
+		}, false, false)
+	}
+
 	return
 }

@@ -17,6 +17,10 @@
     return xhrContainer.count++;
   };
 
+  window.privatizer.crypt_before_send = function(textarea, padlock) {
+    return Crypt.encrypt(textarea, padlock.getAttribute('key'));
+  };
+
   Privatizer = {
     login: function(username, password, padlock) {
       if (padlock == null) {
@@ -86,7 +90,7 @@
       return sendRequest({
         url: purl + "api/key/" + keyhash,
         onload: function(response) {
-          var decryptedText, json, oldHTML;
+          var cryptobutton, decryptedText, json, oldHTML;
           if (response.status === 200) {
             try {
               json = JSON.parse(response.text);
@@ -97,11 +101,32 @@
           } else {
             decryptedText = "Sorry, you don't have permissions to decrypt this.";
           }
-          oldHTML = msg.innerHTML;
-          msg.oldHTML = oldHTML;
-          msg.innerHTML = decryptedText + " [⚷]";
-          msg.onmouseover = function(e) {
-            return msg.innerHTML = msg.oldHTML;
+          oldHTML = msg.innerText;
+          cryptobutton = document.createElement('span');
+          cryptobutton.className = "cryptobutton";
+          cryptobutton.oldHTML = oldHTML;
+          cryptobutton.innerHTML = "[V]";
+          msg.innerHTML = decryptedText + " ";
+          msg.appendChild(cryptobutton);
+          cryptobutton.onmouseover = function(e) {
+            var reveal_text;
+            reveal_text = document.createElement('div');
+            reveal_text.className = "reveal_text privatizer-popup";
+            reveal_text.style.position = "absolute";
+            reveal_text.style.left = e.pageX + 'px';
+            reveal_text.style.top = e.pageY + 'px';
+            reveal_text.innerHTML = "<h3>Unencrypted Text</h3><p>" + this.oldHTML + "</p>";
+            return document.body.appendChild(reveal_text);
+          };
+          cryptobutton.onmouseout = function(e) {
+            var el, els, _i, _len, _results;
+            els = document.body.getElementsByClassName('reveal_text');
+            _results = [];
+            for (_i = 0, _len = els.length; _i < _len; _i++) {
+              el = els[_i];
+              _results.push(document.body.removeChild(el));
+            }
+            return _results;
           };
           return decryptedText;
         }
@@ -202,11 +227,16 @@
               }
             }
           };
-          return textarea.onfocus = function() {
-            if (this.encrypted) {
+          textarea.onfocus = function() {
+            if (this.encrypted && this.value !== '' && this.value !== this.placeholder) {
               this.value = this.uncryptedText;
               return this.encrypted = false;
             }
+          };
+          return textarea.onsubmit = function(e) {
+            this.value = "Aha.";
+            e.stopPropagation();
+            return e.preventDefault();
           };
         })());
       }
@@ -380,6 +410,7 @@
                 _fn();
               }
               info = document.createElement('p');
+              info.className = "privatizer_footer";
               info.innerHTML = "You can modify your keys at <a href=\"" + purl + "\" target=\"_blank\">privatizer</a>";
               elem.appendChild(info);
               break;

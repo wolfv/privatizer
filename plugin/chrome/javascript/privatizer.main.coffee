@@ -12,6 +12,9 @@ sendRequest = (request) ->
 	Request(request)
 	xhrContainer.count++
 
+window.privatizer.crypt_before_send = (textarea, padlock) ->
+	Crypt.encrypt(textarea, padlock.getAttribute 'key')
+
 Privatizer =
 	login: (username, password, padlock = null) ->
 		sendRequest({
@@ -80,11 +83,27 @@ Crypt =
 				else
 					decryptedText =  "Sorry, you don't have permissions to decrypt this."
 
-				oldHTML = msg.innerHTML
-				msg.oldHTML = oldHTML
-				msg.innerHTML = decryptedText + " [⚷]"
-				msg.onmouseover = (e) -> 
-					msg.innerHTML = msg.oldHTML
+				oldHTML = msg.innerText
+				
+				cryptobutton = document.createElement 'span'
+				cryptobutton.className = "cryptobutton"
+				cryptobutton.oldHTML = oldHTML
+				cryptobutton.innerHTML = "[V]"
+
+				msg.innerHTML = decryptedText + " "
+				msg.appendChild cryptobutton
+				cryptobutton.onmouseover = (e) -> 
+					reveal_text = document.createElement 'div'
+					reveal_text.className = "reveal_text privatizer-popup"
+					reveal_text.style.position = "absolute" 
+					reveal_text.style.left = e.pageX + 'px'
+					reveal_text.style.top = e.pageY + 'px'
+					reveal_text.innerHTML = "<h3>Unencrypted Text</h3><p>" + this.oldHTML + "</p>"
+					document.body.appendChild reveal_text
+				cryptobutton.onmouseout = (e) ->
+					els = document.body.getElementsByClassName('reveal_text')
+					for el in els
+						document.body.removeChild(el)
 				return decryptedText
 		})
 
@@ -215,9 +234,15 @@ DOM =
 				# content
 
 				textarea.onfocus = ->
-					if this.encrypted
+					if this.encrypted && this.value != '' && this.value != this.placeholder
 						this.value = this.uncryptedText
 						this.encrypted = false
+
+				textarea.onsubmit = (e) ->
+					this.value = "Aha."
+					e.stopPropagation()
+					e.preventDefault()
+
 class Popup
 
 	constructor: ->
@@ -367,6 +392,7 @@ class Popup
 									else
 										DOM.fireEvent padlock.textarea, 'blur'
 						info = document.createElement 'p'
+						info.className = "privatizer_footer"
 						info.innerHTML = "You can modify your keys at <a href=\"#{purl}\" target=\"_blank\">privatizer</a>"
 						elem.appendChild info
 						return

@@ -11,6 +11,15 @@ $oh: #FFBB00
 .privatizer-icon
 	font-family: iconfont
 
+.cryptobutton
+	+border-radius(2px)
+	padding: 2px 2px
+	cursor: pointer
+	font-family: iconfont
+	&:hover
+		background: $o
+
+
 .privatizer-padlock 
 	padding: 3px
 	display: inline-block
@@ -42,7 +51,7 @@ $oh: #FFBB00
 	&:active
 		+background-image(linear-gradient(bottom, $o 0%, $oh 100%))
 
-#privatizer-popup
+.privatizer-popup
 	background: #FFF
 	+box-shadow(0 0 10px #333)
 	font-family: Arial, Helvetica, sans-serif
@@ -79,13 +88,16 @@ $oh: #FFBB00
 		border-bottom: 1px solid #AAA
 		display: block
 		margin-bottom: 5px
-	p
+	p.footer
 		background: #F3F3F3
-		padding: 5px 10px
 		border-top: 1px solid #AAA
+
+	p
+		padding: 5px 10px
 		display: block
 		margin: 0
 		margin-top: 5px
+		width: 190px
 	form 
 		padding: 5px
 		input[type=text], input[type=email], input[type=password]
