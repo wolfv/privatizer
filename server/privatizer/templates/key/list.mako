@@ -21,7 +21,7 @@
 		<tbody>
 		% for key in keys:
 			<tr>
-				<td>${loop.index}</td>
+				<td>${key.hash()}</td>
 				<td>${key.name}</td>
 				<td>${key.description}</td> 
 				<td>

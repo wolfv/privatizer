@@ -22,3 +22,14 @@ def encode_base36(number, alphabet='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'):
  
 def decode_base36(number):
     return int(number, 36)
+
+flashtype = {'attention':
+    {'cssclass': 'attention',
+     'name': 'Attention'}, 
+'error': 
+    {'cssclass': 'error',
+     'name': 'Error'}, 
+'success': 
+    {'cssclass': 'success',
+    'name': 'Success'}
+}

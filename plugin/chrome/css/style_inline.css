@@ -20,26 +20,34 @@
 /* line 65, ../scss/style_inline.sass */
 #privatizer-popup::after { content: ""; border-width: 0 7px 7px; border-color: #f3f3f3 transparent; border-style: solid; position: absolute; left: 6px; top: -7px; display: block; z-index: 308; }
 /* line 76, ../scss/style_inline.sass */
-#privatizer-popup h3 { background: #f3f3f3; padding: 5px 10px; border-bottom: 1px solid #aaaaaa; display: block; }
-/* line 81, ../scss/style_inline.sass */
-#privatizer-popup form { padding: 5px; }
-/* line 83, ../scss/style_inline.sass */
-#privatizer-popup form input[type=text], #privatizer-popup form input[type=email], #privatizer-popup form input[type=password] { -webkit-border-radius: 2px; -moz-border-radius: 2px; -ms-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; border: 1px solid #999999; padding: 3px; margin: 5px; width: 170px; }
+#privatizer-popup h3 { background: #f3f3f3; padding: 5px 10px; border-bottom: 1px solid #aaaaaa; display: block; margin-bottom: 5px; }
+/* line 82, ../scss/style_inline.sass */
+#privatizer-popup p { background: #f3f3f3; padding: 5px 10px; border-top: 1px solid #aaaaaa; display: block; margin: 0; margin-top: 5px; }
 /* line 89, ../scss/style_inline.sass */
+#privatizer-popup form { padding: 5px; }
+/* line 91, ../scss/style_inline.sass */
+#privatizer-popup form input[type=text], #privatizer-popup form input[type=email], #privatizer-popup form input[type=password] { -webkit-border-radius: 2px; -moz-border-radius: 2px; -ms-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; border: 1px solid #999999; padding: 3px; margin: 5px; width: 170px; }
+/* line 97, ../scss/style_inline.sass */
 #privatizer-popup form input[type=submit] { margin: 5px; padding: 3 7px; }
-/* line 92, ../scss/style_inline.sass */
-#privatizer-popup ul { list-style-type: none; margin: 0; padding: 0; font-size: 12px; line-height: 16px; }
-/* line 98, ../scss/style_inline.sass */
-#privatizer-popup ul li { padding: 2px 4px; -webkit-transition: all 0.2s ease-in; -moz-transition: all 0.2s ease-in; -ms-transition: all 0.2s ease-in; -o-transition: all 0.2s ease-in; transition: all 0.2s ease-in; color: black; font-weight: normal; }
-/* line 101, ../scss/style_inline.sass */
+/* line 100, ../scss/style_inline.sass */
+#privatizer-popup .permissions { -webkit-transition: 0.5s all; -moz-transition: 0.5s all; -ms-transition: 0.5s all; -o-transition: 0.5s all; transition: 0.5s all; display: block; }
+/* line 104, ../scss/style_inline.sass */
+#privatizer-popup .permissions a { text-shadow: 1px 0px #cccccc; -webkit-border-radius: 3px; -moz-border-radius: 3px; -ms-border-radius: 3px; -o-border-radius: 3px; border-radius: 3px; }
+/* line 108, ../scss/style_inline.sass */
+#privatizer-popup ul { list-style-type: none; margin: 0; padding: 0; font-size: 12px; line-height: 24px; }
+/* line 114, ../scss/style_inline.sass */
+#privatizer-popup ul li { line-height: 24px; min-height: 24px; padding: 2px 4px; -webkit-transition: all 0.2s ease-in; -moz-transition: all 0.2s ease-in; -ms-transition: all 0.2s ease-in; -o-transition: all 0.2s ease-in; transition: all 0.2s ease-in; color: black; font-weight: normal; }
+/* line 119, ../scss/style_inline.sass */
 #privatizer-popup ul li:hover { background: #cccccc; }
-/* line 103, ../scss/style_inline.sass */
+/* line 121, ../scss/style_inline.sass */
 #privatizer-popup ul li input[type="radio"] { float: left; -webkit-appearance: none; -moz-appearance: none; appearance: none; -webkit-appearance: none; -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; border: 2px solid black; height: 14px; width: 14px; display: inline-block; }
-/* line 113, ../scss/style_inline.sass */
+/* line 131, ../scss/style_inline.sass */
 #privatizer-popup ul li input[type="radio"]:checked { background-color: #ff9600; }
-/* line 118, ../scss/style_inline.sass */
-#privatizer-popup ul li .name { font-weight: bold; display: block; font-size: 12px; }
-/* line 122, ../scss/style_inline.sass */
-#privatizer-popup ul li .description { font-size: 10px; display: block; min-height: 10px; }
-/* line 126, ../scss/style_inline.sass */
+/* line 136, ../scss/style_inline.sass */
+#privatizer-popup ul li .name { font-weight: bold; font-size: 12px; }
+/* line 139, ../scss/style_inline.sass */
+#privatizer-popup ul li .description { font-size: 12px; min-height: 10px; }
+/* line 142, ../scss/style_inline.sass */
+#privatizer-popup ul li .labelrow { overflow: ellipsis; display: block; }
+/* line 145, ../scss/style_inline.sass */
 #privatizer-popup ul li label { color: black; font-weight: normal; display: block; padding-left: 30px; cursor: pointer; line-height: 10px; }

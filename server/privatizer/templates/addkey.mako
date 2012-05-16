@@ -14,9 +14,9 @@
 	    <div>
   	    <label for="keytext">Keytext</label>
 	    <div class="input-append">
-	      	<input type="text" name="keytext" placeholder="Your Keytext (generate a save one)"/>
+	      	<input type="text" name="keytext" id="keytext" placeholder="Your Keytext (generate a save one)"/>
 
-     	 	<button class="btn disabled" disabled="true"><i class="icon-refresh"></i> Generate Key (Geht nicht)</button>
+     	 	<button class="btn" id="generate_keytext"><i class="icon-refresh"></i> Generate Key</button>
 	      </span>
 	    </div>
 	    </div>

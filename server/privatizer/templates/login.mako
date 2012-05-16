@@ -4,11 +4,11 @@
 <input type="hidden" name="came_from" value="${came_from}"/>
 <div>
 	<label for="name">Email</label>
-	<input type="email" value="${login}" name="login"/>
+	<input type="email" value="${login}" title="Email or Username" data-content="The email or the username you specified." name="login"/>
 </div>
 <div>
 	<label for="password">Passwort</label>
-	<input type="password" name="password" value="${password}"/>
+	<input type="password" name="password" title="Password" data-content="Please tell us your secret password" value="${password}"/>
 </div>
 <hr>
 <input type="hidden" name="csrf" value="${request.session.get_csrf_token()}" />

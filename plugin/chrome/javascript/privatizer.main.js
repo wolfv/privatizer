@@ -194,7 +194,7 @@
             return e.stopPropagation();
           }, true);
           textarea.onblur = function() {
-            if (padlock.textarea.encrypted !== true) {
+            if (padlock.textarea.encrypted !== true && padlock.textarea.value !== padlock.textarea.placeholder) {
               padlock.textarea.encrypted = true;
               padlock.textarea.uncryptedText = this.value;
               if (padlock.textarea.uncryptedText && padlock.getAttribute('key')) {
@@ -329,22 +329,40 @@
         type: "GET",
         url: purl + "api/keys/list",
         onload: function(response) {
-          var json, key, loginform, reference, ul, _fn, _i, _len;
+          var info, json, key, loginform, reference, ul, _fn, _i, _len;
           switch (response.status) {
             case 200:
               json = JSON.parse(response.text);
+              elem.innerHTML = '<h3>Keys</h3>';
               ul = elem.appendChild(document.createElement('ul'));
               _fn = function() {
-                var label, li, radio;
+                var hidden_user_badge, label, li, radio, user, user_badge, _j, _k, _len1, _len2, _ref, _ref1;
                 radio = document.createElement('input');
                 radio.setAttribute('type', 'radio');
                 radio.id = 'pkey-' + key.hash;
                 radio.value = key.hash;
                 radio.setAttribute('name', 'keys');
                 label = document.createElement('label');
-                label.innerHTML = "<span class=\"name\">" + key.name + "</span><span class=\"description\">" + key.description + "</span>";
+                label.innerHTML = "<span class=\"labelrow\"><span class=\"name\" title=\"" + key.description + "\">" + key.name + "</span> <span class=\"description\" title=\"" + key.description + "\">" + key.description + "</span></span>";
                 label.setAttribute('for', 'pkey-' + key.hash);
                 label.setAttribute('tabindex', 0);
+                user_badge = hidden_user_badge = "";
+                _ref = key.shared_with.slice(0, 6);
+                for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+                  user = _ref[_j];
+                  user_badge += "<a class=\"user_badge\">" + user.name + "</a> ";
+                }
+                if (key.shared_with.length === 0) {
+                  user_badge = "private key";
+                }
+                label.innerHTML += "<span class=\"labelrow\">" + user_badge + "</span>";
+                _ref1 = key.shared_with.slice(5);
+                for (_k = 0, _len2 = _ref1.length; _k < _len2; _k++) {
+                  user = _ref1[_k];
+                  hidden_user_badge += "<a class=\"user_badge\">" + user.name + "</a> ";
+                }
+                label.user_badge = user_badge;
+                label.hidden_user_badge = hidden_user_badge;
                 li = ul.appendChild(document.createElement('li'));
                 li.appendChild(radio);
                 li.appendChild(label);
@@ -361,6 +379,9 @@
                 key = json[_i];
                 _fn();
               }
+              info = document.createElement('p');
+              info.innerHTML = "You can modify your keys at <a href=\"" + purl + "\" target=\"_blank\">privatizer</a>";
+              elem.appendChild(info);
               break;
             default:
               loginform = document.createElement('form');

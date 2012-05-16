@@ -78,6 +78,14 @@ $oh: #FFBB00
 		padding: 5px 10px
 		border-bottom: 1px solid #AAA
 		display: block
+		margin-bottom: 5px
+	p
+		background: #F3F3F3
+		padding: 5px 10px
+		border-top: 1px solid #AAA
+		display: block
+		margin: 0
+		margin-top: 5px
 	form 
 		padding: 5px
 		input[type=text], input[type=email], input[type=password]
@@ -89,13 +97,23 @@ $oh: #FFBB00
 		input[type=submit]
 			margin: 5px
 			padding: 3 7px
+	.permissions
+		+transition(0.5s all)
+		display: block
+
+		a
+			+text-shadow(1px 0px #CCC)
+			+border-radius(3px)
+
 	ul
 		list-style-type: none
 		margin: 0
 		padding: 0
 		font-size: 12px
-		line-height: 16px
+		line-height: 24px
 		li
+			line-height: 24px
+			min-height: 24px
 			padding: 2px 4px
 			+transition(all 0.2s ease-in)
 			&:hover
@@ -117,12 +135,13 @@ $oh: #FFBB00
 			font-weight: normal
 			.name
 				font-weight: bold
-				display: block
 				font-size: 12px
 			.description
-				font-size: 10px
-				display: block
+				font-size: 12px
 				min-height: 10px
+			.labelrow
+				overflow: ellipsis
+				display: block
 			label
 				color: #000
 				font-weight: normal
