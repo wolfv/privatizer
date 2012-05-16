@@ -7,39 +7,54 @@
 .privatizer-icon { font-family: iconfont; }
 
 /* line 14, ../scss/style_inline.sass */
+.cryptobutton { -webkit-border-radius: 2px; -moz-border-radius: 2px; -ms-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; padding: 2px 2px; cursor: pointer; font-family: iconfont; }
+/* line 19, ../scss/style_inline.sass */
+.cryptobutton:hover { background: #ff9600; }
+
+/* line 23, ../scss/style_inline.sass */
 .privatizer-padlock { padding: 3px; display: inline-block; text-align: center; color: white; -webkit-border-radius: 0px; -moz-border-radius: 0px; -ms-border-radius: 0px; -o-border-radius: 0px; border-radius: 0px; text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.5); background: #ff9600; background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ff9600), color-stop(100%, #ffbb00)); background-image: -webkit-linear-gradient(top, #ff9600 0%, #ffbb00 100%); background-image: -moz-linear-gradient(top, #ff9600 0%, #ffbb00 100%); background-image: -o-linear-gradient(top, #ff9600 0%, #ffbb00 100%); background-image: -ms-linear-gradient(top, #ff9600 0%, #ffbb00 100%); background-image: linear-gradient(top, #ff9600 0%, #ffbb00 100%); border: 1px solid #cc7800; border-bottom: 1px solid #e68700; -webkit-box-shadow: 0 1px 0 0 #ffab33 inset; -moz-box-shadow: 0 1px 0 0 #ffab33 inset; box-shadow: 0 1px 0 0 #ffab33 inset; z-index: 300; position: absolute; right: 0px; top: 0; font-family: iconfont; font-style: normal; padding: 5px; font-size: 14px; line-height: 14px; cursor: pointer; -webkit-transition: 0.1s all ease-in; -moz-transition: 0.1s all ease-in; -ms-transition: 0.1s all ease-in; -o-transition: 0.1s all ease-in; transition: 0.1s all ease-in; }
-/* line 38, ../scss/style_inline.sass */
+/* line 47, ../scss/style_inline.sass */
 .privatizer-padlock:hover { background: #ffbb00; -webkit-box-shadow: 0 0 5px #cc7800 inset; -moz-box-shadow: 0 0 5px #cc7800 inset; box-shadow: 0 0 5px #cc7800 inset; }
-/* line 42, ../scss/style_inline.sass */
+/* line 51, ../scss/style_inline.sass */
 .privatizer-padlock:active { background-image: -webkit-gradient(linear, 50% 100%, 50% 0%, color-stop(0%, #ff9600), color-stop(100%, #ffbb00)); background-image: -webkit-linear-gradient(bottom, #ff9600 0%, #ffbb00 100%); background-image: -moz-linear-gradient(bottom, #ff9600 0%, #ffbb00 100%); background-image: -o-linear-gradient(bottom, #ff9600 0%, #ffbb00 100%); background-image: -ms-linear-gradient(bottom, #ff9600 0%, #ffbb00 100%); background-image: linear-gradient(bottom, #ff9600 0%, #ffbb00 100%); }
 
-/* line 45, ../scss/style_inline.sass */
-#privatizer-popup { background: white; -webkit-box-shadow: 0 0 10px #333333; -moz-box-shadow: 0 0 10px #333333; box-shadow: 0 0 10px #333333; font-family: Arial, Helvetica, sans-serif; font-weight: normal; font-style: normal; border: 1px solid #999999; z-index: 306; width: 200px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -ms-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; }
-/* line 55, ../scss/style_inline.sass */
-#privatizer-popup::before { content: ""; border-width: 0 8px 8px; border-color: #888888 transparent; position: absolute; border-style: solid; left: 5px; top: -8px; display: block; z-index: 305; }
-/* line 65, ../scss/style_inline.sass */
-#privatizer-popup::after { content: ""; border-width: 0 7px 7px; border-color: #f3f3f3 transparent; border-style: solid; position: absolute; left: 6px; top: -7px; display: block; z-index: 308; }
-/* line 76, ../scss/style_inline.sass */
-#privatizer-popup h3 { background: #f3f3f3; padding: 5px 10px; border-bottom: 1px solid #aaaaaa; display: block; }
-/* line 81, ../scss/style_inline.sass */
-#privatizer-popup form { padding: 5px; }
-/* line 83, ../scss/style_inline.sass */
-#privatizer-popup form input[type=text], #privatizer-popup form input[type=email], #privatizer-popup form input[type=password] { -webkit-border-radius: 2px; -moz-border-radius: 2px; -ms-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; border: 1px solid #999999; padding: 3px; margin: 5px; width: 170px; }
-/* line 89, ../scss/style_inline.sass */
-#privatizer-popup form input[type=submit] { margin: 5px; padding: 3 7px; }
-/* line 92, ../scss/style_inline.sass */
-#privatizer-popup ul { list-style-type: none; margin: 0; padding: 0; font-size: 12px; line-height: 16px; }
-/* line 98, ../scss/style_inline.sass */
-#privatizer-popup ul li { padding: 2px 4px; -webkit-transition: all 0.2s ease-in; -moz-transition: all 0.2s ease-in; -ms-transition: all 0.2s ease-in; -o-transition: all 0.2s ease-in; transition: all 0.2s ease-in; color: black; font-weight: normal; }
+/* line 54, ../scss/style_inline.sass */
+.privatizer-popup { background: white; -webkit-box-shadow: 0 0 10px #333333; -moz-box-shadow: 0 0 10px #333333; box-shadow: 0 0 10px #333333; font-family: Arial, Helvetica, sans-serif; font-weight: normal; font-style: normal; border: 1px solid #999999; z-index: 306; width: 200px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -ms-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; }
+/* line 64, ../scss/style_inline.sass */
+.privatizer-popup::before { content: ""; border-width: 0 8px 8px; border-color: #888888 transparent; position: absolute; border-style: solid; left: 5px; top: -8px; display: block; z-index: 305; }
+/* line 74, ../scss/style_inline.sass */
+.privatizer-popup::after { content: ""; border-width: 0 7px 7px; border-color: #f3f3f3 transparent; border-style: solid; position: absolute; left: 6px; top: -7px; display: block; z-index: 308; }
+/* line 85, ../scss/style_inline.sass */
+.privatizer-popup h3 { background: #f3f3f3; padding: 5px 10px; border-bottom: 1px solid #aaaaaa; display: block; margin-bottom: 5px; }
+/* line 91, ../scss/style_inline.sass */
+.privatizer-popup p.footer { background: #f3f3f3; border-top: 1px solid #aaaaaa; }
+/* line 95, ../scss/style_inline.sass */
+.privatizer-popup p { padding: 5px 10px; display: block; margin: 0; margin-top: 5px; width: 190px; }
 /* line 101, ../scss/style_inline.sass */
-#privatizer-popup ul li:hover { background: #cccccc; }
+.privatizer-popup form { padding: 5px; }
 /* line 103, ../scss/style_inline.sass */
-#privatizer-popup ul li input[type="radio"] { float: left; -webkit-appearance: none; -moz-appearance: none; appearance: none; -webkit-appearance: none; -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; border: 2px solid black; height: 14px; width: 14px; display: inline-block; }
-/* line 113, ../scss/style_inline.sass */
-#privatizer-popup ul li input[type="radio"]:checked { background-color: #ff9600; }
-/* line 118, ../scss/style_inline.sass */
-#privatizer-popup ul li .name { font-weight: bold; display: block; font-size: 12px; }
-/* line 122, ../scss/style_inline.sass */
-#privatizer-popup ul li .description { font-size: 10px; display: block; min-height: 10px; }
+.privatizer-popup form input[type=text], .privatizer-popup form input[type=email], .privatizer-popup form input[type=password] { -webkit-border-radius: 2px; -moz-border-radius: 2px; -ms-border-radius: 2px; -o-border-radius: 2px; border-radius: 2px; border: 1px solid #999999; padding: 3px; margin: 5px; width: 170px; }
+/* line 109, ../scss/style_inline.sass */
+.privatizer-popup form input[type=submit] { margin: 5px; padding: 3 7px; }
+/* line 112, ../scss/style_inline.sass */
+.privatizer-popup .permissions { -webkit-transition: 0.5s all; -moz-transition: 0.5s all; -ms-transition: 0.5s all; -o-transition: 0.5s all; transition: 0.5s all; display: block; }
+/* line 116, ../scss/style_inline.sass */
+.privatizer-popup .permissions a { text-shadow: 1px 0px #cccccc; -webkit-border-radius: 3px; -moz-border-radius: 3px; -ms-border-radius: 3px; -o-border-radius: 3px; border-radius: 3px; }
+/* line 120, ../scss/style_inline.sass */
+.privatizer-popup ul { list-style-type: none; margin: 0; padding: 0; font-size: 12px; line-height: 24px; }
 /* line 126, ../scss/style_inline.sass */
-#privatizer-popup ul li label { color: black; font-weight: normal; display: block; padding-left: 30px; cursor: pointer; line-height: 10px; }
+.privatizer-popup ul li { line-height: 24px; min-height: 24px; padding: 2px 4px; -webkit-transition: all 0.2s ease-in; -moz-transition: all 0.2s ease-in; -ms-transition: all 0.2s ease-in; -o-transition: all 0.2s ease-in; transition: all 0.2s ease-in; color: black; font-weight: normal; }
+/* line 131, ../scss/style_inline.sass */
+.privatizer-popup ul li:hover { background: #cccccc; }
+/* line 133, ../scss/style_inline.sass */
+.privatizer-popup ul li input[type="radio"] { float: left; -webkit-appearance: none; -moz-appearance: none; appearance: none; -webkit-appearance: none; -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; border-radius: 5px; border: 2px solid black; height: 14px; width: 14px; display: inline-block; }
+/* line 143, ../scss/style_inline.sass */
+.privatizer-popup ul li input[type="radio"]:checked { background-color: #ff9600; }
+/* line 148, ../scss/style_inline.sass */
+.privatizer-popup ul li .name { font-weight: bold; font-size: 12px; }
+/* line 151, ../scss/style_inline.sass */
+.privatizer-popup ul li .description { font-size: 12px; min-height: 10px; }
+/* line 154, ../scss/style_inline.sass */
+.privatizer-popup ul li .labelrow { overflow: ellipsis; display: block; }
+/* line 157, ../scss/style_inline.sass */
+.privatizer-popup ul li label { color: black; font-weight: normal; display: block; padding-left: 30px; cursor: pointer; line-height: 10px; }

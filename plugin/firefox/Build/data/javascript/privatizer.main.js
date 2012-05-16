@@ -17,6 +17,10 @@
     return xhrContainer.count++;
   };
 
+  window.privatizer.crypt_before_send = function(textarea, padlock) {
+    return Crypt.encrypt(textarea, padlock.getAttribute('key'));
+  };
+
   Privatizer = {
     login: function(username, password, padlock) {
       if (padlock == null) {
@@ -86,7 +90,7 @@
       return sendRequest({
         url: purl + "api/key/" + keyhash,
         onload: function(response) {
-          var decryptedText, json, oldHTML;
+          var cryptobutton, decryptedText, json, oldHTML;
           if (response.status === 200) {
             try {
               json = JSON.parse(response.text);
@@ -97,11 +101,32 @@
           } else {
             decryptedText = "Sorry, you don't have permissions to decrypt this.";
           }
-          oldHTML = msg.innerHTML;
-          msg.oldHTML = oldHTML;
-          msg.innerHTML = decryptedText + " [⚷]";
-          msg.onmouseover = function(e) {
-            return msg.innerHTML = msg.oldHTML;
+          oldHTML = msg.innerText;
+          cryptobutton = document.createElement('span');
+          cryptobutton.className = "cryptobutton";
+          cryptobutton.oldHTML = oldHTML;
+          cryptobutton.innerHTML = "[V]";
+          msg.innerHTML = decryptedText + " ";
+          msg.appendChild(cryptobutton);
+          cryptobutton.onmouseover = function(e) {
+            var reveal_text;
+            reveal_text = document.createElement('div');
+            reveal_text.className = "reveal_text privatizer-popup";
+            reveal_text.style.position = "absolute";
+            reveal_text.style.left = e.pageX + 'px';
+            reveal_text.style.top = e.pageY + 'px';
+            reveal_text.innerHTML = "<h3>Unencrypted Text</h3><p>" + this.oldHTML + "</p>";
+            return document.body.appendChild(reveal_text);
+          };
+          cryptobutton.onmouseout = function(e) {
+            var el, els, _i, _len, _results;
+            els = document.body.getElementsByClassName('reveal_text');
+            _results = [];
+            for (_i = 0, _len = els.length; _i < _len; _i++) {
+              el = els[_i];
+              _results.push(document.body.removeChild(el));
+            }
+            return _results;
           };
           return decryptedText;
         }
@@ -194,7 +219,7 @@
             return e.stopPropagation();
           }, true);
           textarea.onblur = function() {
-            if (padlock.textarea.encrypted !== true) {
+            if (padlock.textarea.encrypted !== true && padlock.textarea.value !== padlock.textarea.placeholder) {
               padlock.textarea.encrypted = true;
               padlock.textarea.uncryptedText = this.value;
               if (padlock.textarea.uncryptedText && padlock.getAttribute('key')) {
@@ -202,11 +227,16 @@
               }
             }
           };
-          return textarea.onfocus = function() {
-            if (this.encrypted) {
+          textarea.onfocus = function() {
+            if (this.encrypted && this.value !== '' && this.value !== this.placeholder) {
               this.value = this.uncryptedText;
               return this.encrypted = false;
             }
+          };
+          return textarea.onsubmit = function(e) {
+            this.value = "Aha.";
+            e.stopPropagation();
+            return e.preventDefault();
           };
         })());
       }
@@ -329,22 +359,40 @@
         type: "GET",
         url: purl + "api/keys/list",
         onload: function(response) {
-          var json, key, loginform, reference, ul, _fn, _i, _len;
+          var info, json, key, loginform, reference, ul, _fn, _i, _len;
           switch (response.status) {
             case 200:
               json = JSON.parse(response.text);
+              elem.innerHTML = '<h3>Keys</h3>';
               ul = elem.appendChild(document.createElement('ul'));
               _fn = function() {
-                var label, li, radio;
+                var hidden_user_badge, label, li, radio, user, user_badge, _j, _k, _len1, _len2, _ref, _ref1;
                 radio = document.createElement('input');
                 radio.setAttribute('type', 'radio');
                 radio.id = 'pkey-' + key.hash;
                 radio.value = key.hash;
                 radio.setAttribute('name', 'keys');
                 label = document.createElement('label');
-                label.innerHTML = "<span class=\"name\">" + key.name + "</span><span class=\"description\">" + key.description + "</span>";
+                label.innerHTML = "<span class=\"labelrow\"><span class=\"name\" title=\"" + key.description + "\">" + key.name + "</span> <span class=\"description\" title=\"" + key.description + "\">" + key.description + "</span></span>";
                 label.setAttribute('for', 'pkey-' + key.hash);
                 label.setAttribute('tabindex', 0);
+                user_badge = hidden_user_badge = "";
+                _ref = key.shared_with.slice(0, 6);
+                for (_j = 0, _len1 = _ref.length; _j < _len1; _j++) {
+                  user = _ref[_j];
+                  user_badge += "<a class=\"user_badge\">" + user.name + "</a> ";
+                }
+                if (key.shared_with.length === 0) {
+                  user_badge = "private key";
+                }
+                label.innerHTML += "<span class=\"labelrow\">" + user_badge + "</span>";
+                _ref1 = key.shared_with.slice(5);
+                for (_k = 0, _len2 = _ref1.length; _k < _len2; _k++) {
+                  user = _ref1[_k];
+                  hidden_user_badge += "<a class=\"user_badge\">" + user.name + "</a> ";
+                }
+                label.user_badge = user_badge;
+                label.hidden_user_badge = hidden_user_badge;
                 li = ul.appendChild(document.createElement('li'));
                 li.appendChild(radio);
                 li.appendChild(label);
@@ -361,6 +409,10 @@
                 key = json[_i];
                 _fn();
               }
+              info = document.createElement('p');
+              info.className = "privatizer_footer";
+              info.innerHTML = "You can modify your keys at <a href=\"" + purl + "\" target=\"_blank\">privatizer</a>";
+              elem.appendChild(info);
               break;
             default:
               loginform = document.createElement('form');

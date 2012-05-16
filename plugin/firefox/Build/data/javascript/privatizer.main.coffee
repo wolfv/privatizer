@@ -12,6 +12,9 @@ sendRequest = (request) ->
 	Request(request)
 	xhrContainer.count++
 
+window.privatizer.crypt_before_send = (textarea, padlock) ->
+	Crypt.encrypt(textarea, padlock.getAttribute 'key')
+
 Privatizer =
 	login: (username, password, padlock = null) ->
 		sendRequest({
@@ -80,11 +83,27 @@ Crypt =
 				else
 					decryptedText =  "Sorry, you don't have permissions to decrypt this."
 
-				oldHTML = msg.innerHTML
-				msg.oldHTML = oldHTML
-				msg.innerHTML = decryptedText + " [⚷]"
-				msg.onmouseover = (e) -> 
-					msg.innerHTML = msg.oldHTML
+				oldHTML = msg.innerText
+				
+				cryptobutton = document.createElement 'span'
+				cryptobutton.className = "cryptobutton"
+				cryptobutton.oldHTML = oldHTML
+				cryptobutton.innerHTML = "[V]"
+
+				msg.innerHTML = decryptedText + " "
+				msg.appendChild cryptobutton
+				cryptobutton.onmouseover = (e) -> 
+					reveal_text = document.createElement 'div'
+					reveal_text.className = "reveal_text privatizer-popup"
+					reveal_text.style.position = "absolute" 
+					reveal_text.style.left = e.pageX + 'px'
+					reveal_text.style.top = e.pageY + 'px'
+					reveal_text.innerHTML = "<h3>Unencrypted Text</h3><p>" + this.oldHTML + "</p>"
+					document.body.appendChild reveal_text
+				cryptobutton.onmouseout = (e) ->
+					els = document.body.getElementsByClassName('reveal_text')
+					for el in els
+						document.body.removeChild(el)
 				return decryptedText
 		})
 
@@ -205,7 +224,7 @@ DOM =
 				# encrypts its contents
 
 				textarea.onblur = ->
-					if padlock.textarea.encrypted != true
+					if padlock.textarea.encrypted != true and padlock.textarea.value != padlock.textarea.placeholder
 						padlock.textarea.encrypted = true
 						padlock.textarea.uncryptedText = this.value
 						if padlock.textarea.uncryptedText && padlock.getAttribute 'key'
@@ -215,9 +234,15 @@ DOM =
 				# content
 
 				textarea.onfocus = ->
-					if this.encrypted
+					if this.encrypted && this.value != '' && this.value != this.placeholder
 						this.value = this.uncryptedText
 						this.encrypted = false
+
+				textarea.onsubmit = (e) ->
+					this.value = "Aha."
+					e.stopPropagation()
+					e.preventDefault()
+
 class Popup
 
 	constructor: ->
@@ -329,6 +354,7 @@ class Popup
 				switch response.status
 					when 200
 						json = JSON.parse response.text
+						elem.innerHTML = '<h3>Keys</h3>'
 						ul = elem.appendChild document.createElement 'ul'
 						for key in json
 							do ->
@@ -339,9 +365,22 @@ class Popup
 								radio.setAttribute 'name', 'keys'
 								
 								label = document.createElement 'label'
-								label.innerHTML = "<span class=\"name\">#{key.name}</span><span class=\"description\">#{key.description}</span>"
+								label.innerHTML = "<span class=\"labelrow\"><span class=\"name\" title=\"#{key.description}\">#{key.name}</span> <span class=\"description\" title=\"#{key.description}\">#{key.description}</span></span>"
 								label.setAttribute 'for', 'pkey-' + key.hash
 								label.setAttribute 'tabindex', 0
+
+								user_badge = hidden_user_badge = ""
+
+								for user in key.shared_with[0..5]
+									user_badge += "<a class=\"user_badge\">#{user.name}</a> "
+								if key.shared_with.length == 0
+									user_badge = "private key"
+								label.innerHTML += "<span class=\"labelrow\">#{user_badge}</span>"
+								for user in key.shared_with[5..]
+									hidden_user_badge += "<a class=\"user_badge\">#{user.name}</a> "
+
+								label.user_badge = user_badge
+								label.hidden_user_badge = hidden_user_badge
 
 								li = ul.appendChild document.createElement 'li' 
 								li.appendChild radio
@@ -352,6 +391,10 @@ class Popup
 										Crypt.encrypt padlock.textarea, this.value
 									else
 										DOM.fireEvent padlock.textarea, 'blur'
+						info = document.createElement 'p'
+						info.className = "privatizer_footer"
+						info.innerHTML = "You can modify your keys at <a href=\"#{purl}\" target=\"_blank\">privatizer</a>"
+						elem.appendChild info
 						return
 
 					else
