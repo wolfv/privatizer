@@ -272,8 +272,8 @@
           cryptobutton.className = "cryptobutton";
           if (!msg.oldText) {
             msg.oldText = msg.textContent;
-            cryptobutton.setAttribute('oldHTML', msg.textContent);
           }
+          cryptobutton.setAttribute('oldHTML', msg.oldText);
           if (decrypted) {
             cryptobutton.innerHTML = "[V]";
           } else {

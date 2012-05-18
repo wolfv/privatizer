@@ -240,7 +240,8 @@ Crypt =
 				# Save unencrypted text for later use
 				if not msg.oldText
 					msg.oldText = msg.textContent
-					cryptobutton.setAttribute 'oldHTML', msg.textContent
+				
+				cryptobutton.setAttribute 'oldHTML', msg.oldText
 
 				
 				if decrypted
