@@ -18,8 +18,6 @@
       requestID: data.requestID
     };
     request.addEventListener("load", function(response) {
-      console.log('request ready');
-      console.log(xhrContainer);
       responseObject['text'] = response.target.responseText;
       responseObject['status'] = response.target.status;
       xhrContainer.callbacks[responseObject.requestID](responseObject);

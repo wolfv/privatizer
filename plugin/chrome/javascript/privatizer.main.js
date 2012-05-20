@@ -230,6 +230,10 @@
   };
 
   Crypt = {
+    /*
+    		Function to encrypt contents of an textarea
+    */
+
     encrypt: function(elem, keyhash) {
       return sendRequest({
         type: "GET",
@@ -238,8 +242,12 @@
           var crypttext, json;
           if (response.status === 200) {
             json = JSON.parse(response.text);
+            if (json === null) {
+              throw new Error('JSON Response was null');
+            }
             crypttext = Aes.Ctr.encrypt(elem.uncryptedText, json.key, 256);
             elem.value = ":enc:" + keyhash + ":" + crypttext + ":";
+            elem.encrypted = true;
             DOM.fireEvent(elem, 'change');
             DOM.fireEvent(elem, 'keyup');
             DOM.fireEvent(elem, 'keydown');
@@ -273,7 +281,6 @@
           if (!msg.oldText) {
             msg.oldText = msg.textContent;
           }
-          cryptobutton.setAttribute('oldHTML', msg.oldText);
           if (decrypted) {
             cryptobutton.innerHTML = "[V]";
           } else {
@@ -285,7 +292,7 @@
             var fillFunction;
             fillFunction = function(elem) {
               elem.innerHTML = "<h3>Unencrypted Text</h3>";
-              elem.innerHTML += "<p>" + cryptobutton.getAttribute('oldHTML') + "</p>";
+              elem.innerHTML += "<p>" + msg.oldText + "</p>";
               if (!decrypted) {
                 elem.innerHTML += "<h3>Login</h3><p>You cannot encrypt the text, because you are not logged in.</p>";
                 return elem.appendChild(Privatizer.loginform());
@@ -385,24 +392,21 @@
             return e.stopPropagation();
           }, true);
           textarea.onblur = function() {
-            if (padlock.textarea.encrypted !== true && padlock.textarea.value !== padlock.textarea.placeholder) {
-              padlock.textarea.encrypted = true;
+            if (padlock.textarea.value !== padlock.textarea.placeholder && padlock.textarea.enter_submit === void 0) {
               padlock.textarea.uncryptedText = this.value;
-              if (padlock.textarea.uncryptedText && padlock.getAttribute('key')) {
+              if (padlock.textarea.uncryptedText && padlock.getAttribute('key') !== void 0) {
                 return Crypt.encrypt(padlock.textarea, padlock.getAttribute('key'));
               }
             }
           };
-          textarea.onfocus = function() {
+          return textarea.onfocus = function() {
             if (this.encrypted && this.value !== '' && this.value !== this.placeholder) {
               this.value = this.uncryptedText;
+              this.encrypted = false;
+            }
+            if (this.value === '') {
               return this.encrypted = false;
             }
-          };
-          return textarea.onsubmit = function(e) {
-            this.value = "Aha.";
-            e.stopPropagation();
-            return e.preventDefault();
           };
         })());
       }
@@ -472,8 +476,7 @@
     };
 
     Popup.prototype.reload = function() {
-      this.atElem.innerHTML = "";
-      return this.curFillFunction(this.atElem);
+      return this.curFillFunction(this.PopupElement);
     };
 
     Popup.prototype.open = function(atElem, fillFunction) {
@@ -502,7 +505,6 @@
   })();
 
   document.addEventListener("DOMContentLoaded", function() {
-    window.privatizer = {};
     window.privatizer.popup = new Popup();
     if (Plugin.classnames !== void 0) {
       return setInterval(function() {

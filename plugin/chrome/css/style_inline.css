@@ -27,7 +27,7 @@
 /* line 86, ../scss/style_inline.sass */
 .privatizer-popup h3 { background: #f3f3f3; padding: 5px 10px; border-bottom: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa; display: block; margin-bottom: 5px; }
 /* line 93, ../scss/style_inline.sass */
-.privatizer-popup h3::first-child { border-top: 0px solid #aaaaaa; }
+.privatizer-popup h3:first-child { border-top: none; }
 /* line 96, ../scss/style_inline.sass */
 .privatizer-popup p.footer { background: #f3f3f3; border-top: 1px solid #aaaaaa; }
 /* line 100, ../scss/style_inline.sass */

@@ -13,8 +13,6 @@ window.privatizer.request = (data) ->
 	}
 
 	request.addEventListener("load", (response) ->
-		console.log 'request ready'
-		console.log xhrContainer
 		responseObject['text'] = response.target.responseText
 		responseObject['status'] = response.target.status
 		xhrContainer.callbacks[responseObject.requestID](responseObject);

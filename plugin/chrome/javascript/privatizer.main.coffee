@@ -7,9 +7,11 @@
 
 ###
 
-purl = "http://privatizer.crabdance.com/"
+purl = "http://privatizer.crabdance.com/" # Our Main API - URL
 
-preg = new RegExp "(:enc:)([^:]+):([^:]+):", "g"
+preg = new RegExp "(:enc:)([^:]+):([^:]+):", "g" # The pattern to identify encrypted messages
+
+# define global namespace
 
 Request = window.privatizer.request
 
@@ -22,7 +24,7 @@ sendRequest = (request) ->
 	xhrContainer.count++
 
 window.privatizer.crypt_before_send = (textarea, padlock) ->
-	Crypt.encrypt(textarea, padlock.getAttribute 'key')
+	Crypt.encrypt(textarea, padlock.getAttribute('key'))
 
 Privatizer =
 
@@ -193,7 +195,9 @@ Privatizer =
 
 
 Crypt = 
-	# Function to encrypt contents of an textarea
+	###
+		Function to encrypt contents of an textarea
+	###
 	encrypt: (elem, keyhash) ->
 		sendRequest({
 			type: "GET",
@@ -201,8 +205,11 @@ Crypt =
 			onload: (response) ->
 				if response.status == 200
 					json = JSON.parse response.text
+					if json == null
+						throw new Error('JSON Response was null')
 					crypttext = Aes.Ctr.encrypt elem.uncryptedText, json.key, 256
 					elem.value = ":enc:" + keyhash + ":" + crypttext + ":"
+					elem.encrypted = true
 					
 					# Fire events in case there is a hidden textfield that
 					# also needs to change value and does so with an eventlistener
@@ -241,9 +248,6 @@ Crypt =
 				if not msg.oldText
 					msg.oldText = msg.textContent
 				
-				cryptobutton.setAttribute 'oldHTML', msg.oldText
-
-				
 				if decrypted
 					cryptobutton.innerHTML = "[V]" # Open Lock (iconfont)
 				else
@@ -251,10 +255,11 @@ Crypt =
 
 				msg.innerHTML = decryptedText + " "
 				msg.appendChild cryptobutton
+				
 				cryptobutton.onclick = (e) -> 
 					fillFunction = (elem) ->
 						elem.innerHTML =  "<h3>Unencrypted Text</h3>"
-						elem.innerHTML += "<p>" + cryptobutton.getAttribute('oldHTML') + "</p>"
+						elem.innerHTML += "<p>" + msg.oldText + "</p>"
 						if not decrypted
 							elem.innerHTML += "<h3>Login</h3><p>You cannot encrypt the text, because you are not logged in.</p>"
 							elem.appendChild Privatizer.loginform()
@@ -384,10 +389,9 @@ DOM =
 				# encrypts its contents
 
 				textarea.onblur = ->
-					if padlock.textarea.encrypted != true and padlock.textarea.value != padlock.textarea.placeholder
-						padlock.textarea.encrypted = true
+					if padlock.textarea.value != padlock.textarea.placeholder && padlock.textarea.enter_submit == undefined
 						padlock.textarea.uncryptedText = this.value
-						if padlock.textarea.uncryptedText && padlock.getAttribute 'key'
+						if padlock.textarea.uncryptedText && padlock.getAttribute('key') != undefined
 							Crypt.encrypt padlock.textarea, padlock.getAttribute 'key'
 							
 				# Focussing in the textarea restores unencrypted 
@@ -397,11 +401,8 @@ DOM =
 					if this.encrypted && this.value != '' && this.value != this.placeholder
 						this.value = this.uncryptedText
 						this.encrypted = false
-
-				textarea.onsubmit = (e) ->
-					this.value = "Aha."
-					e.stopPropagation()
-					e.preventDefault()
+					if this.value == ''
+						this.encrypted = false
 
 class Popup
 
@@ -463,8 +464,7 @@ class Popup
 		return
 
 	reload: ->
-		@atElem.innerHTML = ""
-		@curFillFunction(@atElem)
+		@curFillFunction(@PopupElement)
 
 
 	open: (atElem, fillFunction) -> 
@@ -494,7 +494,6 @@ class Popup
 		@atElem.setAttribute 'open', '1'
 
 document.addEventListener "DOMContentLoaded", ->
-	window.privatizer = {}
 	window.privatizer.popup = new Popup()
 
 	if Plugin.classnames != undefined
