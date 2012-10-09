@@ -7,9 +7,9 @@
 
 ###
 
-purl = "http://privatizer.crabdance.com/" # Our Main API - URL
+purl = "https://getprivatizer.com/" 				# Our Main API - URL
 
-preg = new RegExp "(:enc:)([^:]+):([^:]+):", "g" # The pattern to identify encrypted messages
+preg = new RegExp "(:enc:)([^:]+):([^:]+):", "g" 	# The pattern to identify encrypted messages
 
 # define global namespace
 
@@ -132,7 +132,7 @@ Privatizer =
 		
 		request = sendRequest({
 			type: "GET",
-			url: purl + "api/keys/list",		
+			url: purl + "api/keys",
 			onload: (response) ->
 
 				switch response.status
@@ -431,7 +431,7 @@ class Popup
 	# Current Fill function
 	curFillFunction: false
 
-	# close action
+	#  action
 	close: (e) ->
 		# If event because of escape not mouse
 		if not e 

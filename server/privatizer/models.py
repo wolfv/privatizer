@@ -7,7 +7,7 @@ import random
 import string
 import logging
 
-from .resources.tools import encode_base36, decode_base36
+from .resources.tools import num_decode, num_encode
 
 from pyramid.security import(
 		Allow,
@@ -66,9 +66,11 @@ class User(Base):
 
 	security_code = sa.Column(sa.String(256), default='default')
 
-	keys = sa.orm.relationship("Key", backref="owner", cascade="all, delete, delete-orphan")
+	keys = sa.orm.relationship("Key", backref="owner", 
+	                           cascade="all, delete, delete-orphan")
 
-	permissions = sa.orm.relationship("KeyPermission", backref="user", cascade="all, delete, delete-orphan")
+	permissions = sa.orm.relationship("KeyPermission", backref="user", 
+	                                  cascade="all, delete, delete-orphan")
 
 	passwordmanager = DelegatingPasswordManager(preferred=BCRYPTPasswordManager())
 
@@ -145,19 +147,22 @@ class KeyPermission(Base):
 
 	__tablename__ = 'key_permission'
 
-	key_id = sa.Column('key_id', sa.BigInteger, sa.ForeignKey('key.id'), primary_key=True)
+	key_id = sa.Column('key_id', sa.BigInteger, sa.ForeignKey('key.id'), 
+	                   primary_key=True)
 	
-	user_id = sa.Column('user_id', sa.Integer, sa.ForeignKey('user.id'), primary_key=True)
+	user_id = sa.Column('user_id', sa.Integer, sa.ForeignKey('user.id'), 
+	                    primary_key=True)
 	
 	permission = sa.Column('permission', sa.String(30))
 
 	@classmethod
-	def by_user_and_key(cls, user_id, key_hash):
-		key_id = decode_base36(key_hash)
-		return DBSession.query(cls).filter(cls.user_id == user_id, cls.key_id == key_id).first()
+	def by_user_and_key(cls, user_id, key_id):
+		return DBSession.query(cls).filter(cls.user_id == user_id, 
+		                                   cls.key_id == key_id).first()
 	
 class Key(Base):
 	"""Key Table""" 
+	
 	@property 
 	def __acl__(self):
 		return [
@@ -185,7 +190,8 @@ class Key(Base):
 
 	keyhash = sa.Column(sa.String(200), unique=True)
 
-	permissions = sa.orm.relationship("KeyPermission", backref="key", cascade="all, delete, delete-orphan")
+	permissions = sa.orm.relationship("KeyPermission", backref="key", 
+	                                  cascade="all, delete, delete-orphan")
 
 	def __repr__(self):
 		return '<Key %s, %s>' % (self.name, self.description)
@@ -197,12 +203,12 @@ class Key(Base):
 
 	@classmethod
 	def by_hash(cls, hash):
-		id_ = decode_base36(hash)
+		id_ = num_decode(hash)
 		query = DBSession.query(cls).filter(cls.id == id_)
 		return query.first()
 
 	def hash(self):
-		return encode_base36(self.id)
+		return num_encode(self.id)
 
 class Group(Base):
 	"""Groups with Group Permissions"""
@@ -215,3 +221,84 @@ class Group(Base):
 
 	description = sa.Column(sa.Unicode(300))
 
+class FuturePermission(Base):
+	"""Future Permission Table"""
+
+	__tablename__ = 'future_permission'
+
+	def __init__(self, key_id, perm):
+		self.key_id = key_id
+		self.permission = perm
+	
+	id = sa.Column(sa.BigInteger, primary_key=True)
+
+	ext_id = sa.Column(sa.BigInteger, sa.ForeignKey('external_identification.id'))
+
+	key_id = sa.Column(sa.Integer, sa.ForeignKey('key.id'), nullable=False)
+
+	permission = sa.Column(sa.String(30))
+
+	external_identification = sa.orm.relationship("ExternalIdentification", 
+	                                              backref="future_permissions",
+	                                              cascade="delete")
+
+class ExternalIdentification(Base):
+	"""External Identificator Table"""
+
+	__tablename__ = 'external_identification'
+
+	def __init__(self, external_id_type, external_identifier):
+		self.identifier_type = external_id_type
+		if external_id_type in ['facebook', 'twitter']:
+			identifier_id = int(external_identifier)
+		elif external_id_type in ['email']:
+			self.identifier = external_identifier
+		self.authenticated = False
+		self.secret_string = self.generate_random_string(30)
+
+	id = sa.Column(sa.BigInteger, primary_key=True)
+
+	user_id = sa.Column(sa.Integer, sa.ForeignKey('user.id'))
+
+	user = sa.orm.relationship('User', backref="external_identificators", 
+	                           cascade="delete")
+
+	identifier_type = sa.Column(sa.Enum("facebook", "twitter", "email", 
+	                            name='identifier_type'), 
+	                            nullable=False)
+
+	identifier = sa.Column(sa.Unicode(200))
+
+	identifier_id = sa.Column(sa.BigInteger)
+
+	name = sa.Column(sa.Unicode(200))
+
+	authenticated = sa.Column(sa.Boolean)
+
+	secret_string = sa.Column(sa.Unicode(100))
+	
+	@staticmethod
+	def generate_random_string(chars=7):
+		return u''.join(random.sample(string.ascii_letters + string.digits, chars))
+
+	def authenticate(self):
+		if self.identifier_type == 'email':
+			# Send email, auth token
+			pass
+		elif self.identifier_type == 'facebook':
+			# OpenID ...
+			pass
+		elif self.identifier_type == 'twitter':
+			# OpenID
+			pass
+
+	@classmethod
+	def find(cls, identifier_type, identifier):
+		if(identifier_type == "facebook" or
+		   identifier_type == "twitter"):
+			q = DBSession.query(cls).find(cls.identifier_id == identifier,
+			                              cls.identifier_type == identifier_type)
+		elif identifier_type == "email":
+			q = DBSession.query(cls).find(cls.identifier == identifier, 
+			                              cls.identifier_type == identifier_type)
+		return q.first()

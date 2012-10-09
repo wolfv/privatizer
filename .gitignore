@@ -19,7 +19,7 @@ sdist
 develop-eggs
 .installed.cfg
 Sdk
-
+*.ini
 # Installer logs
 pip-log.txt
 

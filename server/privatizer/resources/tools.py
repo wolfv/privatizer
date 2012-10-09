@@ -1,35 +1,36 @@
-def encode_base36(number, alphabet='0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'):
-    """Convert positive integer to a base36 string."""
-    if not isinstance(number, (int, long)):
-        raise TypeError('number must be an integer')
- 
-    # Special case for zero
-    if number == 0:
-        return alphabet[0]
- 
-    base36 = ''
- 
-    sign = ''
-    if number < 0:
-        sign = '-'
-        number = - number
- 
-    while number != 0:
-        number, i = divmod(number, len(alphabet))
-        base36 = alphabet[i] + base36
- 
-    return sign + base36
- 
-def decode_base36(number):
-    return int(number, 36)
+import string
+
+ALPHABET = string.digits + string.ascii_uppercase + string.ascii_lowercase + '-_'
+ALPHABET_REVERSE = dict((c, i) for (i, c) in enumerate(ALPHABET))
+BASE = len(ALPHABET)
+SIGN_CHARACTER = '$'
+
+def num_encode(n):
+	if n < 0:
+		return SIGN_CHARACTER + num_encode(-n)
+	s = []
+	while True:
+		n, r = divmod(n, BASE)
+		s.append(ALPHABET[r])
+		if n == 0: break
+	return ''.join(reversed(s))
+
+def num_decode(s):
+	if s[0] == SIGN_CHARACTER:
+		return -num_decode(s[1:])
+	n = 0
+	for c in s:
+		n = n * BASE + ALPHABET_REVERSE[c]
+	return n
+
 
 flashtype = {'attention':
-    {'cssclass': 'attention',
-     'name': 'Attention'}, 
+	{'cssclass': 'attention',
+	 'name': 'Attention'}, 
 'error': 
-    {'cssclass': 'error',
-     'name': 'Error'}, 
+	{'cssclass': 'error',
+	 'name': 'Error'}, 
 'success': 
-    {'cssclass': 'success',
-    'name': 'Success'}
+	{'cssclass': 'success',
+	'name': 'Success'}
 }
