@@ -10,9 +10,9 @@ Download the plugin from the plugin folder, in which you will find all major bro
 
 ### Running a server
 
-1. Have a running linux distro
-2. Use postgreSQL for database
-3. Configure the `development.ini` and `production.ini` to match your environment
-4. Run `(sudo) python setup.py (develop/production)`
-5. Run `pserve (development.ini/production.ini)`
-6. Have fun
+1. Use Linux (it's better)
+2. http://docs.pylonsproject.org/projects/pyramid/en/1.4-branch/narr/install.html
+3. Install »into« this folder
+4. Modify `development.ini` and/or `production.ini` to your needs (e.g. database ...)
+5. Run `bin/pserve development.ini`
+6. Enjoy a cold hand made ice tea
