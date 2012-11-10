@@ -14,6 +14,7 @@ from ..resources.tools import flashtype
 
 log = logging.getLogger(__name__)
 
+
 @view_config(route_name='key.add', renderer='key/add.mako', permission='auth')
 def add(request):
 	error = False
@@ -22,7 +23,7 @@ def add(request):
 		if not len(request.POST['name']):
 			request.session.flash({'message': 'You need to set a name for your Key!', 'type': flashtype['error']})
 			error = True
-		if  not len(request.POST['keytext']):
+		if not len(request.POST['keytext']):
 			request.session.flash({'message': 'You need to set a keytext for your Key!', 'type': flashtype['error']})
 			error = True
 		if error:
@@ -41,6 +42,7 @@ def add(request):
 		log.debug(request.params)
 	return {}
 
+
 @view_config(route_name='key.changepermission', context='privatizer.models.Key', permission='own')
 def changepermission(context, request):
 	if 'form.adduserpermission' in request.params:
@@ -52,7 +54,7 @@ def changepermission(context, request):
 			key_id = int(request.POST['key_id'])
 		except:
 			return HTTPBadRequest()
-	   
+
 		res = DBSession.query(KeyPermission).filter(KeyPermission.user_id == user_id, KeyPermission.key_id == key.id).first()
 
 		if res:
@@ -68,31 +70,32 @@ def changepermission(context, request):
 			return HTTPFound(location=url)
 	return Response('Something wrong here.')
 
+
 @view_config(route_name='key.deletepermission', context='privatizer.models.Key', permission='own', renderer='json')
 def deletepermission(context, request):
 	log.debug('delete key permission')
 	key = context
 	log.debug(key)
-	url = request.route_url('key.list')
+
 	if key.owner_id != authenticated_userid(request):
 		return HTTPForbidden()
-	
+
 	user_id = int(request.matchdict['for'])
 	try:
 		p = KeyPermission.by_user_and_key(user_id, key.id)
 		DBSession.delete(p)
 		return {'key': key.id, 'shared_with': [{'name': permission.user.user_name, 'id': permission.user_id} for permission in key.permissions]}
 	#	return HTTPFound(location=url)
-	
+
 	except:
 		return Response('Sorry, something wrong.', 403)
 
-@view_config(route_name = 'key.list', renderer='key/list.mako', permission='auth')
-def list(request):   
+
+@view_config(route_name='key.list', renderer='key/list.mako', permission='auth')
+def list(request):
 	userid = authenticated_userid(request)
 	if userid != None:
 		user = User.by_id(userid)
 		return {'keys': user.keys, 'perms': user.permissions}
 	else:
 		return Response('Forbidden', 403)
-

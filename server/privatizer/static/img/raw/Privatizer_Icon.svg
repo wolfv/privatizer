@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg3069"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="Privatizer_Icon.svg">
+  <defs
+     id="defs3071">
+    <linearGradient
+       id="linearGradient4057">
+      <stop
+         style="stop-color:#f5bb1e;stop-opacity:1;"
+         offset="0"
+         id="stop4059" />
+      <stop
+         style="stop-color:#f27d08;stop-opacity:1;"
+         offset="1"
+         id="stop4061" />
+    </linearGradient>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3930">
+      <rect
+         style="fill:#ececec;fill-opacity:1;stroke:none"
+         id="rect3932"
+         width="172.56525"
+         height="173.17671"
+         x="217.78931"
+         y="330.22885"
+         rx="11.0957"
+         ry="11.0957" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3934">
+      <rect
+         style="fill:#ececec;fill-opacity:1;stroke:none"
+         id="rect3936"
+         width="172.56525"
+         height="173.17671"
+         x="217.78931"
+         y="330.22885"
+         rx="11.0957"
+         ry="11.0957" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3938">
+      <rect
+         style="fill:#ececec;fill-opacity:1;stroke:none"
+         id="rect3940"
+         width="172.56525"
+         height="173.17671"
+         x="217.78931"
+         y="330.22885"
+         rx="11.0957"
+         ry="11.0957" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3942">
+      <rect
+         style="fill:#ececec;fill-opacity:1;stroke:none"
+         id="rect3944"
+         width="172.56525"
+         height="173.17671"
+         x="217.78931"
+         y="330.22885"
+         rx="11.0957"
+         ry="11.0957" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3946">
+      <rect
+         style="fill:#ececec;fill-opacity:1;stroke:none"
+         id="rect3948"
+         width="172.56525"
+         height="173.17671"
+         x="217.78931"
+         y="330.22885"
+         rx="11.0957"
+         ry="11.0957" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3950">
+      <rect
+         style="fill:#ececec;fill-opacity:1;stroke:none"
+         id="rect3952"
+         width="172.56525"
+         height="173.17671"
+         x="217.78931"
+         y="330.22885"
+         rx="11.0957"
+         ry="11.0957" />
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3954">
+      <rect
+         style="fill:#ececec;fill-opacity:1;stroke:none"
+         id="rect3956"
+         width="172.56525"
+         height="173.17671"
+         x="217.78931"
+         y="330.22885"
+         rx="11.0957"
+         ry="11.0957" />
+    </mask>
+    <filter
+       id="filter3963"
+       inkscape:label="Inner Shadow"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Adds a colorizable drop shadow inside"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur3965"
+         stdDeviation="4"
+         result="result8" />
+      <feOffset
+         id="feOffset3967"
+         dx="4"
+         dy="4"
+         result="result11" />
+      <feComposite
+         in2="result11"
+         id="feComposite3969"
+         result="result6"
+         in="SourceGraphic"
+         operator="in" />
+      <feFlood
+         id="feFlood3971"
+         result="result10"
+         in="result6"
+         flood-opacity="1"
+         flood-color="rgb(0,0,0)" />
+      <feBlend
+         in2="result10"
+         id="feBlend3973"
+         mode="normal"
+         in="result6"
+         result="result12" />
+      <feComposite
+         in2="SourceGraphic"
+         id="feComposite3975"
+         result="result2"
+         operator="in" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4057"
+       id="linearGradient4055"
+       x1="408.21069"
+       y1="496.23129"
+       x2="304.01276"
+       y2="444.74527"
+       gradientUnits="userSpaceOnUse" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4209">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4211"
+         width="172.56525"
+         height="173.17673"
+         x="223.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4213">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4215"
+         width="172.56525"
+         height="173.17673"
+         x="223.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4217">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4219"
+         width="172.56525"
+         height="173.17673"
+         x="223.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4221">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4223"
+         width="172.56525"
+         height="173.17673"
+         x="223.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4225">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4227"
+         width="172.56525"
+         height="173.17673"
+         x="223.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4229">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4231"
+         width="172.56525"
+         height="173.17673"
+         x="217.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4233">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4235"
+         width="172.56525"
+         height="173.17673"
+         x="217.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.7826825"
+     inkscape:cx="315.35633"
+     inkscape:cy="631.75183"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="false"
+     inkscape:guide-bbox="true"
+     inkscape:snap-smooth-nodes="true"
+     inkscape:object-nodes="true"
+     inkscape:object-paths="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1052"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1">
+    <sodipodi:guide
+       orientation="1,0"
+       position="217.7893,548.95661"
+       id="guide3094" />
+    <sodipodi:guide
+       orientation="0,1"
+       position="217.7893,548.95661"
+       id="guide3096" />
+    <sodipodi:guide
+       orientation="-0.96592583,0.25881905"
+       position="379.25885,722.13333"
+       id="guide3961" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata3074">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:url(#linearGradient4055);fill-opacity:1.0;stroke:none"
+       id="rect3124"
+       width="227.3938"
+       height="183.26491"
+       x="226.96039"
+       y="330.22885"
+       rx="0"
+       ry="11.0957"
+       mask="url(#mask3954)"
+       clip-path="url(#clipPath4233)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+    <path
+       style="fill:#28170b;fill-opacity:1;fill-rule:nonzero;stroke:none;filter:url(#filter3963)"
+       d="m 228.88501,330.22885 150.37384,0 -46.16289,173.17671 -104.21095,2e-5 c -6.14702,0 -11.0957,-4.94868 -11.0957,-11.0957 l 0,-150.98533 c 0,-6.14702 4.94868,-11.0957 11.0957,-11.0957 z"
+       id="rect3958"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sccssss"
+       clip-path="url(#clipPath4229)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:5;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 296.44399,413.79725 15.86375,-59.20432 27.16424,0 -5.53089,20.64157 -27.16425,0"
+       id="path2989-0"
+       inkscape:connector-curvature="0"
+       mask="url(#mask3946)"
+       transform="translate(-6,0)"
+       clip-path="url(#clipPath4225)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:5;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 290.50116,435.97616 -26.09377,0 -8.23608,30.73745 60.02218,0 8.23608,-30.73745 z"
+       id="path3098"
+       inkscape:connector-curvature="0"
+       mask="url(#mask3942)"
+       transform="translate(-6,0)"
+       clip-path="url(#clipPath4221)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+    <path
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 329.95802,359.40914 -3.42903,11.07065 2.84375,0 3.53125,-11.07065 z"
+       id="path3876"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       mask="url(#mask3938)"
+       transform="translate(-6,0)"
+       clip-path="url(#clipPath4217)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+    <path
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 323.79805,363.35476 -0.80384,3 13.68779,0 0,-3 z"
+       id="path3874"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       mask="url(#mask3934)"
+       transform="translate(-6,0)"
+       clip-path="url(#clipPath4213)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 296.83608,412.33391 -6.33492,23.64225"
+       id="path3878"
+       inkscape:connector-curvature="0"
+       mask="url(#mask3930)"
+       transform="translate(-6,0)"
+       clip-path="url(#clipPath4209)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+  </g>
+</svg>

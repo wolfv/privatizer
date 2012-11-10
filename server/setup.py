@@ -15,7 +15,8 @@ requires = [
     'zope.sqlalchemy',
     'waitress',
     'cryptacular',
-    'webhelpers'
+    'webhelpers',
+    'mysql-python'
     ]
 
 setup(name='privatizer',

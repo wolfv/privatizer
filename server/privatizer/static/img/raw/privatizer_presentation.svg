@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg3107"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="New document 4">
+  <defs
+     id="defs3109">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4209">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4211"
+         width="172.56525"
+         height="173.17673"
+         x="223.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3930">
+      <rect
+         style="fill:#ececec;fill-opacity:1;stroke:none"
+         id="rect3932"
+         width="172.56525"
+         height="173.17671"
+         x="217.78931"
+         y="330.22885"
+         rx="11.0957"
+         ry="11.0957" />
+    </mask>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4213">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4215"
+         width="172.56525"
+         height="173.17673"
+         x="223.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3934">
+      <rect
+         style="fill:#ececec;fill-opacity:1;stroke:none"
+         id="rect3936"
+         width="172.56525"
+         height="173.17671"
+         x="217.78931"
+         y="330.22885"
+         rx="11.0957"
+         ry="11.0957" />
+    </mask>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4217">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4219"
+         width="172.56525"
+         height="173.17673"
+         x="223.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3938">
+      <rect
+         style="fill:#ececec;fill-opacity:1;stroke:none"
+         id="rect3940"
+         width="172.56525"
+         height="173.17671"
+         x="217.78931"
+         y="330.22885"
+         rx="11.0957"
+         ry="11.0957" />
+    </mask>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4221">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4223"
+         width="172.56525"
+         height="173.17673"
+         x="223.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3942">
+      <rect
+         style="fill:#ececec;fill-opacity:1;stroke:none"
+         id="rect3944"
+         width="172.56525"
+         height="173.17671"
+         x="217.78931"
+         y="330.22885"
+         rx="11.0957"
+         ry="11.0957" />
+    </mask>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4225">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4227"
+         width="172.56525"
+         height="173.17673"
+         x="223.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3946">
+      <rect
+         style="fill:#ececec;fill-opacity:1;stroke:none"
+         id="rect3948"
+         width="172.56525"
+         height="173.17671"
+         x="217.78931"
+         y="330.22885"
+         rx="11.0957"
+         ry="11.0957" />
+    </mask>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4229">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4231"
+         width="172.56525"
+         height="173.17673"
+         x="217.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+    <filter
+       id="filter3963"
+       inkscape:label="Inner Shadow"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Adds a colorizable drop shadow inside"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur3965"
+         stdDeviation="4"
+         result="result8" />
+      <feOffset
+         id="feOffset3967"
+         dx="4"
+         dy="4"
+         result="result11" />
+      <feComposite
+         in2="result11"
+         id="feComposite3969"
+         result="result6"
+         in="SourceGraphic"
+         operator="in" />
+      <feFlood
+         id="feFlood3971"
+         result="result10"
+         in="result6"
+         flood-opacity="1"
+         flood-color="rgb(0,0,0)" />
+      <feBlend
+         in2="result10"
+         id="feBlend3973"
+         mode="normal"
+         in="result6"
+         result="result12" />
+      <feComposite
+         in2="SourceGraphic"
+         id="feComposite3975"
+         result="result2"
+         operator="in" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4057"
+       id="linearGradient4055"
+       x1="408.21069"
+       y1="496.23129"
+       x2="304.01276"
+       y2="444.74527"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       id="linearGradient4057">
+      <stop
+         style="stop-color:#f5bb1e;stop-opacity:1;"
+         offset="0"
+         id="stop4059" />
+      <stop
+         style="stop-color:#f27d08;stop-opacity:1;"
+         offset="1"
+         id="stop4061" />
+    </linearGradient>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4233">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4235"
+         width="172.56525"
+         height="173.17673"
+         x="217.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3954">
+      <rect
+         style="fill:#ececec;fill-opacity:1;stroke:none"
+         id="rect3956"
+         width="172.56525"
+         height="173.17671"
+         x="217.78931"
+         y="330.22885"
+         rx="11.0957"
+         ry="11.0957" />
+    </mask>
+    <linearGradient
+       y2="444.74527"
+       x2="304.01276"
+       y1="496.23129"
+       x1="408.21069"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3223"
+       xlink:href="#linearGradient4057"
+       inkscape:collect="always" />
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4209-4">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4211-7"
+         width="172.56525"
+         height="173.17673"
+         x="223.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3930-8">
+      <rect
+         style="fill:#ececec;fill-opacity:1;stroke:none"
+         id="rect3932-3"
+         width="172.56525"
+         height="173.17671"
+         x="217.78931"
+         y="330.22885"
+         rx="11.0957"
+         ry="11.0957" />
+    </mask>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4213-2">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4215-2"
+         width="172.56525"
+         height="173.17673"
+         x="223.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3934-2">
+      <rect
+         style="fill:#ececec;fill-opacity:1;stroke:none"
+         id="rect3936-9"
+         width="172.56525"
+         height="173.17671"
+         x="217.78931"
+         y="330.22885"
+         rx="11.0957"
+         ry="11.0957" />
+    </mask>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4217-7">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4219-6"
+         width="172.56525"
+         height="173.17673"
+         x="223.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3938-2">
+      <rect
+         style="fill:#ececec;fill-opacity:1;stroke:none"
+         id="rect3940-8"
+         width="172.56525"
+         height="173.17671"
+         x="217.78931"
+         y="330.22885"
+         rx="11.0957"
+         ry="11.0957" />
+    </mask>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4221-3">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4223-0"
+         width="172.56525"
+         height="173.17673"
+         x="223.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3942-6">
+      <rect
+         style="fill:#ececec;fill-opacity:1;stroke:none"
+         id="rect3944-8"
+         width="172.56525"
+         height="173.17671"
+         x="217.78931"
+         y="330.22885"
+         rx="11.0957"
+         ry="11.0957" />
+    </mask>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath4225-3">
+      <rect
+         style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none"
+         id="rect4227-0"
+         width="172.56525"
+         height="173.17673"
+         x="223.78931"
+         y="330.22885"
+         ry="11.0957" />
+    </clipPath>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask3946-6">
+      <rect
+         style="fill:#ececec;fill-opacity:1;stroke:none"
+         id="rect3948-2"
+         width="172.56525"
+         height="173.17671"
+         x="217.78931"
+         y="330.22885"
+         rx="11.0957"
+         ry="11.0957" />
+    </mask>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4057"
+       id="linearGradient4252"
+       x1="303.5"
+       y1="632.86218"
+       x2="304.25"
+       y2="667.61218"
+       gradientUnits="userSpaceOnUse" />
+    <filter
+       id="filter4277"
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Drop Shadow">
+      <feFlood
+         id="feFlood4279"
+         flood-opacity="1"
+         flood-color="rgb(0,0,0)"
+         result="flood" />
+      <feComposite
+         id="feComposite4281"
+         in2="SourceGraphic"
+         in="flood"
+         operator="in"
+         result="composite1" />
+      <feGaussianBlur
+         id="feGaussianBlur4283"
+         in="composite"
+         stdDeviation="3"
+         result="blur" />
+      <feOffset
+         id="feOffset4285"
+         dx="0"
+         dy="0"
+         result="offset" />
+      <feComposite
+         id="feComposite4287"
+         in2="offset"
+         in="SourceGraphic"
+         operator="over"
+         result="composite2" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.70710678"
+     inkscape:cx="610.5615"
+     inkscape:cy="468.10421"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1052"
+     inkscape:window-x="1920"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1">
+    <sodipodi:guide
+       orientation="1,0"
+       position="98.766656,714.37248"
+       id="guide4123" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata3112">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:url(#linearGradient4252);stroke:none;fill-opacity:1"
+       d="m 283.14715,658.85408 6.26576,-23.38416 22.19614,0 0,22.82321 z"
+       id="path4154"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <rect
+       transform="translate(2.14437,-257.71813)"
+       style="fill:url(#linearGradient3223);fill-opacity:1;stroke:none"
+       id="rect3124"
+       width="227.3938"
+       height="183.26491"
+       x="226.96039"
+       y="330.22885"
+       rx="0"
+       ry="11.0957"
+       mask="url(#mask3954)"
+       clip-path="url(#clipPath4233)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+    <path
+       transform="translate(2.14437,-257.71813)"
+       style="fill:#28170b;fill-opacity:1;fill-rule:nonzero;stroke:none;filter:url(#filter3963)"
+       d="m 228.88501,330.22885 150.37384,0 -46.16289,173.17671 -104.21095,2e-5 c -6.14702,0 -11.0957,-4.94868 -11.0957,-11.0957 l 0,-150.98533 c 0,-6.14702 4.94868,-11.0957 11.0957,-11.0957 z"
+       id="rect3958"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="sccssss"
+       clip-path="url(#clipPath4229)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:5;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 296.44399,413.79725 15.86375,-59.20432 27.16424,0 -5.53089,20.64157 -27.16425,0"
+       id="path2989-0"
+       inkscape:connector-curvature="0"
+       mask="url(#mask3946)"
+       transform="translate(-3.85563,-257.71813)"
+       clip-path="url(#clipPath4225)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:5;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 290.50116,435.97616 -26.09377,0 -8.23608,30.73745 60.02218,0 8.23608,-30.73745 z"
+       id="path3098"
+       inkscape:connector-curvature="0"
+       mask="url(#mask3942)"
+       transform="translate(-3.85563,-257.71813)"
+       clip-path="url(#clipPath4221)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+    <path
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 329.95802,359.40914 -3.42903,11.07065 2.84375,0 3.53125,-11.07065 z"
+       id="path3876"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       mask="url(#mask3938)"
+       transform="translate(-3.85563,-257.71813)"
+       clip-path="url(#clipPath4217)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+    <path
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+       d="m 323.79805,363.35476 -0.80384,3 13.68779,0 0,-3 z"
+       id="path3874"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       mask="url(#mask3934)"
+       transform="translate(-3.85563,-257.71813)"
+       clip-path="url(#clipPath4213)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+    <path
+       style="fill:none;stroke:#ffffff;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 296.83608,412.33391 -6.33492,23.64225"
+       id="path3878"
+       inkscape:connector-curvature="0"
+       mask="url(#mask3930)"
+       transform="translate(-3.85563,-257.71813)"
+       clip-path="url(#clipPath4209)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+    <rect
+       style="fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-opacity:1.0"
+       id="rect3322"
+       width="220.5392"
+       height="325.25565"
+       x="90.436935"
+       y="333.62653"
+       ry="0" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.97641754px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 94.006817,356.23575 213.014553,0"
+       id="path4092"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:tb-rl;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Snell Roundhand;-inkscape-font-specification:Snell Roundhand Bold Italic"
+       x="98.766655"
+       y="350.28595"
+       id="text4094"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4096"
+         x="98.766655"
+         y="350.28595"
+         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;font-family:Arial;-inkscape-font-specification:Arial">Frank Mustermann</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:tb-rl;text-anchor:start;fill:#cccccc;fill-opacity:1;stroke:none;font-family:Snell Roundhand;-inkscape-font-specification:Snell Roundhand Bold Italic"
+       x="98.766655"
+       y="558.08289"
+       id="text4094-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4096-4"
+         x="98.766655"
+         y="558.08289"
+         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;fill:#1a1a1a;font-family:Arial;-inkscape-font-specification:Arial">Hi!</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:tb-rl;text-anchor:start;fill:#cccccc;fill-opacity:1;stroke:none;font-family:Snell Roundhand;-inkscape-font-specification:Snell Roundhand Bold Italic"
+       x="98.766655"
+       y="575.99084"
+       id="text4094-8-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4096-4-4"
+         x="98.766655"
+         y="575.99084"
+         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;fill:#1a1a1a;font-family:Arial;-inkscape-font-specification:Arial">Wie geht's dir?</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.02903211px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 90.655673,635.87628 220.509967,0"
+       id="path4150"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;stroke:#363636;stroke-width:5;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 296.44399,413.79725 15.86375,-59.20432 27.16424,0 -5.53089,20.64157 -27.16425,0"
+       id="path2989-0-0"
+       inkscape:connector-curvature="0"
+       mask="url(#mask3946-6)"
+       transform="matrix(0.13309603,0,0,0.13309603,258.0975,592.41776)"
+       clip-path="url(#clipPath4225-3)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+    <path
+       style="fill:none;stroke:#363636;stroke-width:5;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 290.50116,435.97616 -26.09377,0 -8.23608,30.73745 60.02218,0 8.23608,-30.73745 z"
+       id="path3098-6"
+       inkscape:connector-curvature="0"
+       mask="url(#mask3942-6)"
+       transform="matrix(0.13309603,0,0,0.13309603,258.0975,592.41776)"
+       clip-path="url(#clipPath4221-3)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+    <path
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#ffffff;fill-opacity:1;stroke:#363636;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans;stroke-opacity:1"
+       d="m 329.95802,359.40914 -3.42903,11.07065 2.84375,0 3.53125,-11.07065 z"
+       id="path3876-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       mask="url(#mask3938-2)"
+       transform="matrix(0.13309603,0,0,0.13309603,258.0975,592.41776)"
+       clip-path="url(#clipPath4217-7)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+    <path
+       style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#313131;fill-opacity:1;stroke:#363636;stroke-width:3;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans;stroke-opacity:1"
+       d="m 323.79805,363.35476 -0.80384,3 13.68779,0 0,-3 z"
+       id="path3874-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc"
+       mask="url(#mask3934-2)"
+       transform="matrix(0.13309603,0,0,0.13309603,258.0975,592.41776)"
+       clip-path="url(#clipPath4213-2)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+    <path
+       style="fill:none;stroke:#363636;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 296.83608,412.33391 -6.33492,23.64225"
+       id="path3878-4"
+       inkscape:connector-curvature="0"
+       mask="url(#mask3930-8)"
+       transform="matrix(0.13309603,0,0,0.13309603,258.0975,592.41776)"
+       clip-path="url(#clipPath4209-4)"
+       inkscape:export-filename="/home/wolf/Programme/privatizer/server/privatizer/static/favicon.png"
+       inkscape:export-xdpi="8.3400002"
+       inkscape:export-ydpi="8.3400002" />
+    <path
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#363636;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;filter:url(#filter4277)"
+       d="m 254,539.875 c -3.878,0 -7,3.122 -7,7 l 0,74 c 0,3.878 3.122,7 7,7 l 39.125,0 9.0625,9.0625 9.0625,-9.0625 30.25,0 c 3.878,0 7,-3.122 7,-7 l 0,-74 c 0,-3.878 -3.122,-7 -7,-7 l -87.5,0 z"
+       id="rect4260"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Snell Roundhand;-inkscape-font-specification:Snell Roundhand Bold Italic"
+       x="262.30026"
+       y="558.27271"
+       id="text4289"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4291"
+         x="262.30026"
+         y="558.27271"
+         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">Privater Schlüssel</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Snell Roundhand;-inkscape-font-specification:Snell Roundhand Bold Italic"
+       x="262.7327"
+       y="574.40155"
+       id="text4289-4"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4291-0"
+         x="262.7327"
+         y="574.40155"
+         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">Schlüssel </tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Snell Roundhand;-inkscape-font-specification:Snell Roundhand Bold Italic"
+       x="263.16928"
+       y="590.48627"
+       id="text4289-6"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4291-6"
+         x="263.16928"
+         y="590.48627"
+         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Arial;-inkscape-font-specification:Arial">Arbeitskollegen</tspan></text>
+    <rect
+       style="fill:#ffa801;fill-opacity:1;fill-rule:nonzero;stroke:#363636;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect4323"
+       width="6.7175145"
+       height="6.7175145"
+       x="252.13902"
+       y="567.99402"
+       ry="3.3587573" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#363636;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect4323-6"
+       width="6.7175145"
+       height="6.7175145"
+       x="251.96225"
+       y="551.0235"
+       ry="3.3587573" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#363636;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect4323-6-9"
+       width="6.7175145"
+       height="6.7175145"
+       x="252.40419"
+       y="583.90393"
+       ry="3.3587573" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:tb-rl;text-anchor:start;fill:#cccccc;fill-opacity:1;stroke:none;font-family:Snell Roundhand;-inkscape-font-specification:Snell Roundhand Bold Italic"
+       x="98.766655"
+       y="649.95007"
+       id="text4094-8-1-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4096-4-4-1"
+         x="98.766655"
+         y="649.95007"
+         style="font-size:10px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;writing-mode:lr-tb;fill:#1a1a1a;font-family:Arial;-inkscape-font-specification:Arial">Soweit so gut!</tspan></text>
+  </g>
+</svg>

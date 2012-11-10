@@ -9,7 +9,7 @@ import logging
 
 from .resources.tools import num_decode, num_encode
 
-from pyramid.security import(
+from pyramid.security import (
 		Allow,
 		Everyone,
 		Authenticated,
@@ -32,12 +32,13 @@ log = logging.getLogger(__name__)
 DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 Base = declarative_base()
 
+
 class KeyFactory(object):
 	__acl__ = [
 		(Allow, Everyone, 'test'),
 		(Allow, Authenticated, 'auth'),
 	]
-	
+
 	def __init__(self, request):
 		pass
 
@@ -46,6 +47,7 @@ class KeyFactory(object):
 		key.__parent__ = self
 		key.__name__ = key
 		return key
+
 
 class User(Base):
 
@@ -66,20 +68,20 @@ class User(Base):
 
 	security_code = sa.Column(sa.String(256), default='default')
 
-	keys = sa.orm.relationship("Key", backref="owner", 
-	                           cascade="all, delete, delete-orphan")
+	keys = sa.orm.relationship("Key", backref="owner",
+		cascade="all, delete, delete-orphan")
 
-	permissions = sa.orm.relationship("KeyPermission", backref="user", 
-	                                  cascade="all, delete, delete-orphan")
+	permissions = sa.orm.relationship("KeyPermission", backref="user",
+		cascade="all, delete, delete-orphan", lazy='joined')
 
 	passwordmanager = DelegatingPasswordManager(preferred=BCRYPTPasswordManager())
 
 	last_login_date = sa.Column(sa.TIMESTAMP(timezone=False),
-								default=sa.sql.func.now(),
-								server_default=sa.func.now()
+								default="0000-00-00 00:00:00",
+								server_default="0000-00-00 00:00:00"
 								)
 
-	registered_date =  sa.Column(sa.TIMESTAMP(timezone=False),
+	registered_date = sa.Column(sa.TIMESTAMP(timezone=False),
 								default=sa.sql.func.now(),
 								server_default=sa.func.now()
 								)
@@ -92,9 +94,9 @@ class User(Base):
 		# construct the url
 		hash = hashlib.md5(self.email.encode('utf8').lower()).hexdigest()
 		gravatar_url = "https://secure.gravatar.com/avatar/%s?%s" % (
-												hash,
-												urllib.urlencode({'d':default})
-																	  )
+			hash,
+			urllib.urlencode({'d': default})
+			)
 		return gravatar_url
 
 	def set_password(self, raw_password):
@@ -105,16 +107,17 @@ class User(Base):
 	def check_password(self, raw_password):
 		""" checks string with users password hash"""
 		return self.passwordmanager.check(self.user_password, raw_password,
-										  setter=self.set_password)
+			setter=self.set_password)
+
 	@classmethod
 	def generate_random_pass(cls, chars=7):
 		""" generates random string of fixed length"""
 		return cls.generate_random_string(chars)
-	
+
 	def regenerate_security_code(self):
 		""" generates new security code"""
 		self.security_code = self.generate_random_string(32)
- 
+
 	@staticmethod
 	def generate_random_string(chars=7):
 		return u''.join(random.sample(string.ascii_letters + string.digits, chars))
@@ -123,7 +126,7 @@ class User(Base):
 	def by_email(email):
 		res = DBSession.query(User).filter(User.email == email)
 		return res.first()
-	
+
 	@staticmethod
 	def by_id(id):
 		res = DBSession.query(User).get(id)
@@ -134,7 +137,7 @@ class User(Base):
 		query1 = DBSession.query(cls).filter(cls.email == value)
 		query2 = DBSession.query(cls).filter(cls.user_name == value)
 		return query1.union(query2).first()
-	
+
 	@staticmethod
 	def authenticate(email, password):
 		user = DBSession.query(User).one(User.email == email)
@@ -143,36 +146,19 @@ class User(Base):
 		else:
 			return False
 
-class KeyPermission(Base):
 
-	__tablename__ = 'key_permission'
-
-	key_id = sa.Column('key_id', sa.BigInteger, sa.ForeignKey('key.id'), 
-	                   primary_key=True)
-	
-	user_id = sa.Column('user_id', sa.Integer, sa.ForeignKey('user.id'), 
-	                    primary_key=True)
-	
-	permission = sa.Column('permission', sa.String(30))
-
-	@classmethod
-	def by_user_and_key(cls, user_id, key_id):
-		return DBSession.query(cls).filter(cls.user_id == user_id, 
-		                                   cls.key_id == key_id).first()
-	
 class Key(Base):
-	"""Key Table""" 
-	
-	@property 
+	"""Key Table"""
+
+	@property
 	def __acl__(self):
 		return [
 			(Allow, self.owner_id, 'own')
 		]
 
+	__tablename__ = 'key'
 
-	__tablename__ = 'key'		
-
-	def __init__(self, name, owner_id, keytext, description = None):
+	def __init__(self, name, owner_id, keytext, description=None):
 		self.name = name
 		self.owner_id = owner_id
 		self.keytext = keytext
@@ -190,8 +176,9 @@ class Key(Base):
 
 	keyhash = sa.Column(sa.String(200), unique=True)
 
-	permissions = sa.orm.relationship("KeyPermission", backref="key", 
-	                                  cascade="all, delete, delete-orphan")
+	permissions = sa.orm.relationship("KeyPermission", backref="key",
+								cascade="all, delete, delete-orphan",
+								lazy="joined")
 
 	def __repr__(self):
 		return '<Key %s, %s>' % (self.name, self.description)
@@ -210,6 +197,25 @@ class Key(Base):
 	def hash(self):
 		return num_encode(self.id)
 
+
+class KeyPermission(Base):
+
+	__tablename__ = 'key_permission'
+
+	key_id = sa.Column('key_id', sa.Integer, sa.ForeignKey('key.id'),
+		primary_key=True)
+
+	user_id = sa.Column('user_id', sa.Integer, sa.ForeignKey('user.id'),
+		primary_key=True)
+
+	permission = sa.Column('permission', sa.String(30))
+
+	@classmethod
+	def by_user_and_key(cls, user_id, key_id):
+		return DBSession.query(cls).filter(cls.user_id == user_id,
+											cls.key_id == key_id).first()
+
+
 class Group(Base):
 	"""Groups with Group Permissions"""
 
@@ -221,6 +227,7 @@ class Group(Base):
 
 	description = sa.Column(sa.Unicode(300))
 
+
 class FuturePermission(Base):
 	"""Future Permission Table"""
 
@@ -229,7 +236,7 @@ class FuturePermission(Base):
 	def __init__(self, key_id, perm):
 		self.key_id = key_id
 		self.permission = perm
-	
+
 	id = sa.Column(sa.BigInteger, primary_key=True)
 
 	ext_id = sa.Column(sa.BigInteger, sa.ForeignKey('external_identification.id'))
@@ -238,9 +245,10 @@ class FuturePermission(Base):
 
 	permission = sa.Column(sa.String(30))
 
-	external_identification = sa.orm.relationship("ExternalIdentification", 
-	                                              backref="future_permissions",
-	                                              cascade="delete")
+	external_identification = sa.orm.relationship("ExternalIdentification",
+		backref="future_permissions",
+		cascade="delete")
+
 
 class ExternalIdentification(Base):
 	"""External Identificator Table"""
@@ -260,12 +268,13 @@ class ExternalIdentification(Base):
 
 	user_id = sa.Column(sa.Integer, sa.ForeignKey('user.id'))
 
-	user = sa.orm.relationship('User', backref="external_identificators", 
-	                           cascade="delete")
+	user = sa.orm.relationship('User',
+		backref="external_identificators",
+		cascade="delete")
 
-	identifier_type = sa.Column(sa.Enum("facebook", "twitter", "email", 
-	                            name='identifier_type'), 
-	                            nullable=False)
+	identifier_type = sa.Column(sa.Enum("facebook", "twitter", "email",
+		name='identifier_type'),
+		nullable=False)
 
 	identifier = sa.Column(sa.Unicode(200))
 
@@ -276,7 +285,7 @@ class ExternalIdentification(Base):
 	authenticated = sa.Column(sa.Boolean)
 
 	secret_string = sa.Column(sa.Unicode(100))
-	
+
 	@staticmethod
 	def generate_random_string(chars=7):
 		return u''.join(random.sample(string.ascii_letters + string.digits, chars))
@@ -295,10 +304,10 @@ class ExternalIdentification(Base):
 	@classmethod
 	def find(cls, identifier_type, identifier):
 		if(identifier_type == "facebook" or
-		   identifier_type == "twitter"):
+			identifier_type == "twitter"):
 			q = DBSession.query(cls).find(cls.identifier_id == identifier,
-			                              cls.identifier_type == identifier_type)
+				cls.identifier_type == identifier_type)
 		elif identifier_type == "email":
-			q = DBSession.query(cls).find(cls.identifier == identifier, 
-			                              cls.identifier_type == identifier_type)
+			q = DBSession.query(cls).find(cls.identifier == identifier,
+				cls.identifier_type == identifier_type)
 		return q.first()
