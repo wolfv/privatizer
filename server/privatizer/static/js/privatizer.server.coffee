@@ -16,6 +16,7 @@ App = {}
 
 Key = Backbone.Model.extend
 	rootUrl: '/api/keys'
+	url: '/api/keys'
 	defaults:
 		name: 0
 		description: 0
@@ -328,10 +329,14 @@ $(document).ready( ->
 	$('#add-key-save').click (e) ->
 		data = $('#addkey form').serializeJSON()
 		key = new Key(data)
-		key.save()	
-		view.collection.add(key)
+		key.save(
+			success: ->
+				$('#addkey form').empty()
+				$('#addkey').modal 'hide'
+		)	
+		view.collection.add(key, 
+		)
 		console.log key.toJSON()
-
 #	$('#testbutton').click( (e) -> 
 #		e.preventDefault()
 #		Router.navigate("keys", {trigger: true, replace: true})

@@ -1,0 +1,1 @@
+This is the privatizer server, that allows you to store keys etc. for your friends

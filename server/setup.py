@@ -16,13 +16,14 @@ requires = [
     'waitress',
     'cryptacular',
     'webhelpers',
-    'mysql-python'
+    'mysql-python',
+    'python-statsd'
     ]
 
 setup(name='privatizer',
       version='0.1',
       description='the privatizer server',
-      long_description=README + '\n\n' +  CHANGES,
+      long_description=README + '\n\n' + CHANGES,
       classifiers=[
         "Programming Language :: Python",
         "Framework :: Pylons",
